@@ -51,13 +51,6 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<!-- 
-  DESKTOP NOTE: This page is intentionally designed as a single-page mobile-first app.
-  The existing structure, content, brand identity and desktop visual hierarchy are preserved.
-  Mobile-specific optimizations are applied via media queries and layout choices below max-width: 640px.
-  On desktop (≥768px), the layout falls back to a centered max-width container.
--->
-
 <body class="bg-brand-cream text-brand-dark min-h-screen select-none">
 
   <!-- ============================
@@ -80,11 +73,7 @@
 
       <!-- Right Actions -->
       <div class="flex items-center gap-2 flex-shrink-0">
-        <!-- Search -->
-        <button id="searchBtn" onclick="openSearch()" class="w-9 h-9 rounded-full bg-white border border-brand-border flex items-center justify-center text-brand-muted shadow-sm active:scale-95 transition-transform" aria-label="Search products">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-        </button>
-        <!-- Cart -->
+        <!-- Cart Button -->
         <button onclick="openCartDrawer()" class="relative h-9 px-3 rounded-full bg-brand-dark text-white flex items-center gap-1.5 shadow-sm active:scale-95 transition-transform" aria-label="View cart">
           <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
           <span class="text-xs font-bold text-brand-goldsoft" id="navCartCount">0</span>
@@ -94,46 +83,11 @@
   </header>
 
   <!-- ============================
-       SEARCH OVERLAY
-       ============================ -->
-  <div id="searchOverlay" class="fixed inset-0 z-[60] pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Search">
-    <div onclick="closeSearch()" class="absolute inset-0 bg-brand-dark/70 backdrop-blur-sm"></div>
-    <div class="absolute top-0 left-0 right-0 bg-brand-cream shadow-2xl rounded-b-3xl overflow-hidden">
-      <!-- Search Input -->
-      <div class="px-4 pt-4 pb-3 flex items-center gap-3">
-        <div class="flex-1 flex items-center gap-2 bg-white border border-brand-border rounded-xl px-3 py-2.5 shadow-sm">
-          <svg class="w-4 h-4 text-brand-muted flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-          <input id="searchInput" type="text" placeholder="Search products, ingredients..." class="flex-1 text-sm bg-transparent outline-none text-brand-dark placeholder-brand-muted" oninput="handleSearch(this.value)" autocomplete="off">
-          <button id="searchClearBtn" onclick="clearSearch()" class="text-brand-muted hidden">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-          </button>
-        </div>
-        <button onclick="closeSearch()" class="text-brand-muted text-sm font-semibold px-1 py-2 whitespace-nowrap">Cancel</button>
-      </div>
-
-      <!-- Recent / Suggestions -->
-      <div id="searchSuggestions" class="px-4 pb-5">
-        <p class="text-[11px] uppercase font-bold tracking-wider text-brand-muted mb-2">Popular Searches</p>
-        <div class="flex flex-wrap gap-2">
-          <button onclick="doSearch('laddoo')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Laddoo</button>
-          <button onclick="doSearch('sattu')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Sattu</button>
-          <button onclick="doSearch('dates')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Dates</button>
-          <button onclick="doSearch('besan')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Besan</button>
-          <button onclick="doSearch('sugar free')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Sugar Free</button>
-          <button onclick="doSearch('glass jar')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Glass Jar</button>
-        </div>
-        <!-- Search results will appear here -->
-        <div id="searchResults" class="mt-3 space-y-2 hidden"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============================
        MAIN CONTENT
        ============================ -->
   <main class="pb-32" id="mainContent">
 
-    <!-- === SECTION 1: COMPACT HERO (Quick Value Prop) === -->
+    <!-- === SECTION 1: COMPACT HERO === -->
     <section class="relative px-4 pt-3 pb-4" id="homeSection">
       <div class="relative rounded-2xl overflow-hidden bg-brand-dark text-white border border-brand-border/50 shadow-lg">
         <!-- Hero Image - Compact -->
@@ -145,7 +99,7 @@
           <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent"></div>
         </div>
 
-        <!-- Hero Content Overlay - Compact -->
+        <!-- Hero Content Overlay -->
         <div class="p-4 relative -mt-16 z-10">
           <div class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-[10px] text-brand-goldsoft mb-2">
             <svg class="w-3 h-3 text-brand-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -164,22 +118,18 @@
             <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] text-stone-200">🫙 Desi Ghee</span>
           </div>
 
-          <!-- Hero CTA - Scroll to products -->
-          <div class="mt-3 flex gap-2">
-            <button onclick="scrollToProducts()" class="flex-1 py-2.5 px-4 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg active:scale-95 transition-transform">
-              <span>Shop Now</span>
+          <!-- Hero CTA -->
+          <div class="mt-3">
+            <button onclick="scrollToProducts()" class="w-full py-2.5 px-4 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg active:scale-95 transition-transform">
+              <span>Shop Fresh Laddoos</span>
               <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"/></svg>
-            </button>
-            <button onclick="openSearch()" class="py-2.5 px-3 rounded-xl bg-white/10 border border-white/20 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-              Search
             </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- === SECTION 2: TRUST BADGES (Compact horizontal) === -->
+    <!-- === SECTION 2: TRUST BADGES === -->
     <section class="px-4 pb-4">
       <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
         <div class="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full border border-brand-border shadow-sm flex-shrink-0">
@@ -201,538 +151,348 @@
       </div>
     </section>
 
-    <!-- === SECTION 3: PRODUCTS — PRODUCT-FIRST LAYOUT === -->
+    <!-- === SECTION 3: PRODUCTS (Product-First Grid) === -->
     <section id="productsSection" class="px-4 pb-2">
       <!-- Section Header -->
       <div class="flex items-center justify-between mb-3">
         <div>
-          <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Our Products</span>
-          <h2 class="font-serif text-xl font-bold text-brand-dark leading-tight">Four Recipes. Zero Regret.</h2>
+          <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Artisanal Sweets</span>
+          <h2 class="font-serif text-xl font-bold text-brand-dark leading-tight">Fresh Recipes. Zero Guilt.</h2>
         </div>
-        <button onclick="scrollToProducts()" class="text-[11px] font-bold text-brand-amber flex items-center gap-1">
-          All
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-        </button>
+        <span class="text-xs text-brand-muted font-medium">6 Varieties</span>
       </div>
 
       <!-- Category Filter Pills -->
       <div class="flex gap-2 overflow-x-auto no-scrollbar pb-3">
-        <button data-category="All" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold transition whitespace-nowrap bg-brand-dark text-brand-goldsoft shadow-sm" onclick="filterCategory('All')">All</button>
-        <button data-category="Dry Fruit" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Dry Fruit')">Dry Fruit</button>
-        <button data-category="Besan" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Besan')">Besan</button>
-        <button data-category="Dates" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Dates')">Dates</button>
-        <button data-category="Energy" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Energy')">Energy</button>
-        <button data-category="Glass Jar" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Glass Jar')">Glass Jar</button>
+        <button id="cat-all" class="category-chip active flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-bold transition whitespace-nowrap bg-brand-dark text-brand-cream shadow-sm" onclick="filterCategory('all')">All</button>
+        <button id="cat-dryfruit" class="category-chip flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Dry Fruit')">Dry Fruit</button>
+        <button id="cat-besan" class="category-chip flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Besan')">Besan</button>
+        <button id="cat-dates" class="category-chip flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Dates')">Dates</button>
+        <button id="cat-energy" class="category-chip flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Energy')">Energy</button>
+        <button id="cat-glassjar" class="category-chip flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Glass Jar')">Glass Jar</button>
       </div>
 
-      <!-- Product Grid - 2 columns on mobile -->
+      <!-- 2-Column Product Grid -->
       <div class="grid grid-cols-2 gap-3" id="productGrid">
 
         <!-- Product 1: Dry Fruit Sattu Laddoo -->
-        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+        <div class="product-grid-card product-card bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
              data-id="p1" 
-             data-category="Dry Fruit,Energy,Sattu"
-             data-name="Dry Fruit Sattu Laddoo"
-             data-price="250"
-             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q">
-          <!-- Product Image -->
-          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20">
+             data-category="Dry Fruit,Energy,Sattu">
+          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20 cursor-pointer" onclick="openVariantSheet('p1')">
             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q" 
                  alt="Dry Fruit Sattu Laddoo" 
-                 class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                 class="w-full h-full object-cover" 
                  loading="lazy"/>
-            <!-- Wishlist button -->
-            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-            </button>
-            <!-- Best seller badge -->
             <div class="absolute top-2 left-2">
-              <span class="px-1.5 py-0.5 rounded-md bg-brand-amber text-white text-[9px] font-bold uppercase tracking-wide">Popular</span>
+              <span class="px-2 py-0.5 rounded-full bg-brand-amber text-white text-[9px] font-bold uppercase tracking-wide shadow-sm">Popular</span>
             </div>
           </div>
-
-          <!-- Product Info -->
-          <div class="p-2.5 flex flex-col flex-1">
-            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Dry Fruit Sattu Laddoo</h3>
-            <div class="flex items-center gap-1 mt-1">
-              <span class="text-brand-gold text-[10px]">★★★★★</span>
+          <div class="p-3 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 mb-1">
+                <span class="text-brand-amber text-[11px]">★</span>
+                <span class="text-[10px] font-bold text-brand-dark">4.9</span>
+                <span class="text-[9px] text-brand-muted">(128)</span>
+              </div>
+              <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-1">Dry Fruit Sattu Laddoo</h3>
+              <p class="text-[10px] text-brand-muted line-clamp-1 mt-0.5">Sattu, dry fruits &amp; jaggery</p>
             </div>
-            <!-- Price Row -->
-            <div class="mt-1.5 flex items-baseline gap-1">
-              <span class="text-sm font-bold text-brand-dark">₹250</span>
-              <span class="text-[10px] text-brand-muted">/ 250g</span>
-            </div>
-            <!-- Quick Add Button -->
-            <div class="mt-2" id="btn-container-p1">
-              <button onclick="event.stopPropagation(); openVariantSheet('p1')" 
-                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
-                <span class="text-base leading-none">+</span> Add
+            <div class="mt-2.5 pt-2 border-t border-brand-border/60">
+              <div class="flex items-baseline justify-between mb-2">
+                <span class="text-xs font-extrabold text-brand-dark">₹250 <span class="text-[9px] font-normal text-brand-muted">/250g</span></span>
+                <span class="text-[9px] text-brand-amber font-semibold">2 sizes</span>
+              </div>
+              <button onclick="openVariantSheet('p1')" class="btn-add-touch w-full py-2 rounded-xl bg-brand-dark text-brand-gold font-bold text-xs flex items-center justify-center gap-1 shadow active:scale-95 transition-transform" aria-label="Add Dry Fruit Sattu Laddoo to cart">
+                <span>+ Add</span>
               </button>
             </div>
           </div>
         </div>
 
         <!-- Product 2: Besan Badam Laddoo -->
-        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+        <div class="product-grid-card product-card bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
              data-id="p2" 
-             data-category="Besan,Badam"
-             data-name="Besan Badam Laddoo"
-             data-price="215"
-             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg">
-          <!-- Product Image -->
-          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg"
-                 alt="Besan Badam Laddoo"
-                 class="w-full h-full object-cover transition-transform duration-300"
+             data-category="Besan,Badam">
+          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20 cursor-pointer" onclick="openVariantSheet('p2')">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg" 
+                 alt="Besan Badam Laddoo" 
+                 class="w-full h-full object-cover" 
                  loading="lazy"/>
-            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-            </button>
+            <div class="absolute top-2 left-2">
+              <span class="px-2 py-0.5 rounded-full bg-brand-dark text-brand-gold text-[9px] font-bold uppercase tracking-wide shadow-sm">Classic</span>
+            </div>
           </div>
-
-          <!-- Product Info -->
-          <div class="p-2.5 flex flex-col flex-1">
-            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Besan Badam Laddoo</h3>
-            <div class="flex items-center gap-1 mt-1">
-              <span class="text-brand-gold text-[10px]">★★★★★</span>
+          <div class="p-3 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 mb-1">
+                <span class="text-brand-amber text-[11px]">★</span>
+                <span class="text-[10px] font-bold text-brand-dark">4.8</span>
+                <span class="text-[9px] text-brand-muted">(96)</span>
+              </div>
+              <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-1">Besan Badam Laddoo</h3>
+              <p class="text-[10px] text-brand-muted line-clamp-1 mt-0.5">Slow-roasted with desi ghee</p>
             </div>
-            <div class="mt-1.5 flex items-baseline gap-1">
-              <span class="text-sm font-bold text-brand-dark">₹215</span>
-              <span class="text-[10px] text-brand-muted">/ 250g</span>
-            </div>
-            <div class="mt-2" id="btn-container-p2">
-              <button onclick="event.stopPropagation(); openVariantSheet('p2')" 
-                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
-                <span class="text-base leading-none">+</span> Add
+            <div class="mt-2.5 pt-2 border-t border-brand-border/60">
+              <div class="flex items-baseline justify-between mb-2">
+                <span class="text-xs font-extrabold text-brand-dark">₹215 <span class="text-[9px] font-normal text-brand-muted">/250g</span></span>
+                <span class="text-[9px] text-brand-amber font-semibold">2 sizes</span>
+              </div>
+              <button onclick="openVariantSheet('p2')" class="btn-add-touch w-full py-2 rounded-xl bg-brand-dark text-brand-gold font-bold text-xs flex items-center justify-center gap-1 shadow active:scale-95 transition-transform" aria-label="Add Besan Badam Laddoo to cart">
+                <span>+ Add</span>
               </button>
             </div>
           </div>
         </div>
 
         <!-- Product 3: Dates Delight Laddoo -->
-        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+        <div class="product-grid-card product-card bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
              data-id="p3" 
-             data-category="Dates,Energy"
-             data-name="Dates Delight Laddoo"
-             data-price="315"
-             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w">
-          <!-- Product Image -->
-          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w"
-                 alt="Dates Delight Laddoo"
-                 class="w-full h-full object-cover transition-transform duration-300"
+             data-category="Dates,Energy">
+          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20 cursor-pointer" onclick="openVariantSheet('p3')">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w" 
+                 alt="Dates Delight Laddoo" 
+                 class="w-full h-full object-cover" 
                  loading="lazy"/>
-            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-            </button>
             <div class="absolute top-2 left-2">
-              <span class="px-1.5 py-0.5 rounded-md bg-brand-olive text-white text-[9px] font-bold uppercase tracking-wide">Energy</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-700 text-white text-[9px] font-bold uppercase tracking-wide shadow-sm">Energy</span>
             </div>
           </div>
-
-          <!-- Product Info -->
-          <div class="p-2.5 flex flex-col flex-1">
-            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Dates Delight Laddoo</h3>
-            <div class="flex items-center gap-1 mt-1">
-              <span class="text-brand-gold text-[10px]">★★★★★</span>
+          <div class="p-3 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 mb-1">
+                <span class="text-brand-amber text-[11px]">★</span>
+                <span class="text-[10px] font-bold text-brand-dark">4.9</span>
+                <span class="text-[9px] text-brand-muted">(112)</span>
+              </div>
+              <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-1">Dates Delight Laddoo</h3>
+              <p class="text-[10px] text-brand-muted line-clamp-1 mt-0.5">Dates, nuts &amp; roasted seeds</p>
             </div>
-            <div class="mt-1.5 flex items-baseline gap-1">
-              <span class="text-sm font-bold text-brand-dark">₹315</span>
-              <span class="text-[10px] text-brand-muted">/ 250g</span>
-            </div>
-            <div class="mt-2" id="btn-container-p3">
-              <button onclick="event.stopPropagation(); openVariantSheet('p3')" 
-                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
-                <span class="text-base leading-none">+</span> Add
+            <div class="mt-2.5 pt-2 border-t border-brand-border/60">
+              <div class="flex items-baseline justify-between mb-2">
+                <span class="text-xs font-extrabold text-brand-dark">₹315 <span class="text-[9px] font-normal text-brand-muted">/250g</span></span>
+                <span class="text-[9px] text-brand-amber font-semibold">2 sizes</span>
+              </div>
+              <button onclick="openVariantSheet('p3')" class="btn-add-touch w-full py-2 rounded-xl bg-brand-dark text-brand-gold font-bold text-xs flex items-center justify-center gap-1 shadow active:scale-95 transition-transform" aria-label="Add Dates Delight Laddoo to cart">
+                <span>+ Add</span>
               </button>
             </div>
           </div>
         </div>
 
         <!-- Product 4: Sattu Laddoo -->
-        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+        <div class="product-grid-card product-card bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
              data-id="p4" 
-             data-category="Energy,Sattu"
-             data-name="Sattu Laddoo"
-             data-price="165"
-             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q">
-          <!-- Product Image -->
-          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q"
-                 alt="Sattu Laddoo"
-                 class="w-full h-full object-cover transition-transform duration-300"
+             data-category="Energy,Sattu">
+          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20 cursor-pointer" onclick="openVariantSheet('p4')">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q" 
+                 alt="Sattu Laddoo" 
+                 class="w-full h-full object-cover" 
                  loading="lazy"/>
-            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-            </button>
             <div class="absolute top-2 left-2">
-              <span class="px-1.5 py-0.5 rounded-md bg-brand-brown text-brand-goldsoft text-[9px] font-bold uppercase tracking-wide">Classic</span>
+              <span class="px-2 py-0.5 rounded-full bg-stone-700 text-white text-[9px] font-bold uppercase tracking-wide shadow-sm">Simple</span>
             </div>
           </div>
-
-          <!-- Product Info -->
-          <div class="p-2.5 flex flex-col flex-1">
-            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Sattu Laddoo</h3>
-            <div class="flex items-center gap-1 mt-1">
-              <span class="text-brand-gold text-[10px]">★★★★★</span>
+          <div class="p-3 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 mb-1">
+                <span class="text-brand-amber text-[11px]">★</span>
+                <span class="text-[10px] font-bold text-brand-dark">4.7</span>
+                <span class="text-[9px] text-brand-muted">(74)</span>
+              </div>
+              <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-1">Sattu Laddoo</h3>
+              <p class="text-[10px] text-brand-muted line-clamp-1 mt-0.5">Traditional sattu &amp; jaggery</p>
             </div>
-            <div class="mt-1.5 flex items-baseline gap-1">
-              <span class="text-sm font-bold text-brand-dark">₹165</span>
-              <span class="text-[10px] text-brand-muted">/ 250g</span>
-            </div>
-            <div class="mt-2" id="btn-container-p4">
-              <button onclick="event.stopPropagation(); openVariantSheet('p4')" 
-                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
-                <span class="text-base leading-none">+</span> Add
+            <div class="mt-2.5 pt-2 border-t border-brand-border/60">
+              <div class="flex items-baseline justify-between mb-2">
+                <span class="text-xs font-extrabold text-brand-dark">₹165 <span class="text-[9px] font-normal text-brand-muted">/250g</span></span>
+                <span class="text-[9px] text-brand-amber font-semibold">2 sizes</span>
+              </div>
+              <button onclick="openVariantSheet('p4')" class="btn-add-touch w-full py-2 rounded-xl bg-brand-dark text-brand-gold font-bold text-xs flex items-center justify-center gap-1 shadow active:scale-95 transition-transform" aria-label="Add Sattu Laddoo to cart">
+                <span>+ Add</span>
               </button>
             </div>
           </div>
         </div>
 
-        <!-- Glass Jar Products -->
-        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+        <!-- Product 5: Dry Fruit Sattu Glass Jar -->
+        <div class="product-grid-card product-card bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
              data-id="p5" 
-             data-category="Glass Jar,Dry Fruit"
-             data-name="Dry Fruit Sattu Laddoo (Glass Jar)"
-             data-price="350"
-             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q">
-          <div class="relative w-full aspect-square overflow-hidden bg-amber-50">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q"
-                 alt="Dry Fruit Sattu Laddoo Glass Jar"
-                 class="w-full h-full object-cover transition-transform duration-300"
+             data-category="Glass Jar,Dry Fruit">
+          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20 cursor-pointer" onclick="openVariantSheet('p5')">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q" 
+                 alt="Dry Fruit Sattu Glass Jar" 
+                 class="w-full h-full object-cover" 
                  loading="lazy"/>
-            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-            </button>
             <div class="absolute top-2 left-2">
-              <span class="px-1.5 py-0.5 rounded-md bg-amber-600 text-white text-[9px] font-bold uppercase tracking-wide">🫙 Glass Jar</span>
+              <span class="px-2 py-0.5 rounded-full bg-amber-600 text-white text-[9px] font-bold uppercase tracking-wide shadow-sm">Gift Jar</span>
             </div>
           </div>
-          <div class="p-2.5 flex flex-col flex-1">
-            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Dry Fruit Sattu (Glass Jar)</h3>
-            <div class="flex items-center gap-1 mt-1">
-              <span class="text-brand-gold text-[10px]">★★★★★</span>
+          <div class="p-3 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 mb-1">
+                <span class="text-brand-amber text-[11px]">★</span>
+                <span class="text-[10px] font-bold text-brand-dark">4.9</span>
+                <span class="text-[9px] text-brand-muted">(62)</span>
+              </div>
+              <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-1">Sattu Laddoo (Glass Jar)</h3>
+              <p class="text-[10px] text-brand-muted line-clamp-1 mt-0.5">Reusable premium glass jar</p>
             </div>
-            <div class="mt-1.5 flex items-baseline gap-1">
-              <span class="text-sm font-bold text-brand-dark">₹350</span>
-              <span class="text-[10px] text-brand-muted">/ 350g</span>
-            </div>
-            <div class="mt-2" id="btn-container-p5">
-              <button onclick="event.stopPropagation(); openVariantSheet('p5')" 
-                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
-                <span class="text-base leading-none">+</span> Add
+            <div class="mt-2.5 pt-2 border-t border-brand-border/60">
+              <div class="flex items-baseline justify-between mb-2">
+                <span class="text-xs font-extrabold text-brand-dark">₹350 <span class="text-[9px] font-normal text-brand-muted">/350g</span></span>
+                <span class="text-[9px] text-brand-amber font-semibold">2 sizes</span>
+              </div>
+              <button onclick="openVariantSheet('p5')" class="btn-add-touch w-full py-2 rounded-xl bg-brand-dark text-brand-gold font-bold text-xs flex items-center justify-center gap-1 shadow active:scale-95 transition-transform" aria-label="Add Sattu Glass Jar to cart">
+                <span>+ Add</span>
               </button>
             </div>
           </div>
         </div>
 
-        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+        <!-- Product 6: Dates Delight Glass Jar -->
+        <div class="product-grid-card product-card bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
              data-id="p6" 
-             data-category="Glass Jar,Dates"
-             data-name="Dates Delight Laddoo (Glass Jar)"
-             data-price="500"
-             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w">
-          <div class="relative w-full aspect-square overflow-hidden bg-amber-50">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w"
-                 alt="Dates Delight Glass Jar"
-                 class="w-full h-full object-cover transition-transform duration-300"
+             data-category="Glass Jar,Dates">
+          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20 cursor-pointer" onclick="openVariantSheet('p6')">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w" 
+                 alt="Dates Delight Glass Jar" 
+                 class="w-full h-full object-cover" 
                  loading="lazy"/>
-            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-            </button>
             <div class="absolute top-2 left-2">
-              <span class="px-1.5 py-0.5 rounded-md bg-amber-600 text-white text-[9px] font-bold uppercase tracking-wide">🫙 Glass Jar</span>
+              <span class="px-2 py-0.5 rounded-full bg-purple-700 text-white text-[9px] font-bold uppercase tracking-wide shadow-sm">Premium</span>
             </div>
           </div>
-          <div class="p-2.5 flex flex-col flex-1">
-            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Dates Delight (Glass Jar)</h3>
-            <div class="flex items-center gap-1 mt-1">
-              <span class="text-brand-gold text-[10px]">★★★★★</span>
+          <div class="p-3 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 mb-1">
+                <span class="text-brand-amber text-[11px]">★</span>
+                <span class="text-[10px] font-bold text-brand-dark">4.8</span>
+                <span class="text-[9px] text-brand-muted">(45)</span>
+              </div>
+              <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-1">Dates Delight (Glass Jar)</h3>
+              <p class="text-[10px] text-brand-muted line-clamp-1 mt-0.5">Artisanal gifting edition</p>
             </div>
-            <div class="mt-1.5 flex items-baseline gap-1">
-              <span class="text-sm font-bold text-brand-dark">₹500</span>
-              <span class="text-[10px] text-brand-muted">/ 350g</span>
-            </div>
-            <div class="mt-2" id="btn-container-p6">
-              <button onclick="event.stopPropagation(); openVariantSheet('p6')" 
-                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
-                <span class="text-base leading-none">+</span> Add
+            <div class="mt-2.5 pt-2 border-t border-brand-border/60">
+              <div class="flex items-baseline justify-between mb-2">
+                <span class="text-xs font-extrabold text-brand-dark">₹500 <span class="text-[9px] font-normal text-brand-muted">/350g</span></span>
+                <span class="text-[9px] text-brand-amber font-semibold">2 sizes</span>
+              </div>
+              <button onclick="openVariantSheet('p6')" class="btn-add-touch w-full py-2 rounded-xl bg-brand-dark text-brand-gold font-bold text-xs flex items-center justify-center gap-1 shadow active:scale-95 transition-transform" aria-label="Add Dates Delight Glass Jar to cart">
+                <span>+ Add</span>
               </button>
             </div>
           </div>
         </div>
 
-      </div><!-- /productGrid -->
-    </section>
-
-    <!-- === SECTION 4: OUR PROMISE (Compact) === -->
-    <section id="promiseSection" class="px-4 py-4 mt-2">
-      <div class="bg-brand-dark text-white rounded-2xl p-4 border border-brand-border/30 shadow-md">
-        <div class="text-center mb-3">
-          <span class="text-[10px] uppercase font-bold tracking-wider text-brand-gold">Our Simple Promise</span>
-          <h2 class="font-serif text-lg font-bold mt-1">Nourishment You Can Taste,<br><span class="text-brand-gold italic">Tradition You Can Trust</span></h2>
-        </div>
-
-        <div class="grid grid-cols-3 gap-2 mt-3 text-center">
-          <div class="bg-white/10 border border-white/20 p-2.5 rounded-xl">
-            <div class="text-xl mb-1">🚫</div>
-            <span class="text-[10px] font-bold block">No Preservatives</span>
-          </div>
-          <div class="bg-white/10 border border-white/20 p-2.5 rounded-xl">
-            <div class="text-xl mb-1">🍯</div>
-            <span class="text-[10px] font-bold block">No Refined Sugar</span>
-          </div>
-          <div class="bg-white/10 border border-white/20 p-2.5 rounded-xl">
-            <div class="text-xl mb-1">❤️</div>
-            <span class="text-[10px] font-bold block">100% Love</span>
-          </div>
-        </div>
-
-        <p class="text-[11px] text-stone-300 mt-3 text-center leading-relaxed">
-          We believe you shouldn't have to read the fine print to know what's going into something you eat. No shortcuts.
-        </p>
-
-        <button onclick="scrollToProducts()" class="mt-3 w-full py-2.5 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-transform">
-          Shop Our Products
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-        </button>
       </div>
     </section>
 
-    <!-- === SECTION 5: TARGET AUDIENCE (Horizontal scroll chips) === -->
-    <section class="px-4 py-4">
-      <h3 class="font-serif text-lg font-bold text-brand-dark mb-3">Made for Everyone</h3>
-      <div class="flex gap-2 overflow-x-auto no-scrollbar">
-        <div class="flex-shrink-0 w-36 bg-white rounded-2xl border border-brand-border p-3 shadow-sm">
-          <div class="text-xl mb-1">👶</div>
-          <h4 class="font-serif font-bold text-sm text-brand-dark">Growing Kids</h4>
-          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">A wholesome burst of energy after school.</p>
-        </div>
-        <div class="flex-shrink-0 w-36 bg-white rounded-2xl border border-brand-border p-3 shadow-sm">
-          <div class="text-xl mb-1">👩</div>
-          <h4 class="font-serif font-bold text-sm text-brand-dark">Busy Women</h4>
-          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Something nourishing when the day gets long.</p>
-        </div>
-        <div class="flex-shrink-0 w-36 bg-white rounded-2xl border border-brand-border p-3 shadow-sm">
-          <div class="text-xl mb-1">👨</div>
-          <h4 class="font-serif font-bold text-sm text-brand-dark">Busy Men</h4>
-          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">A better bite between meetings and moments.</p>
-        </div>
-        <div class="flex-shrink-0 w-36 bg-white rounded-2xl border border-brand-border p-3 shadow-sm">
-          <div class="text-xl mb-1">🧓</div>
-          <h4 class="font-serif font-bold text-sm text-brand-dark">Elders</h4>
-          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Traditional goodness, the way it used to taste.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- === SECTION 6: WHY CHOOSE US === -->
-    <section id="whyUsSection" class="px-4 py-4">
-      <div class="text-center mb-3">
-        <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Why Choose Us</span>
-        <h2 class="font-serif text-xl font-bold text-brand-dark">Good Food, Thoughtfully Made</h2>
-      </div>
-
-      <div class="grid grid-cols-2 gap-2.5">
-        <div class="bg-white rounded-xl border border-brand-border p-3 text-center shadow-sm">
-          <div class="w-9 h-9 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          </div>
-          <h4 class="font-bold text-xs text-brand-dark">Quality Ingredients</h4>
-          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Thoughtfully selected, always honest.</p>
-        </div>
-        <div class="bg-white rounded-xl border border-brand-border p-3 text-center shadow-sm">
-          <div class="w-9 h-9 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/></svg>
-          </div>
-          <h4 class="font-bold text-xs text-brand-dark">Made with Care</h4>
-          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Every treat crafted with warmth & attention.</p>
-        </div>
-        <div class="bg-white rounded-xl border border-brand-border p-3 text-center shadow-sm">
-          <div class="w-9 h-9 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
-          </div>
-          <h4 class="font-bold text-xs text-brand-dark">Freshly Baked</h4>
-          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Made in small batches, never mass-produced.</p>
-        </div>
-        <div class="bg-white rounded-xl border border-brand-border p-3 text-center shadow-sm">
-          <div class="w-9 h-9 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-          </div>
-          <h4 class="font-bold text-xs text-brand-dark">Delicious Taste</h4>
-          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Better choices without flavour compromise.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- === SECTION 7: OUR STORY (Collapsed/Compact) === -->
-    <section id="storySection" class="px-4 py-4">
+    <!-- === SECTION 4: OUR PROMISE === -->
+    <section class="px-4 py-5" id="promiseSection">
       <div class="bg-white rounded-2xl border border-brand-border p-4 shadow-sm">
-        <div class="mb-3">
-          <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Our Story</span>
-          <h2 class="font-serif text-xl font-bold text-brand-dark mt-1">Made with Love,<br><span class="text-brand-amber italic">Eaten with Joy</span></h2>
+        <div class="text-center mb-3">
+          <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Our Philosophy</span>
+          <h3 class="font-serif text-lg font-bold text-brand-dark">The Guilt-Free Promise</h3>
         </div>
-        <p class="text-xs text-brand-muted leading-relaxed">
-          Every great sweet in India was invented before refined sugar existed. Somewhere along the way, we forgot that and let "healthy" and "delicious" become enemies instead of the same word. We didn't invent anything new. We just stopped cutting corners.
-        </p>
-        
-        <!-- Ingredients list compact -->
-        <div class="mt-3 grid grid-cols-2 gap-2">
-          <div class="flex items-center gap-2">
-            <span class="w-5 h-5 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-[10px] flex items-center justify-center flex-shrink-0">01</span>
-            <span class="text-xs font-semibold text-brand-dark">Sattu</span>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="p-2.5 rounded-xl bg-brand-cream border border-brand-border/60">
+            <span class="text-base mb-1 block">🌿</span>
+            <p class="font-bold text-brand-dark">No Refined Sugar</p>
+            <p class="text-[10px] text-brand-muted mt-0.5">Naturally sweetened with jaggery &amp; dates</p>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="w-5 h-5 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-[10px] flex items-center justify-center flex-shrink-0">02</span>
-            <span class="text-xs font-semibold text-brand-dark">Dates</span>
+          <div class="p-2.5 rounded-xl bg-brand-cream border border-brand-border/60">
+            <span class="text-base mb-1 block">🫙</span>
+            <p class="font-bold text-brand-dark">Pure Desi Ghee</p>
+            <p class="text-[10px] text-brand-muted mt-0.5">Rich in healthy fats and genuine aroma</p>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="w-5 h-5 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-[10px] flex items-center justify-center flex-shrink-0">03</span>
-            <span class="text-xs font-semibold text-brand-dark">Desi Ghee</span>
+          <div class="p-2.5 rounded-xl bg-brand-cream border border-brand-border/60">
+            <span class="text-base mb-1 block">🛡️</span>
+            <p class="font-bold text-brand-dark">Zero Preservatives</p>
+            <p class="text-[10px] text-brand-muted mt-0.5">Handcrafted in small batches fresh daily</p>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="w-5 h-5 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-[10px] flex items-center justify-center flex-shrink-0">04</span>
-            <span class="text-xs font-semibold text-brand-dark">Jaggery</span>
+          <div class="p-2.5 rounded-xl bg-brand-cream border border-brand-border/60">
+            <span class="text-base mb-1 block">⚡</span>
+            <p class="font-bold text-brand-dark">Sustained Energy</p>
+            <p class="text-[10px] text-brand-muted mt-0.5">High fibre, roasted sattu &amp; crunchy nuts</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECTION 5: STORY & VISION === -->
+    <section class="px-4 pb-6" id="storySection">
+      <div class="bg-brand-dark text-white rounded-2xl p-5 shadow-lg border border-brand-border/30 relative overflow-hidden">
+        <div class="relative z-10">
+          <span class="text-[10px] uppercase tracking-widest text-brand-gold font-bold">Our Story</span>
+          <h3 class="font-serif text-xl font-bold mt-1 text-brand-cream">Pure Ingredients, Honest Sweets</h3>
+          <p class="text-xs text-stone-300 mt-2 leading-relaxed">
+            We started Guilt Free Cravings with a simple belief: nobody should have to compromise between celebrating tradition and caring for their health. Every laddoo is hand-rolled with 100% wholesome ingredients.
+          </p>
+          <div class="mt-4 flex items-center gap-3">
+            <button onclick="scrollToProducts()" class="px-4 py-2 bg-brand-gold text-brand-dark rounded-xl font-bold text-xs shadow active:scale-95 transition-transform">
+              Taste the Difference
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- === SECTION 8: OUR VISION === -->
-    <section id="visionSection" class="px-4 py-4">
-      <div class="bg-brand-dark text-white rounded-2xl p-4 border border-brand-border/20 shadow-md">
-        <span class="text-[10px] uppercase font-bold tracking-wider text-brand-gold">Our Vision</span>
-        <h2 class="font-serif text-xl font-bold mt-1">Making every craving feel a little better</h2>
-        <p class="text-xs text-stone-300 mt-2 leading-relaxed">
-          We envision a world where enjoying something sweet does not have to come with unnecessary compromise.
-        </p>
-
-        <div class="mt-3 space-y-2">
-          <div class="bg-white/10 border border-white/20 p-2.5 rounded-xl flex items-start gap-2">
-            <span class="text-brand-gold font-bold text-xs mt-0.5 flex-shrink-0">Taste</span>
-            <p class="text-[11px] text-stone-300">Delicious flavours that make every craving worth giving in to.</p>
-          </div>
-          <div class="bg-white/10 border border-white/20 p-2.5 rounded-xl flex items-start gap-2">
-            <span class="text-brand-gold font-bold text-xs mt-0.5 flex-shrink-0">Quality</span>
-            <p class="text-[11px] text-stone-300">Thoughtfully selected ingredients chosen with care.</p>
-          </div>
-        </div>
-
-        <div class="mt-3 p-3 bg-white/5 border border-white/10 rounded-xl text-center">
-          <p class="text-sm font-serif italic text-brand-goldsoft">"Better choices should never mean less enjoyment."</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- === FINAL CTA === -->
-    <section class="px-4 py-4">
-      <div class="bg-gradient-to-br from-brand-brown to-brand-dark text-white rounded-2xl p-5 text-center shadow-lg border border-brand-border/20">
-        <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-brand-goldsoft text-brand-dark flex items-center justify-center font-serif font-bold text-base">GC</div>
-        <h2 class="font-serif text-lg font-bold">Ready to taste the difference?</h2>
-        <p class="text-xs text-stone-300 mt-1.5 max-w-xs mx-auto">Order your favourite treats today and experience the warmth of homemade goodness.</p>
-        <button onclick="scrollToProducts()" class="mt-4 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs shadow-md active:scale-95 transition-transform">
-          <span>Shop Now</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-        </button>
-      </div>
-    </section>
   </main>
 
   <!-- ============================
        FOOTER
        ============================ -->
-  <footer class="bg-brand-dark text-stone-300 pt-6 pb-4 px-5 border-t border-brand-border/30">
-    <div class="flex flex-col gap-5">
+  <footer class="bg-brand-dark text-stone-300 px-4 pt-8 pb-28 border-t border-brand-border/20 text-xs">
+    <div class="space-y-4">
       <div>
-        <div class="flex items-center gap-2 mb-2">
-          <span class="w-9 h-9 rounded-full bg-brand-goldsoft text-brand-dark flex items-center justify-center font-serif font-bold text-sm">GC</span>
-          <span class="font-serif text-base font-bold text-white">Guilt Free Cravings</span>
-        </div>
-        <p class="text-xs text-stone-400 mt-1.5">Delicious treats thoughtfully made for your everyday cravings.</p>
-        <div class="flex items-center gap-3 mt-3">
-          <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition" aria-label="Instagram">
-            <span class="text-xs font-bold">IG</span>
-          </a>
-          <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition" aria-label="Facebook">
-            <span class="text-xs font-bold">FB</span>
-          </a>
-          <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition" aria-label="WhatsApp">
-            <span class="text-xs font-bold">WA</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 gap-4 text-xs">
-        <div>
-          <h5 class="font-bold text-white mb-2 text-[11px] uppercase tracking-wider text-brand-gold">Quick Links</h5>
-          <ul class="space-y-1.5 text-stone-400">
-            <li><a href="#homeSection" class="hover:text-white transition">Home</a></li>
-            <li><a href="#productsSection" class="hover:text-white transition">Products</a></li>
-            <li><a href="#promiseSection" class="hover:text-white transition">Our Promise</a></li>
-            <li><a href="#storySection" class="hover:text-white transition">Our Story</a></li>
-            <li><a href="#visionSection" class="hover:text-white transition">Our Vision</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="font-bold text-white mb-2 text-[11px] uppercase tracking-wider text-brand-gold">Customer Care</h5>
-          <ul class="space-y-1.5 text-stone-400">
-            <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
-            <li><a href="#" class="hover:text-white transition">FAQs</a></li>
-            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
-            <li><a href="#" class="hover:text-white transition">Terms &amp; Conditions</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="border-t border-stone-800 pt-3">
-        <p class="text-xs text-stone-400">Email: hello@guiltfreecravings.com</p>
-        <p class="text-xs text-stone-400 mt-1">Phone: +91 XXXXX XXXXX</p>
-        <p class="text-xs text-stone-400 mt-1">Delhi, India</p>
+        <span class="font-serif text-lg font-bold text-white">Guilt<span class="text-brand-gold">Free</span> Cravings</span>
+        <p class="text-[11px] text-stone-400 mt-1">Homemade Indian Sweets &bull; No Refined Sugar &bull; 100% Desi Ghee</p>
       </div>
 
       <div class="pt-3 border-t border-stone-800 text-[10px] text-stone-500 text-center">
         <p>&copy; 2026 Guilt Free Cravings. All rights reserved.</p>
-        <p class="mt-1">Made with care for every craving.</p>
+        <p class="mt-1">Handcrafted with care for every craving ❤️</p>
       </div>
     </div>
   </footer>
 
   <!-- ============================
-       BOTTOM NAVIGATION BAR
+       BOTTOM NAVIGATION BAR (With User Profile Tab)
        ============================ -->
   <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/97 backdrop-blur-md border-t border-brand-border shadow-2xl" id="bottomNav" aria-label="Main navigation">
-    <div class="flex items-center justify-around px-2 py-2 safe-area-bottom">
-      <!-- Home -->
-      <button onclick="bottomNavSelect('home')" id="bnav-home" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-all active:scale-90 text-brand-amber" aria-label="Home">
+    <div class="flex items-center justify-around px-2 py-1.5 safe-area-bottom">
+      <!-- 1. Home -->
+      <button onclick="bottomNavSelect('home'); window.scrollTo({top: 0, behavior: 'smooth'});" id="bnav-home" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1 rounded-xl transition-all active:scale-90 text-brand-amber" aria-label="Home">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z"/><path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z"/></svg>
         <span class="text-[10px] font-bold">Home</span>
       </button>
       
-      <!-- Products -->
-      <button onclick="bottomNavSelect('products'); scrollToProducts();" id="bnav-products" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-all active:scale-90 text-brand-muted" aria-label="Products">
+      <!-- 2. Products -->
+      <button onclick="bottomNavSelect('products'); scrollToProducts();" id="bnav-products" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1 rounded-xl transition-all active:scale-90 text-brand-muted" aria-label="Products">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
         <span class="text-[10px] font-semibold">Products</span>
       </button>
 
-      <!-- Search (Center prominent) -->
-      <button onclick="openSearch()" id="bnav-search" class="bnav-btn flex flex-col items-center flex-1 relative" aria-label="Search">
-        <div class="w-12 h-12 rounded-2xl bg-brand-dark flex items-center justify-center shadow-lg -mt-4 border-2 border-brand-cream active:scale-95 transition-transform">
-          <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-        </div>
-        <span class="text-[10px] font-semibold text-brand-muted mt-0.5">Search</span>
-      </button>
-
-      <!-- Cart -->
-      <button onclick="bottomNavSelect('cart'); openCartDrawer();" id="bnav-cart" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-all active:scale-90 text-brand-muted relative" aria-label="Cart">
+      <!-- 3. Cart -->
+      <button onclick="bottomNavSelect('cart'); openCartDrawer();" id="bnav-cart" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1 rounded-xl transition-all active:scale-90 text-brand-muted relative" aria-label="Cart">
         <div class="relative">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
           <span id="bnavCartBadge" class="hidden absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
         </div>
         <span class="text-[10px] font-semibold">Cart</span>
       </button>
 
-      <!-- Account / Menu -->
-      <button onclick="toggleMobileMenu()" id="bnav-account" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-all active:scale-90 text-brand-muted" aria-label="More options">
+      <!-- 4. User Profile Button (Prominent Bottom Nav Item) -->
+      <button onclick="bottomNavSelect('profile'); openProfile();" id="bnav-profile" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1 rounded-xl transition-all active:scale-90 text-brand-muted" aria-label="Profile">
+        <div class="w-7 h-7 rounded-full bg-brand-goldsoft border border-brand-border flex items-center justify-center text-brand-brown">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+        </div>
+        <span class="text-[10px] font-bold">Profile</span>
+      </button>
+
+      <!-- 5. Account / Menu -->
+      <button onclick="toggleMobileMenu()" id="bnav-account" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1 rounded-xl transition-all active:scale-90 text-brand-muted" aria-label="More options">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
         <span class="text-[10px] font-semibold">More</span>
       </button>
@@ -741,7 +501,6 @@
 
   <!-- ============================
        FLOATING STICKY CART BAR
-       (shows when cart has items, above bottom nav)
        ============================ -->
   <div id="stickyBottomCart" class="fixed bottom-16 left-3 right-3 z-35 transform translate-y-40 transition-transform duration-300 ease-out pointer-events-none">
     <div class="bg-brand-dark text-white rounded-2xl p-3 shadow-2xl border border-brand-gold/30 flex items-center justify-between pointer-events-auto">
@@ -774,12 +533,10 @@
     <div onclick="closeVariantSheet()" class="absolute inset-0 drawer-backdrop"></div>
     <div id="variantSheetContent" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300 ease-out max-h-[88vh]">
       
-      <!-- Sheet Handle -->
       <div class="flex justify-center pt-3 pb-1">
         <div class="w-10 h-1 rounded-full bg-stone-200"></div>
       </div>
 
-      <!-- Close button -->
       <div class="px-4 pb-3 flex items-center justify-between border-b border-brand-border">
         <div class="flex items-center gap-3">
           <img id="sheetProductImg" src="" alt="" class="w-14 h-14 rounded-xl object-cover border border-brand-border flex-shrink-0"/>
@@ -793,17 +550,12 @@
         </button>
       </div>
 
-      <!-- Sheet Body (scrollable) -->
       <div class="px-4 py-4 overflow-y-auto flex-1">
-        <!-- Size / Pack Selection -->
         <div class="mb-4">
           <p class="text-xs font-bold text-brand-dark mb-2">Select Pack Size</p>
-          <div class="flex gap-2 flex-wrap" id="variantOptions">
-            <!-- Populated by JS -->
-          </div>
+          <div class="flex gap-2 flex-wrap" id="variantOptions"></div>
         </div>
 
-        <!-- Quantity -->
         <div class="mb-4">
           <p class="text-xs font-bold text-brand-dark mb-2">Quantity</p>
           <div class="flex items-center gap-4">
@@ -819,14 +571,12 @@
           </div>
         </div>
 
-        <!-- Availability note -->
-        <div class="flex items-center gap-1.5 mb-4">
+        <div class="flex items-center gap-1.5 mb-2">
           <span class="w-2 h-2 rounded-full bg-green-500 flex-shrink-0"></span>
-          <span class="text-xs text-brand-muted">In Stock • Freshly made, dispatched within 24hrs</span>
+          <span class="text-xs text-brand-muted">In Stock &bull; Freshly made, dispatched within 24hrs</span>
         </div>
       </div>
 
-      <!-- Sheet Actions - Sticky -->
       <div class="px-4 pb-6 pt-3 border-t border-brand-border bg-white rounded-t-xl space-y-2.5">
         <button onclick="addFromSheet()" id="sheetAddBtn" class="w-full h-12 rounded-xl bg-brand-goldsoft border border-brand-border text-brand-brown font-bold text-sm flex items-center justify-center gap-2 active:scale-98 transition-transform shadow-sm">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
@@ -841,18 +591,16 @@
   </div>
 
   <!-- ============================
-       CART DRAWER (Bottom Sheet)
+       CART DRAWER
        ============================ -->
   <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Shopping cart">
     <div onclick="closeCartDrawer()" class="absolute inset-0 drawer-backdrop"></div>
     <div id="cartDrawerContent" class="absolute bottom-0 left-0 right-0 max-h-[92vh] bg-white rounded-t-3xl shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300 ease-out">
       
-      <!-- Sheet Handle -->
       <div class="flex justify-center pt-3 pb-1">
         <div class="w-10 h-1 rounded-full bg-stone-200"></div>
       </div>
 
-      <!-- Drawer Header -->
       <div class="px-4 pb-3 border-b border-brand-border flex items-center justify-between">
         <div class="flex items-center gap-2">
           <h3 class="font-serif text-xl font-bold text-brand-dark">Your Cart</h3>
@@ -863,12 +611,8 @@
         </button>
       </div>
 
-      <!-- Cart Items List -->
-      <div id="cartItemList" class="px-4 py-3 overflow-y-auto space-y-3 flex-1 max-h-[52vh]">
-        <!-- Dynamic items -->
-      </div>
+      <div id="cartItemList" class="px-4 py-3 overflow-y-auto space-y-3 flex-1 max-h-[52vh]"></div>
 
-      <!-- Cart Footer & Checkout -->
       <div class="px-4 pt-3 pb-6 bg-stone-50 border-t border-brand-border">
         <div class="space-y-1.5 text-xs mb-3">
           <div class="flex justify-between text-brand-muted">
@@ -877,7 +621,7 @@
           </div>
           <div class="flex justify-between text-brand-muted">
             <span>Delivery</span>
-            <span class="text-green-600 font-semibold">Free</span>
+            <span class="text-green-600 font-semibold">Free Express</span>
           </div>
           <div class="flex justify-between text-sm font-bold text-brand-dark pt-1.5 border-t border-stone-200">
             <span>Grand Total</span>
@@ -889,13 +633,319 @@
           <span>Proceed to Checkout</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
         </button>
-        <p class="text-[10px] text-center text-stone-400 mt-2">Freshly made with love, just for you ❤️</p>
       </div>
     </div>
   </div>
 
   <!-- ============================
-       MOBILE SIDE DRAWER (More/Account)
+       FULL USER PROFILE SCREEN / MODAL
+       ============================ -->
+  <div id="profileModal" class="fixed inset-0 z-[60] pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="User Profile">
+    <div onclick="closeProfile()" class="absolute inset-0 drawer-backdrop"></div>
+    <div id="profileContent" class="absolute bottom-0 left-0 right-0 bg-brand-cream rounded-t-3xl shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300 ease-out max-h-[94vh]">
+      
+      <!-- Drag Handle -->
+      <div class="flex justify-center pt-3 pb-1">
+        <div class="w-10 h-1 rounded-full bg-stone-300"></div>
+      </div>
+
+      <!-- Profile Header Bar -->
+      <div class="px-4 pb-3 flex items-center justify-between border-b border-brand-border">
+        <h3 class="font-serif text-lg font-bold text-brand-dark">My Account</h3>
+        <button onclick="closeProfile()" class="w-8 h-8 rounded-full bg-white border border-brand-border flex items-center justify-center text-stone-500 active:scale-90 transition-transform">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Profile Body (Scrollable) -->
+      <div class="px-4 py-4 overflow-y-auto flex-1 space-y-4">
+
+        <!-- 1. User Hero Card -->
+        <div class="profile-gold-gradient text-white rounded-2xl p-4 shadow-md relative overflow-hidden border border-brand-gold/30">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3.5">
+              <!-- Avatar Circle -->
+              <div class="relative w-14 h-14 rounded-full bg-brand-gold text-brand-dark font-extrabold text-lg flex items-center justify-center border-2 border-white/80 shadow-md">
+                <span id="profileAvatarInitials">PS</span>
+                <button onclick="openEditProfile()" class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-brand-dark text-white flex items-center justify-center text-[9px] border border-white" aria-label="Edit Profile">
+                  ✎
+                </button>
+              </div>
+
+              <!-- Name & Contact -->
+              <div>
+                <h4 id="profileNameDisplay" class="font-serif text-base font-bold text-white leading-tight">Priya Sharma</h4>
+                <p id="profilePhoneDisplay" class="text-xs text-brand-goldsoft mt-0.5">+91 98765 43210</p>
+                <p id="profileEmailDisplay" class="text-[10px] text-stone-300 mt-0.5">priya.sharma@example.com</p>
+              </div>
+            </div>
+
+            <button onclick="openEditProfile()" class="px-3 py-1.5 rounded-xl bg-white/15 border border-white/20 text-[11px] font-bold text-white active:scale-95 transition">
+              Edit
+            </button>
+          </div>
+
+          <!-- Member Tier Badge -->
+          <div class="mt-3 pt-3 border-t border-white/15 flex items-center justify-between text-xs">
+            <span class="inline-flex items-center gap-1 text-[11px] font-bold text-brand-gold">
+              👑 Craving Club Gold Member
+            </span>
+            <span class="text-[10px] text-stone-300">Member since 2025</span>
+          </div>
+        </div>
+
+        <!-- 2. Wallet & Stats Dashboard -->
+        <div class="grid grid-cols-4 gap-2">
+          <div class="profile-stat-card shadow-sm">
+            <p class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Points</p>
+            <p id="profilePointsDisplay" class="text-sm font-extrabold text-brand-amber mt-1">350 pts</p>
+            <p class="text-[8px] text-stone-400 mt-0.5">₹70 value</p>
+          </div>
+
+          <div class="profile-stat-card shadow-sm">
+            <p class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Orders</p>
+            <p id="profileOrdersCount" class="text-sm font-extrabold text-brand-dark mt-1">2</p>
+            <p class="text-[8px] text-stone-400 mt-0.5">Completed</p>
+          </div>
+
+          <div class="profile-stat-card shadow-sm">
+            <p class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Addresses</p>
+            <p id="profileAddressesCount" class="text-sm font-extrabold text-brand-dark mt-1">2</p>
+            <p class="text-[8px] text-stone-400 mt-0.5">Saved</p>
+          </div>
+
+          <div class="profile-stat-card shadow-sm">
+            <p class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Coupons</p>
+            <p class="text-sm font-extrabold text-green-600 mt-1">2</p>
+            <p class="text-[8px] text-stone-400 mt-0.5">Active</p>
+          </div>
+        </div>
+
+        <!-- 3. Section: My Orders -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-1.5">
+              <span class="text-sm">📦</span>
+              <h4 class="font-serif font-bold text-sm text-brand-dark">My Orders &amp; Deliveries</h4>
+            </div>
+            <span class="text-[11px] text-brand-amber font-semibold">Live Status</span>
+          </div>
+          <div class="space-y-2.5" id="profileOrdersList">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- 4. Section: Saved Delivery Addresses -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-1.5">
+              <span class="text-sm">📍</span>
+              <h4 class="font-serif font-bold text-sm text-brand-dark">Saved Addresses</h4>
+            </div>
+            <button onclick="openAddAddressModal()" class="text-[11px] font-bold text-brand-amber flex items-center gap-1 active:scale-95">
+              + Add New
+            </button>
+          </div>
+          <div class="space-y-2" id="profileAddressesList">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- 5. Section: Dietary & Health Preferences -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-1.5">
+              <span class="text-sm">🥗</span>
+              <h4 class="font-serif font-bold text-sm text-brand-dark">Dietary &amp; Taste Preferences</h4>
+            </div>
+            <span class="text-[10px] text-stone-400">Tap to toggle</span>
+          </div>
+          <div class="flex flex-wrap gap-2" id="profileDietaryContainer">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- 6. Section: Member Exclusive Coupons -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-1.5">
+              <span class="text-sm">🎁</span>
+              <h4 class="font-serif font-bold text-sm text-brand-dark">Available Coupons &amp; Offers</h4>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="coupon-ticket flex items-center justify-between shadow-sm">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono font-bold text-xs bg-brand-goldsoft text-brand-brown px-2 py-0.5 rounded">FIRSTBITE</span>
+                  <span class="text-[11px] font-bold text-brand-dark">Flat ₹50 OFF</span>
+                </div>
+                <p class="text-[10px] text-brand-muted mt-1">Valid on orders above ₹300 for new members</p>
+              </div>
+              <button onclick="copyCouponCode('FIRSTBITE')" class="px-3 py-1.5 rounded-xl bg-brand-dark text-brand-gold font-bold text-[11px] active:scale-95 flex-shrink-0">
+                Copy
+              </button>
+            </div>
+
+            <div class="coupon-ticket flex items-center justify-between shadow-sm">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono font-bold text-xs bg-brand-goldsoft text-brand-brown px-2 py-0.5 rounded">SWEETLOVE</span>
+                  <span class="text-[11px] font-bold text-brand-dark">Free 250g Besan Laddoo</span>
+                </div>
+                <p class="text-[10px] text-brand-muted mt-1">Valid on orders above ₹999</p>
+              </div>
+              <button onclick="copyCouponCode('SWEETLOVE')" class="px-3 py-1.5 rounded-xl bg-brand-dark text-brand-gold font-bold text-[11px] active:scale-95 flex-shrink-0">
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Section: Help & Concierge Support -->
+        <div class="bg-white rounded-2xl border border-brand-border p-4 shadow-sm space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-sm">💬</span>
+            <h4 class="font-serif font-bold text-sm text-brand-dark">Need Help with an Order?</h4>
+          </div>
+          <p class="text-xs text-brand-muted leading-relaxed">Our sweet experts are always happy to help with custom orders, gifting, or delivery queries.</p>
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <a href="https://wa.me/919876543210?text=Hi%20Guilt%20Free%20Cravings,%20I%20have%20an%20inquiry" target="_blank" class="py-2.5 px-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-95">
+              <span>💬 WhatsApp Us</span>
+            </a>
+            <a href="tel:+919876543210" class="py-2.5 px-3 rounded-xl bg-brand-cream border border-brand-border text-brand-dark font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-95">
+              <span>📞 Call Concierge</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 8. Section: Settings & Logout -->
+        <div class="pt-2 pb-6 space-y-2">
+          <button onclick="showToast('You are safely logged in as Priya Sharma')" class="w-full py-3 rounded-xl bg-white border border-brand-border text-brand-dark font-bold text-xs flex items-center justify-center gap-2 active:scale-98 shadow-sm">
+            <span>⚙️ Account Preferences</span>
+          </button>
+          <button onclick="showToast('Logged out of demo session')" class="w-full py-3 rounded-xl bg-red-50 border border-red-200 text-red-700 font-bold text-xs flex items-center justify-center gap-2 active:scale-98">
+            <span>🚪 Sign Out</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================
+       EDIT PROFILE MODAL
+       ============================ -->
+  <div id="editProfileModal" class="fixed inset-0 z-[65] pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Edit Profile">
+    <div onclick="closeEditProfile()" class="absolute inset-0 drawer-backdrop"></div>
+    <div id="editProfileContent" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300 ease-out max-h-[85vh]">
+      
+      <div class="flex justify-center pt-3 pb-1">
+        <div class="w-10 h-1 rounded-full bg-stone-200"></div>
+      </div>
+
+      <div class="px-4 pb-3 border-b border-brand-border flex items-center justify-between">
+        <h3 class="font-serif text-lg font-bold text-brand-dark">Edit Profile</h3>
+        <button onclick="closeEditProfile()" class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 active:scale-90 transition-transform">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="px-4 py-4 overflow-y-auto flex-1 space-y-3">
+        <div>
+          <label class="text-[11px] font-bold text-brand-muted uppercase tracking-wider block mb-1">Full Name</label>
+          <input id="editProfileName" type="text" placeholder="Full Name" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber">
+        </div>
+
+        <div>
+          <label class="text-[11px] font-bold text-brand-muted uppercase tracking-wider block mb-1">Phone Number</label>
+          <input id="editProfilePhone" type="tel" placeholder="Phone Number" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber">
+        </div>
+
+        <div>
+          <label class="text-[11px] font-bold text-brand-muted uppercase tracking-wider block mb-1">Email Address</label>
+          <input id="editProfileEmail" type="email" placeholder="Email Address" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber">
+        </div>
+
+        <div>
+          <label class="text-[11px] font-bold text-brand-muted uppercase tracking-wider block mb-1">City / Region</label>
+          <input id="editProfileCity" type="text" placeholder="City" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber">
+        </div>
+      </div>
+
+      <div class="px-4 pb-8 pt-3 border-t border-brand-border bg-white">
+        <button onclick="saveEditProfile()" class="w-full h-12 rounded-xl bg-brand-dark text-brand-gold font-bold text-sm flex items-center justify-center gap-2 shadow-lg active:scale-98 transition-transform">
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================
+       ADD NEW ADDRESS MODAL
+       ============================ -->
+  <div id="addAddressModal" class="fixed inset-0 z-[65] pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Add Address">
+    <div onclick="closeAddAddressModal()" class="absolute inset-0 drawer-backdrop"></div>
+    <div id="addAddressContent" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300 ease-out max-h-[85vh]">
+      
+      <div class="flex justify-center pt-3 pb-1">
+        <div class="w-10 h-1 rounded-full bg-stone-200"></div>
+      </div>
+
+      <div class="px-4 pb-3 border-b border-brand-border flex items-center justify-between">
+        <h3 class="font-serif text-lg font-bold text-brand-dark">Add New Address</h3>
+        <button onclick="closeAddAddressModal()" class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 active:scale-90 transition-transform">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="px-4 py-4 overflow-y-auto flex-1 space-y-3">
+        <div>
+          <label class="text-[11px] font-bold text-brand-muted uppercase tracking-wider block mb-1">Address Label</label>
+          <select id="newAddrType" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber">
+            <option value="Home">Home</option>
+            <option value="Work">Work / Office</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-[11px] font-bold text-brand-muted uppercase tracking-wider block mb-1">House / Flat / Street Address</label>
+          <input id="newAddrLine" type="text" placeholder="e.g. Flat 102, Green Park" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[11px] font-bold text-brand-muted uppercase tracking-wider block mb-1">City</label>
+            <input id="newAddrCity" type="text" placeholder="City" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-brand-muted uppercase tracking-wider block mb-1">PIN Code</label>
+            <input id="newAddrPin" type="text" placeholder="PIN Code" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber" inputmode="numeric">
+          </div>
+        </div>
+
+        <div>
+          <label class="text-[11px] font-bold text-brand-muted uppercase tracking-wider block mb-1">State</label>
+          <input id="newAddrState" type="text" placeholder="State" value="Delhi" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber">
+        </div>
+
+        <div>
+          <label class="text-[11px] font-bold text-brand-muted uppercase tracking-wider block mb-1">Contact Phone</label>
+          <input id="newAddrPhone" type="tel" placeholder="+91 98765 43210" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber">
+        </div>
+      </div>
+
+      <div class="px-4 pb-8 pt-3 border-t border-brand-border bg-white">
+        <button onclick="saveNewAddress()" class="w-full h-12 rounded-xl bg-brand-dark text-brand-gold font-bold text-sm flex items-center justify-center gap-2 shadow-lg active:scale-98 transition-transform">
+          Save Address
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================
+       MOBILE SIDE MENU (More)
        ============================ -->
   <div id="navDrawer" class="fixed inset-0 z-[55] pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Navigation menu">
     <div onclick="toggleMobileMenu()" class="absolute inset-0 drawer-backdrop"></div>
@@ -919,6 +969,10 @@
             <span>Our Products</span>
             <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
           </a>
+          <button onclick="toggleMobileMenu(); setTimeout(openProfile, 200);" class="px-3 py-3 rounded-xl hover:bg-white text-brand-dark flex items-center justify-between text-left transition">
+            <span>My Profile &amp; Orders</span>
+            <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          </button>
           <a href="#promiseSection" onclick="toggleMobileMenu()" class="px-3 py-3 rounded-xl hover:bg-white text-brand-dark flex items-center justify-between transition">
             <span>Our Promise</span>
             <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
@@ -927,37 +981,26 @@
             <span>Our Story</span>
             <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
           </a>
-          <a href="#visionSection" onclick="toggleMobileMenu()" class="px-3 py-3 rounded-xl hover:bg-white text-brand-dark flex items-center justify-between transition">
-            <span>Our Vision</span>
-            <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-          </a>
-          <a href="#whyUsSection" onclick="toggleMobileMenu()" class="px-3 py-3 rounded-xl hover:bg-white text-brand-dark flex items-center justify-between transition">
-            <span>Why Choose Us</span>
-            <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-          </a>
         </nav>
       </div>
       <div class="pt-6 border-t border-brand-border text-xs text-brand-muted">
-        <p class="font-semibold text-brand-dark">Get in Touch</p>
-        <p class="mt-1">Email: hello@guiltfreecravings.com</p>
-        <p class="mt-1">Phone: +91 XXXXX XXXXX</p>
+        <p class="font-semibold text-brand-dark">Direct Support</p>
+        <p class="mt-1">WhatsApp: +91 98765 43210</p>
         <p class="mt-3 text-[10px] text-stone-400">&copy; 2026 Guilt Free Cravings</p>
       </div>
     </div>
   </div>
 
   <!-- ============================
-       CHECKOUT MODAL (Lightweight)
+       CHECKOUT MODAL
        ============================ -->
   <div id="checkoutModal" class="fixed inset-0 z-[60] pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Checkout">
     <div onclick="closeCheckout()" class="absolute inset-0 drawer-backdrop"></div>
     <div id="checkoutContent" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300 ease-out max-h-[95vh]">
-      <!-- Handle -->
       <div class="flex justify-center pt-3 pb-1">
         <div class="w-10 h-1 rounded-full bg-stone-200"></div>
       </div>
       
-      <!-- Header -->
       <div class="px-4 pb-3 border-b border-brand-border flex items-center justify-between">
         <h3 class="font-serif text-xl font-bold text-brand-dark">Checkout</h3>
         <button onclick="closeCheckout()" class="w-9 h-9 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 active:scale-90 transition-transform">
@@ -965,15 +1008,14 @@
         </button>
       </div>
 
-      <!-- Checkout Form -->
       <div class="px-4 py-4 overflow-y-auto flex-1 space-y-4">
         <!-- Contact -->
         <div>
-          <p class="text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">1. Contact</p>
+          <p class="text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">1. Contact Details</p>
           <div class="space-y-2.5">
-            <input type="text" placeholder="Full Name" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="name">
-            <input type="tel" placeholder="Phone Number" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="tel" inputmode="tel">
-            <input type="email" placeholder="Email (optional)" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="email" inputmode="email">
+            <input id="checkoutNameInput" type="text" placeholder="Full Name" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="name">
+            <input id="checkoutPhoneInput" type="tel" placeholder="Phone Number" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="tel" inputmode="tel">
+            <input id="checkoutEmailInput" type="email" placeholder="Email (optional)" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="email" inputmode="email">
           </div>
         </div>
 
@@ -981,56 +1023,53 @@
         <div>
           <p class="text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">2. Delivery Address</p>
           <div class="space-y-2.5">
-            <input type="text" placeholder="Address Line 1" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="address-line1">
-            <input type="text" placeholder="City" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="address-level2">
+            <input id="checkoutAddrInput" type="text" placeholder="Address Line 1" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="address-line1">
+            <input id="checkoutCityInput" type="text" placeholder="City" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="address-level2">
             <div class="grid grid-cols-2 gap-2">
-              <input type="text" placeholder="State" class="h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="address-level1">
-              <input type="text" placeholder="PIN Code" class="h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="postal-code" inputmode="numeric">
+              <input type="text" placeholder="State" value="Delhi" class="h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="address-level1">
+              <input id="checkoutPinInput" type="text" placeholder="PIN Code" class="h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="postal-code" inputmode="numeric">
             </div>
           </div>
         </div>
 
-        <!-- Order Summary compact -->
+        <!-- Order Summary -->
         <div>
           <p class="text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">3. Order Summary</p>
-          <div id="checkoutSummary" class="bg-brand-cream rounded-xl p-3 space-y-1.5 text-xs">
-            <!-- Populated by JS -->
-          </div>
+          <div id="checkoutSummary" class="bg-brand-cream rounded-xl p-3 space-y-1.5 text-xs"></div>
           <div class="mt-2 flex justify-between font-bold text-sm px-1">
-            <span>Total</span>
-            <span id="checkoutTotal">₹0</span>
+            <span>Total to Pay</span>
+            <span id="checkoutTotal" class="text-brand-dark">₹0</span>
           </div>
         </div>
 
         <!-- Payment -->
         <div>
-          <p class="text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">4. Payment</p>
+          <p class="text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">4. Payment Method</p>
           <div class="space-y-2">
             <label class="flex items-center gap-3 p-3 rounded-xl border border-brand-amber bg-brand-goldsoft/30 cursor-pointer">
               <input type="radio" name="payment" value="cod" checked class="accent-brand-amber">
               <div>
                 <p class="text-sm font-semibold text-brand-dark">Cash on Delivery</p>
-                <p class="text-[10px] text-brand-muted">Pay when your order arrives</p>
+                <p class="text-[10px] text-brand-muted">Pay when fresh laddoos arrive</p>
               </div>
             </label>
             <label class="flex items-center gap-3 p-3 rounded-xl border border-brand-border bg-white cursor-pointer">
               <input type="radio" name="payment" value="upi" class="accent-brand-amber">
               <div>
                 <p class="text-sm font-semibold text-brand-dark">UPI / Online Payment</p>
-                <p class="text-[10px] text-brand-muted">PhonePe, GPay, Paytm, etc.</p>
+                <p class="text-[10px] text-brand-muted">PhonePe, Google Pay, Paytm, Cards</p>
               </div>
             </label>
           </div>
         </div>
       </div>
 
-      <!-- Place Order CTA -->
       <div class="px-4 pb-8 pt-3 border-t border-brand-border bg-white">
         <button onclick="placeOrder()" class="w-full h-12 rounded-xl bg-brand-dark text-brand-gold font-bold text-sm flex items-center justify-center gap-2 shadow-lg active:scale-98 transition-transform">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           Place Order
         </button>
-        <p class="text-[10px] text-center text-stone-400 mt-2">Secure &bull; Freshly made with love &bull; Dispatched in 24hrs</p>
+        <p class="text-[10px] text-center text-stone-400 mt-2">Secure &bull; Freshly made daily &bull; Dispatched in 24hrs</p>
       </div>
     </div>
   </div>
@@ -1039,22 +1078,27 @@
        TOAST NOTIFICATION
        ============================ -->
   <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-[70] bg-brand-dark text-brand-goldsoft text-xs font-semibold px-4 py-2.5 rounded-full shadow-2xl border border-brand-gold/40 pointer-events-none opacity-0 transition-all duration-300 whitespace-nowrap">
-    Cart updated
+    Notification
   </div>
 
   <!-- ============================
        ORDER SUCCESS OVERLAY
        ============================ -->
   <div id="orderSuccess" class="fixed inset-0 z-[70] pointer-events-none opacity-0 flex items-center justify-center transition-opacity duration-300">
-    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl mx-6 border border-brand-border">
+    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl mx-6 border border-brand-border max-w-[360px]">
       <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
         <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       </div>
       <h3 class="font-serif text-xl font-bold text-brand-dark">Order Placed! 🎉</h3>
-      <p class="text-xs text-brand-muted mt-2 leading-relaxed">Thank you for your order!<br>Your homemade laddoos will be dispatched within 24 hours.</p>
-      <button onclick="dismissOrderSuccess()" class="mt-5 px-6 py-3 rounded-xl bg-brand-gold text-brand-dark font-bold text-sm active:scale-95 transition-transform">
-        Continue Shopping
-      </button>
+      <p class="text-xs text-brand-muted mt-2 leading-relaxed">Thank you for your order!<br>You earned <span class="font-bold text-brand-amber">+50 Craving Points</span>.<br>Your fresh laddoos will be dispatched in 24 hours.</p>
+      <div class="mt-5 flex gap-2">
+        <button onclick="dismissOrderSuccess(); openProfile();" class="flex-1 px-3 py-2.5 rounded-xl bg-brand-cream border border-brand-border text-brand-dark font-bold text-xs active:scale-95 transition-transform">
+          View in Orders
+        </button>
+        <button onclick="dismissOrderSuccess()" class="flex-1 px-3 py-2.5 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs active:scale-95 transition-transform">
+          Continue
+        </button>
+      </div>
     </div>
   </div>
 

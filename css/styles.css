@@ -30,7 +30,8 @@
   --z-bottom-nav: 40;
   --z-sticky-cart: 35;
   --z-sheet: 50;
-  --z-search: 60;
+  --z-profile: 60;
+  --z-modal: 65;
   --z-toast: 70;
 }
 
@@ -158,16 +159,6 @@ body {
   animation: cartBounce 0.4s ease forwards;
 }
 
-/* Fade-in for search results */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-#searchResults > * {
-  animation: fadeIn 0.15s ease forwards;
-}
-
 /* Shimmer loading */
 @keyframes shimmer {
   0% { background-position: -468px 0; }
@@ -178,92 +169,108 @@ body {
   animation: shimmer 1.2s ease-in-out infinite;
   background: linear-gradient(
     to right,
-    #f0f0f0 0%,
-    #e0e0e0 20%,
-    #f0f0f0 40%,
-    #f0f0f0 100%
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
   );
   background-size: 800px 104px;
-}
-
-/* ============================================================
-   IMAGES
-   ============================================================ */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* ============================================================
-   SELECTION STYLING
-   ============================================================ */
-::selection {
-  background-color: var(--brand-goldsoft);
-  color: var(--brand-brown);
-}
-
-/* ============================================================
-   FOCUS STYLES — Accessibility
-   ============================================================ */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-  outline: 2px solid var(--brand-amber);
-  outline-offset: 2px;
-}
-
-/* Remove default outline for touch */
-button:focus:not(:focus-visible),
-a:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* ============================================================
-   TEXT SELECTION DISABLE (UI elements)
-   ============================================================ */
-.select-none {
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-/* ============================================================
-   PRODUCT CARD — Mobile Grid
-   ============================================================ */
-.product-item {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.product-item:active {
-  transform: scale(0.985);
-}
-
-/* Product image container — forces square aspect */
-.product-item .aspect-square {
-  aspect-ratio: 1 / 1;
 }
 
 /* ============================================================
    BOTTOM NAVIGATION BAR
    ============================================================ */
 #bottomNav {
-  /* iOS safe area support */
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-#bottomNav .safe-area-bottom {
-  padding-bottom: max(8px, env(safe-area-inset-bottom, 8px));
+.safe-area-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }
 
+/* Touch targets */
 .bnav-btn {
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
   min-height: var(--touch-min);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Active indicator dot */
+.bnav-active-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--brand-amber);
+  margin-top: 2px;
+}
+
+/* ============================================================
+   PRODUCT CARDS & GRIDS
+   ============================================================ */
+.product-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  will-change: transform;
+}
+
+.product-card:active {
+  transform: scale(0.98);
+}
+
+/* Touch-safe add button */
+.btn-add-touch {
+  min-height: 40px;
   touch-action: manipulation;
+}
+
+/* Badge styles */
+.badge-pill {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+/* ============================================================
+   VARIANT CHIPS (in bottom sheet)
+   ============================================================ */
+.variant-chip {
+  min-height: 44px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.variant-chip.selected {
+  background-color: var(--brand-dark);
+  color: var(--brand-cream);
+  border-color: var(--brand-dark);
+  box-shadow: 0 2px 8px rgba(38, 22, 16, 0.2);
+}
+
+.variant-chip.selected .variant-price {
+  color: var(--brand-gold);
+}
+
+/* ============================================================
+   CATEGORY FILTER CHIPS
+   ============================================================ */
+.category-chip {
+  min-height: 36px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.category-chip.active {
+  background-color: var(--brand-dark);
+  color: var(--brand-cream);
+  border-color: var(--brand-dark);
 }
 
 /* ============================================================
@@ -275,23 +282,73 @@ a:focus:not(:focus-visible) {
 }
 
 /* ============================================================
-   SEARCH OVERLAY
+   USER PROFILE STYLES
    ============================================================ */
-#searchOverlay .pointer-events-auto {
-  pointer-events: all;
+.profile-gold-gradient {
+  background: linear-gradient(135deg, #261610 0%, #3B2317 50%, #4D301E 100%);
 }
 
-#searchOverlay input {
-  /* iOS safari fix — prevent zoom on focus */
-  font-size: 16px;
+.profile-stat-card {
+  background: #FFFFFF;
+  border: 1px solid var(--brand-border);
+  border-radius: 16px;
+  padding: 12px 10px;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.profile-stat-card:active {
+  transform: scale(0.96);
+}
+
+.dietary-chip {
+  padding: 8px 12px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--brand-border);
+  background-color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--brand-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dietary-chip.active {
+  border-color: var(--brand-amber);
+  background-color: var(--brand-goldsoft);
+  color: var(--brand-brown);
+  font-weight: 700;
+}
+
+.coupon-ticket {
+  border: 1.5px dashed var(--brand-gold);
+  background: #FFFDF9;
+  border-radius: 14px;
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.order-history-card {
+  background: #FFFFFF;
+  border: 1px solid var(--brand-border);
+  border-radius: 16px;
+  padding: 14px;
+  transition: all 0.15s ease;
 }
 
 /* ============================================================
-   VARIANT SHEET / CART SHEET BOTTOM SHEETS
+   VARIANT SHEET / CART SHEET / PROFILE BOTTOM SHEETS
    ============================================================ */
 #variantSheetContent,
 #cartDrawerContent,
-#checkoutContent {
+#checkoutContent,
+#profileContent,
+#editProfileContent,
+#addAddressContent {
   /* Prevent overscroll bounce inside sheets */
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
@@ -311,7 +368,9 @@ a:focus:not(:focus-visible) {
    ============================================================ */
 input[type="text"],
 input[type="tel"],
-input[type="email"] {
+input[type="email"],
+textarea,
+select {
   font-size: 16px; /* Prevents iOS zoom */
   -webkit-appearance: none;
   appearance: none;
@@ -319,74 +378,39 @@ input[type="email"] {
 }
 
 /* ============================================================
-   TOUCH TARGETS — Minimum 44×44px
-   ============================================================ */
-@media (max-width: 767px) {
-  button:not(.variant-opt-btn):not(.cat-pill) {
-    min-height: 36px; /* Slightly relaxed for inline controls */
-  }
-  
-  /* Primary action buttons must be full 44px */
-  .w-full.h-12,
-  .h-12 {
-    min-height: 48px;
-  }
-  
-  #bottomNav button {
-    min-height: 48px;
-  }
-}
-
-/* ============================================================
-   MOBILE LAYOUT — Core breakpoint overrides
-   ============================================================ */
-@media (max-width: 640px) {
-  /* Main content padding bottom to account for bottom nav + cart bar */
-  main {
-    padding-bottom: 160px;
-  }
-  
-  /* Product grid — exactly 2 columns on all mobile sizes */
-  #productGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-  
-  /* Tighter card padding on small screens */
-  .product-item .p-2\.5 {
-    padding: 8px;
-  }
-  
-  /* Smaller font on very small screens */
-  @media (max-width: 360px) {
-    #productGrid {
-      gap: 8px;
-    }
-    .product-item h3 {
-      font-size: 11px;
-    }
-  }
-}
-
-/* ============================================================
-   TABLET & DESKTOP — Constrain layout
+   DESKTOP / TABLET CONTAINER
+   Constrain max-width to 480px on screens >= 768px
    ============================================================ */
 @media (min-width: 768px) {
   body {
-    max-width: 480px;
-    margin: 0 auto;
-    box-shadow: 0 0 60px rgba(0,0,0,0.1);
+    background-color: #F0EAE1;
+    display: flex;
+    justify-content: center;
     min-height: 100vh;
   }
   
-  #bottomNav {
+  #mainHeader,
+  #mainContent,
+  #bottomNav,
+  #stickyBottomCart,
+  footer {
     max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  #mainHeader {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  #bottomNav {
     left: 50%;
     transform: translateX(-50%);
   }
   
   #stickyBottomCart {
-    max-width: 454px; /* 480 - 2×13 padding */
+    max-width: 456px;
     left: 50%;
     right: auto;
     transform: translateX(-50%);
@@ -399,8 +423,10 @@ input[type="email"] {
   /* Fix overlays to full viewport on tablet+ */
   #variantSheet,
   #cartDrawer,
-  #searchOverlay,
   #navDrawer,
+  #profileModal,
+  #editProfileModal,
+  #addAddressModal,
   #checkoutModal,
   #orderSuccess {
     position: fixed;
@@ -410,7 +436,10 @@ input[type="email"] {
   /* Constrain sheet content on wide screens */
   #variantSheetContent,
   #cartDrawerContent,
-  #checkoutContent {
+  #checkoutContent,
+  #profileContent,
+  #editProfileContent,
+  #addAddressContent {
     max-width: 480px;
     margin: 0 auto;
     left: 50%;
@@ -421,7 +450,10 @@ input[type="email"] {
   
   #variantSheetContent.translate-y-full,
   #cartDrawerContent.translate-y-full,
-  #checkoutContent.translate-y-full {
+  #checkoutContent.translate-y-full,
+  #profileContent.translate-y-full,
+  #editProfileContent.translate-y-full,
+  #addAddressContent.translate-y-full {
     transform: translateX(-50%) translateY(100%);
   }
 }
@@ -435,17 +467,10 @@ input[type="email"] {
   #variantSheet,
   #cartDrawer,
   #checkoutModal,
-  #searchOverlay,
+  #profileModal,
   #toast {
     display: none !important;
   }
-}
-
-/* ============================================================
-   DARK MODE — Disabled intentionally (keeping light brand theme)
-   ============================================================ */
-@media (prefers-color-scheme: dark) {
-  /* Intentionally keeping light theme for brand consistency */
 }
 
 /* ============================================================
