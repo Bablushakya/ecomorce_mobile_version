@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gulf Free Cravings — Artisanal Indian Mithai</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              cream: '#FAF6F0',
+              creambright: '#FFFDF9',
+              dark: '#261610',
+              brown: '#3B2317',
+              amber: '#C67A18',
+              gold: '#D89E34',
+              goldsoft: '#F4E7CE',
+              border: '#EDE5DA',
+              card: '#FFFFFF',
+              muted: '#76675B',
+              olive: '#4D5837'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FAF6F0;
+      color: #261610;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .font-serif {
+      font-family: 'DM Serif Display', Georgia, serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .drawer-backdrop {
+      background: rgba(38, 22, 16, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+<body class="bg-brand-cream text-brand-dark min-h-screen pb-24 select-none">
+
+  <!-- 1. TOP ANNOUNCEMENT & STICKY HEADER -->
+  <header class="sticky top-0 z-40 bg-brand-cream/95 backdrop-blur-md border-b border-brand-border transition-all duration-200" id="mainHeader">
+    <!-- Mini top promo bar -->
+    <div class="bg-brand-dark text-brand-goldsoft text-[11px] font-medium tracking-wider text-center py-1.5 px-3 flex items-center justify-center gap-2">
+      <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></span>
+      <span>100% PURE DESI GHEE &bull; ZERO REFINED SUGAR &bull; FRESH BATCHES</span>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="px-4 py-3 flex items-center justify-between">
+      <!-- Left: Mobile Menu Toggle & Logo -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full bg-white border border-brand-border flex items-center justify-center text-brand-dark shadow-sm active:scale-95 transition" aria-label="Menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        </button>
+        <a href="#" class="flex flex-col">
+          <span class="font-serif text-xl font-bold tracking-tight text-brand-dark leading-none">Gulf Free<span class="text-brand-amber font-normal italic"> Cravings</span></span>
+          <span class="text-[9px] uppercase tracking-widest text-brand-muted mt-0.5 font-semibold">Artisanal Mithai &bull; Est. 2021</span>
+        </a>
+      </div>
+
+      <!-- Right: Search & Cart Button -->
+      <div class="flex items-center gap-2">
+        <button onclick="document.getElementById('sweetsSection').scrollIntoView({behavior: 'smooth'})" class="w-9 h-9 rounded-full bg-white border border-brand-border flex items-center justify-center text-brand-dark shadow-sm active:scale-95 transition" aria-label="Search">
+          <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+        </button>
+        <!-- Sticky Cart Icon with dynamic counter badge -->
+        <button onclick="openCartDrawer()" class="relative h-9 px-3 rounded-full bg-brand-dark text-white flex items-center gap-1.5 shadow-sm active:scale-95 transition">
+          <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+          <span class="text-xs font-bold font-sans text-brand-goldsoft" id="navCartCount">2</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAVIGATION DRAWER (SLIDE OVER) -->
+  <div id="navDrawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+    <div onclick="toggleMobileMenu()" class="absolute inset-0 drawer-backdrop"></div>
+    <div id="navDrawerContent" class="absolute top-0 left-0 bottom-0 w-[280px] bg-brand-cream p-6 shadow-2xl flex flex-col justify-between transform -translate-x-full transition-transform duration-300">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-brand-border">
+          <div>
+            <h3 class="font-serif text-lg font-bold text-brand-dark">Gulf Free Cravings</h3>
+            <p class="text-[11px] text-brand-muted">Guilt-Free Healthy Indulgence</p>
+          </div>
+          <button onclick="toggleMobileMenu()" class="w-8 h-8 rounded-full bg-white border border-brand-border flex items-center justify-center text-brand-muted">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <nav class="mt-6 flex flex-col gap-3 font-medium text-sm text-brand-dark">
+          <a href="#" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg bg-white border border-brand-border text-brand-amber font-semibold flex items-center justify-between">
+            <span>Home</span>
+            <span class="text-xs text-brand-amber">&bull;</span>
+          </a>
+          <a href="#sweetsSection" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-white text-brand-dark flex items-center justify-between">
+            <span>Sweets Collection</span>
+            <span class="text-[11px] bg-brand-goldsoft text-brand-brown px-2 py-0.5 rounded-full font-bold">12 Fresh</span>
+          </a>
+          <a href="#sweetsSection" onclick="filterCategory('Ladoos'); toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-white text-brand-dark">Handcrafted Ladoos</a>
+          <a href="#giftingSection" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-white text-brand-dark">Festive Gift Boxes</a>
+          <a href="#ingredientsSection" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-white text-brand-dark">Our Ingredients</a>
+          <a href="#whyUsSection" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-white text-brand-dark">Why Us & Pure Craft</a>
+          <a href="#reviewsSection" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-white text-brand-dark">Customer Stories</a>
+        </nav>
+      </div>
+      <div class="pt-6 border-t border-brand-border text-xs text-brand-muted">
+        <p class="font-semibold text-brand-dark">Need gifting assistance?</p>
+        <p class="mt-1">WhatsApp concierge: +91 98765 43210</p>
+        <p class="mt-3 text-[10px] text-stone-400">&copy; 2025 Gulf Free Cravings</p>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- 2. HERO SECTION -->
+    <section class="relative px-4 pt-4 pb-6 overflow-hidden">
+      <div class="relative rounded-2xl overflow-hidden bg-brand-dark text-white border border-brand-border shadow-md">
+        <!-- Hero Background visual -->
+        <div class="relative w-full h-[250px] overflow-hidden">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w" alt="Handcrafted Indian Mithai Selection in Brass Thali" class="w-full h-full object-cover object-center transform scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/60 to-transparent"></div>
+          <span class="absolute top-3 right-3 bg-brand-gold text-brand-dark text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">
+            Festive Batch #42
+          </span>
+        </div>
+
+        <!-- Hero Content Overlay -->
+        <div class="p-5 relative -mt-16 z-10">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] text-brand-goldsoft mb-2.5">
+            <svg class="w-3.5 h-3.5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <span>Pure Ingredients &bull; Zero Compromise</span>
+          </div>
+
+          <h1 class="font-serif text-3xl font-bold tracking-tight text-white leading-tight">
+            Wholesome Goodness,<br>
+            <span class="text-brand-gold italic">Irresistible Taste</span>
+          </h1>
+
+          <p class="text-stone-300 text-xs mt-2 leading-relaxed max-w-xs">
+            Artisanal mithai prepared with wholesome dry fruits, cold-pressed nuts, and organic jaggery. Pure indulgence without regret.
+          </p>
+
+          <!-- Direct Hero Action Buttons -->
+          <div class="mt-4 flex items-center gap-3">
+            <button onclick="document.getElementById('sweetsSection').scrollIntoView({behavior: 'smooth'})" class="flex-1 py-3 px-4 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-2 shadow-lg active:scale-98 transition">
+              <span>Shop Sweets</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"/></svg>
+            </button>
+            <a href="#ingredientsSection" class="py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-xs flex items-center justify-center transition">
+              Explore Our Story
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TRUST / USP STRIP -->
+    <section class="px-4 py-1">
+      <div class="bg-white rounded-xl border border-brand-border p-3 shadow-sm grid grid-cols-2 gap-2.5">
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-amber-50 text-brand-amber flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-brand-dark leading-tight">No Refined Sugar</h4>
+            <p class="text-[10px] text-brand-muted">Only dates & jaggery</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-brand-dark leading-tight">No Preservatives</h4>
+            <p class="text-[10px] text-brand-muted">Clean & wholesome</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-orange-50 text-orange-700 flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-brand-dark leading-tight">Pure Ingredients</h4>
+            <p class="text-[10px] text-brand-muted">A2 ghee & Mamra badam</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-stone-100 text-brand-brown flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-brand-dark leading-tight">Made Fresh Daily</h4>
+            <p class="text-[10px] text-brand-muted">Hand-rolled in small batches</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. INTRODUCTION SECTION: "A Healthy Reason to Say Yes" -->
+    <section class="px-4 py-6">
+      <div class="bg-white rounded-2xl border border-brand-border p-4 shadow-sm">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-brand-amber bg-brand-goldsoft/50 px-2.5 py-0.5 rounded-full inline-block mb-2">
+          The Clean Mithai Revolution
+        </span>
+        <h2 class="font-serif text-xl font-bold text-brand-dark leading-snug">
+          A Healthy Reason to Say Yes
+        </h2>
+        <p class="text-xs text-brand-muted mt-1.5 leading-relaxed">
+          Traditional Indian sweets crafted for mindful eaters. All the festive indulgence, handcrafted with zero guilt and maximum nourishment.
+        </p>
+
+        <!-- Visual + 3 concise benefits -->
+        <div class="mt-4 grid grid-cols-1 gap-3">
+          <div class="relative rounded-xl overflow-hidden h-36 border border-brand-border">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q" alt="Fresh Sattu and Jaggery healthy mithai bites" class="w-full h-full object-cover object-center" />
+            <div class="absolute bottom-2 left-2 bg-brand-dark/85 backdrop-blur-sm text-white px-2.5 py-1 rounded-md text-[10px] font-medium">
+              100% Sattu, Roasted Nuts & Organic Jaggery
+            </div>
+          </div>
+
+          <div class="space-y-2 mt-1">
+            <div class="flex items-start gap-2.5 text-xs text-brand-dark">
+              <span class="w-5 h-5 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-[10px] flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+              <div>
+                <span class="font-bold">Zero Glucose Spikes:</span>
+                <span class="text-brand-muted"> Sweetened naturally using black dates and slow-cooked organic jaggery.</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 text-xs text-brand-dark">
+              <span class="w-5 h-5 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-[10px] flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+              <div>
+                <span class="font-bold">High Protein & Satiety:</span>
+                <span class="text-brand-muted"> Loaded with nutrient-dense Sattu, roasted pistachios, and cashews.</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 text-xs text-brand-dark">
+              <span class="w-5 h-5 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-[10px] flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+              <div>
+                <span class="font-bold">Digestive & Heart Healthy:</span>
+                <span class="text-brand-muted"> Cardamom, cold-pressed sesame, and pure A2 bilona desi ghee.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CATEGORY NAVIGATION & 6. BESTSELLERS SHOPPING SECTION -->
+    <section id="sweetsSection" class="px-4 pt-2 pb-6">
+      <div class="flex items-end justify-between mb-2">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-brand-amber">Browse & Shop</span>
+          <h2 class="font-serif text-2xl font-bold text-brand-dark">Pick Your Favourite</h2>
+          <p class="text-xs text-brand-muted mt-0.5">Traditional recipes. Better ingredients. Seriously good taste.</p>
+        </div>
+      </div>
+
+      <!-- Horizontal category pill filter (Zomato-style quick filtering) -->
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2.5 -mx-4 px-4 sticky top-16 z-30 bg-brand-cream/95 backdrop-blur-md">
+        <button onclick="filterCategory('All')" data-category="All" class="cat-pill px-4 py-2 rounded-full text-xs font-bold transition whitespace-nowrap bg-brand-dark text-brand-goldsoft shadow-sm">
+          All Sweets (8)
+        </button>
+        <button onclick="filterCategory('Ladoos')" data-category="Ladoos" class="cat-pill px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border">
+          Ladoos
+        </button>
+        <button onclick="filterCategory('Dry Fruit')" data-category="Dry Fruit" class="cat-pill px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border">
+          Dry Fruit & Nuts
+        </button>
+        <button onclick="filterCategory('Sattu')" data-category="Sattu" class="cat-pill px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border">
+          Healthy Sattu
+        </button>
+        <button onclick="filterCategory('Dates')" data-category="Dates" class="cat-pill px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border">
+          Dates & Figs
+        </button>
+        <button onclick="filterCategory('Gift Boxes')" data-category="Gift Boxes" class="cat-pill px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border">
+          Gift Boxes
+        </button>
+      </div>
+
+      <!-- 7. 2-COLUMN RESPONSIVE PRODUCT GRID -->
+      <div class="grid grid-cols-2 gap-3 mt-3" id="productGrid">
+
+        <!-- Product 1 -->
+        <div class="product-item bg-white rounded-xl border border-brand-border p-2.5 flex flex-col justify-between shadow-sm hover:shadow-md transition relative group" data-category="Ladoos Dry Fruit" data-id="p1">
+          <div>
+            <div class="relative rounded-lg overflow-hidden bg-stone-50 aspect-square cursor-pointer" onclick="openQuickView('Royal Dry Fruit Ladoo', '4.9 (128)', '₹480', 'Box of 12 pcs &bull; 400g', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg', 'Handcrafted with crunchy roasted Mamra almonds, Iranian pistachios, and Cashews bound purely with Arabian dates and pure A2 Desi Ghee. Zero white sugar.', 'Almonds, Pistachios, Cashews, Dates, Cardamom, A2 Ghee', 'p1')">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg" alt="Royal Dry Fruit Ladoo" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              <span class="absolute top-1.5 left-1.5 bg-brand-gold text-brand-dark font-bold text-[9px] px-1.5 py-0.5 rounded shadow">Bestseller</span>
+              <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-white/90 text-brand-dark flex items-center justify-center shadow-sm active:scale-90 transition">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+              </button>
+            </div>
+
+            <div class="mt-2">
+              <div class="flex items-center gap-1 text-[11px] text-brand-amber">
+                <span>★ 4.9</span>
+                <span class="text-[10px] text-stone-400 font-normal">(128)</span>
+              </div>
+              <h3 class="font-serif font-bold text-sm text-brand-dark leading-tight mt-0.5 line-clamp-1 cursor-pointer" onclick="openQuickView('Royal Dry Fruit Ladoo', '4.9 (128)', '₹480', 'Box of 12 pcs &bull; 400g', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg', 'Handcrafted with crunchy roasted Mamra almonds, Iranian pistachios, and Cashews bound purely with Arabian dates and pure A2 Desi Ghee. Zero white sugar.', 'Almonds, Pistachios, Cashews, Dates, Cardamom, A2 Ghee', 'p1')">
+                Royal Dry Fruit Ladoo
+              </h3>
+              <p class="text-[10px] text-brand-muted line-clamp-1 mt-0.5">Almonds, cashews, dates & pure ghee</p>
+            </div>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-stone-100 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-stone-400 block line-through leading-none">₹550</span>
+              <span class="text-xs font-bold text-brand-dark">₹480</span>
+            </div>
+            <!-- In-place Add/Quantity toggle -->
+            <div id="btn-container-p1">
+              <button onclick="addToCart('p1', 'Royal Dry Fruit Ladoo', 480, 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg')" class="h-7 px-3 rounded-lg bg-brand-goldsoft text-brand-brown font-bold text-xs hover:bg-brand-gold hover:text-brand-dark active:scale-95 transition flex items-center gap-1 border border-brand-border">
+                <span>+</span> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-item bg-white rounded-xl border border-brand-border p-2.5 flex flex-col justify-between shadow-sm hover:shadow-md transition relative group" data-category="Sattu" data-id="p2">
+          <div>
+            <div class="relative rounded-lg overflow-hidden bg-stone-50 aspect-square cursor-pointer" onclick="openQuickView('Artisanal Sattu Jaggery Bites', '4.8 (94)', '₹390', 'Box of 10 pcs &bull; 350g', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q', 'Roasted organic chana sattu blended with mineral-rich jaggery, toasted sesame seeds, and crushed green cardamom. High natural plant protein.', 'Roasted Chana Sattu, Desi Jaggery, Sesame Seeds, Cold Pressed Ghee', 'p2')">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q" alt="Artisanal Sattu Jaggery Bites" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              <span class="absolute top-1.5 left-1.5 bg-emerald-700 text-white font-bold text-[9px] px-1.5 py-0.5 rounded shadow">High Protein</span>
+              <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-white/90 text-brand-dark flex items-center justify-center shadow-sm active:scale-90 transition">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+              </button>
+            </div>
+
+            <div class="mt-2">
+              <div class="flex items-center gap-1 text-[11px] text-brand-amber">
+                <span>★ 4.8</span>
+                <span class="text-[10px] text-stone-400 font-normal">(94)</span>
+              </div>
+              <h3 class="font-serif font-bold text-sm text-brand-dark leading-tight mt-0.5 line-clamp-1 cursor-pointer" onclick="openQuickView('Artisanal Sattu Jaggery Bites', '4.8 (94)', '₹390', 'Box of 10 pcs &bull; 350g', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q', 'Roasted organic chana sattu blended with mineral-rich jaggery, toasted sesame seeds, and crushed green cardamom. High natural plant protein.', 'Roasted Chana Sattu, Desi Jaggery, Sesame Seeds, Cold Pressed Ghee', 'p2')">
+                Sattu Jaggery Bites
+              </h3>
+              <p class="text-[10px] text-brand-muted line-clamp-1 mt-0.5">Roasted chana sattu & organic jaggery</p>
+            </div>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-stone-100 flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold text-brand-dark">₹390</span>
+            </div>
+            <!-- In-place Add/Quantity toggle -->
+            <div id="btn-container-p2">
+              <button onclick="addToCart('p2', 'Sattu Jaggery Bites', 390, 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q')" class="h-7 px-3 rounded-lg bg-brand-goldsoft text-brand-brown font-bold text-xs hover:bg-brand-gold hover:text-brand-dark active:scale-95 transition flex items-center gap-1 border border-brand-border">
+                <span>+</span> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-item bg-white rounded-xl border border-brand-border p-2.5 flex flex-col justify-between shadow-sm hover:shadow-md transition relative group" data-category="Gift Boxes" data-id="p3">
+          <div>
+            <div class="relative rounded-lg overflow-hidden bg-stone-50 aspect-square cursor-pointer" onclick="openQuickView('Festive Royal Gift Box', '5.0 (62)', '₹890', 'Assorted 16 Gourmet Mithais &bull; 650g', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBytAyROuBCkJ3bdx2y_kDVVRPYbVkevg1ZzfnIAmuznyewmK99DLDxSoovE6oDKNRxbaaROy49Tc3wQEa6Q_7-8cokqP86IyHzyB-OsWyL3bZKqmfz5UqXEBB7gLC-3ZYnRF6yBkpjmJ6yFPf9xf55hYsswGTiJQTpK3T-lyqX68wjZjK9uOAUu5PG00P8bNtUbb_KNLYPkEnnipYUCDl6VlE7-fiADiVqKWdh9a8w09boynxW5zUgzg', 'Luxe rigid dark chocolate brown keepsake gift box with golden foil motif and ribbon. Packed with 4 varieties of artisan ladoos and sweets.', 'Dry fruit ladoo, Sattu bites, Besan pista jewels, Fig nut rolls', 'p3')">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBytAyROuBCkJ3bdx2y_kDVVRPYbVkevg1ZzfnIAmuznyewmK99DLDxSoovE6oDKNRxbaaROy49Tc3wQEa6Q_7-8cokqP86IyHzyB-OsWyL3bZKqmfz5UqXEBB7gLC-3ZYnRF6yBkpjmJ6yFPf9xf55hYsswGTiJQTpK3T-lyqX68wjZjK9uOAUu5PG00P8bNtUbb_KNLYPkEnnipYUCDl6VlE7-fiADiVqKWdh9a8w09boynxW5zUgzg" alt="Festive Royal Gift Box" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              <span class="absolute top-1.5 left-1.5 bg-brand-dark text-brand-gold font-bold text-[9px] px-1.5 py-0.5 rounded shadow">Luxe Gift</span>
+              <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-white/90 text-brand-dark flex items-center justify-center shadow-sm active:scale-90 transition">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+              </button>
+            </div>
+
+            <div class="mt-2">
+              <div class="flex items-center gap-1 text-[11px] text-brand-amber">
+                <span>★ 5.0</span>
+                <span class="text-[10px] text-stone-400 font-normal">(62)</span>
+              </div>
+              <h3 class="font-serif font-bold text-sm text-brand-dark leading-tight mt-0.5 line-clamp-1 cursor-pointer" onclick="openQuickView('Festive Royal Gift Box', '5.0 (62)', '₹890', 'Assorted 16 Gourmet Mithais &bull; 650g', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBytAyROuBCkJ3bdx2y_kDVVRPYbVkevg1ZzfnIAmuznyewmK99DLDxSoovE6oDKNRxbaaROy49Tc3wQEa6Q_7-8cokqP86IyHzyB-OsWyL3bZKqmfz5UqXEBB7gLC-3ZYnRF6yBkpjmJ6yFPf9xf55hYsswGTiJQTpK3T-lyqX68wjZjK9uOAUu5PG00P8bNtUbb_KNLYPkEnnipYUCDl6VlE7-fiADiVqKWdh9a8w09boynxW5zUgzg', 'Luxe rigid dark chocolate brown keepsake gift box with golden foil motif and ribbon. Packed with 4 varieties of artisan ladoos and sweets.', 'Dry fruit ladoo, Sattu bites, Besan pista jewels, Fig nut rolls', 'p3')">
+                Royal Gifting Hamper
+              </h3>
+              <p class="text-[10px] text-brand-muted line-clamp-1 mt-0.5">Assorted 16 gourmet sweets</p>
+            </div>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-stone-100 flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold text-brand-dark">₹890</span>
+            </div>
+            <!-- In-place Add/Quantity toggle -->
+            <div id="btn-container-p3">
+              <button onclick="addToCart('p3', 'Royal Gifting Hamper', 890, 'https://lh3.googleusercontent.com/aida-public/AB6AXuBytAyROuBCkJ3bdx2y_kDVVRPYbVkevg1ZzfnIAmuznyewmK99DLDxSoovE6oDKNRxbaaROy49Tc3wQEa6Q_7-8cokqP86IyHzyB-OsWyL3bZKqmfz5UqXEBB7gLC-3ZYnRF6yBkpjmJ6yFPf9xf55hYsswGTiJQTpK3T-lyqX68wjZjK9uOAUu5PG00P8bNtUbb_KNLYPkEnnipYUCDl6VlE7-fiADiVqKWdh9a8w09boynxW5zUgzg')" class="h-7 px-3 rounded-lg bg-brand-goldsoft text-brand-brown font-bold text-xs hover:bg-brand-gold hover:text-brand-dark active:scale-95 transition flex items-center gap-1 border border-brand-border">
+                <span>+</span> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-item bg-white rounded-xl border border-brand-border p-2.5 flex flex-col justify-between shadow-sm hover:shadow-md transition relative group" data-category="Dates Dry Fruit" data-id="p4">
+          <div>
+            <div class="relative rounded-lg overflow-hidden bg-stone-50 aspect-square cursor-pointer" onclick="openQuickView('Anjeer & Saffron Date Rolls', '4.7 (81)', '₹450', 'Box of 10 rolls &bull; 320g', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w', 'Rich Turkish dried figs (Anjeer) and Madina dates minced with crushed cashew paste, rolled in toasted pistachio slivers and infused with Kashmiri saffron.', 'Dried Figs, Medjool Dates, Cashews, Pistachios, Kashmiri Saffron', 'p4')">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w" alt="Anjeer and Saffron Date Rolls" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              <span class="absolute top-1.5 left-1.5 bg-brand-brown text-brand-gold font-bold text-[9px] px-1.5 py-0.5 rounded shadow">Zero Sugar</span>
+              <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-white/90 text-brand-dark flex items-center justify-center shadow-sm active:scale-90 transition">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+              </button>
+            </div>
+
+            <div class="mt-2">
+              <div class="flex items-center gap-1 text-[11px] text-brand-amber">
+                <span>★ 4.7</span>
+                <span class="text-[10px] text-stone-400 font-normal">(81)</span>
+              </div>
+              <h3 class="font-serif font-bold text-sm text-brand-dark leading-tight mt-0.5 line-clamp-1 cursor-pointer" onclick="openQuickView('Anjeer & Saffron Date Rolls', '4.7 (81)', '₹450', 'Box of 10 rolls &bull; 320g', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w', 'Rich Turkish dried figs (Anjeer) and Madina dates minced with crushed cashew paste, rolled in toasted pistachio slivers and infused with Kashmiri saffron.', 'Dried Figs, Medjool Dates, Cashews, Pistachios, Kashmiri Saffron', 'p4')">
+                Anjeer & Date Roll
+              </h3>
+              <p class="text-[10px] text-brand-muted line-clamp-1 mt-0.5">Turkish figs, Medjool dates, pistachios</p>
+            </div>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-stone-100 flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold text-brand-dark">₹450</span>
+            </div>
+            <!-- In-place Add/Quantity toggle -->
+            <div id="btn-container-p4">
+              <button onclick="addToCart('p4', 'Anjeer & Date Roll', 450, 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w')" class="h-7 px-3 rounded-lg bg-brand-goldsoft text-brand-brown font-bold text-xs hover:bg-brand-gold hover:text-brand-dark active:scale-95 transition flex items-center gap-1 border border-brand-border">
+                <span>+</span> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 11. PACKAGING / GIFTING SECTION -->
+    <section id="giftingSection" class="px-4 py-6">
+      <div class="bg-brand-dark text-white rounded-2xl p-5 relative overflow-hidden border border-brand-border shadow-md">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-2 h-2 rounded-full bg-brand-gold"></span>
+          <span class="text-[10px] uppercase font-bold tracking-wider text-brand-goldsoft">Corporate & Festive Gifting</span>
+        </div>
+        <h2 class="font-serif text-2xl font-bold leading-tight">
+          Made to Gift.<br><span class="text-brand-gold italic">Made to Impress.</span>
+        </h2>
+        <p class="text-xs text-stone-300 mt-2 leading-relaxed">
+          Sturdy, foil-embossed keepsake boxes that bring royal celebration to every doorstep. Bespoke ribbons and personalized greeting card included.
+        </p>
+
+        <!-- Product highlight image -->
+        <div class="mt-4 rounded-xl overflow-hidden h-44 relative border border-white/10">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBytAyROuBCkJ3bdx2y_kDVVRPYbVkevg1ZzfnIAmuznyewmK99DLDxSoovE6oDKNRxbaaROy49Tc3wQEa6Q_7-8cokqP86IyHzyB-OsWyL3bZKqmfz5UqXEBB7gLC-3ZYnRF6yBkpjmJ6yFPf9xf55hYsswGTiJQTpK3T-lyqX68wjZjK9uOAUu5PG00P8bNtUbb_KNLYPkEnnipYUCDl6VlE7-fiADiVqKWdh9a8w09boynxW5zUgzg" alt="Festive Mithai Box Gifting" class="w-full h-full object-cover" />
+          <div class="absolute bottom-2 right-2 bg-brand-dark/90 px-3 py-1 rounded-full text-[10px] font-bold text-brand-gold border border-brand-gold/30">
+            Custom Sleeves Available
+          </div>
+        </div>
+
+        <!-- 3 Gift Benefits -->
+        <div class="grid grid-cols-3 gap-2 mt-4 text-center">
+          <div class="bg-white/5 border border-white/10 p-2.5 rounded-xl">
+            <svg class="w-5 h-5 mx-auto text-brand-gold mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H4.5a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h17.25"/></svg>
+            <span class="text-[11px] font-bold block">Gift-Ready</span>
+            <span class="text-[9px] text-stone-400">Ribbon included</span>
+          </div>
+          <div class="bg-white/5 border border-white/10 p-2.5 rounded-xl">
+            <svg class="w-5 h-5 mx-auto text-brand-gold mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V3.75m0 3.75h3.75"/></svg>
+            <span class="text-[11px] font-bold block">Secure Delivery</span>
+            <span class="text-[9px] text-stone-400">All-India transit</span>
+          </div>
+          <div class="bg-white/5 border border-white/10 p-2.5 rounded-xl">
+            <svg class="w-5 h-5 mx-auto text-brand-gold mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-2.18-8.583a5.25 5.25 0 00-7.32 7.32l8.25 8.25 8.25-8.25a5.25 5.25 0 00-7.32-7.32l-.93.93-.93-.93z"/></svg>
+            <span class="text-[11px] font-bold block">Protected</span>
+            <span class="text-[9px] text-stone-400">Freshness lock</span>
+          </div>
+        </div>
+
+        <button onclick="filterCategory('Gift Boxes'); document.getElementById('sweetsSection').scrollIntoView({behavior: 'smooth'})" class="mt-4 w-full py-3 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1.5 shadow active:scale-98 transition">
+          <span>Shop Gift Boxes</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- 12. INGREDIENT STORY -->
+    <section id="ingredientsSection" class="px-4 py-4">
+      <div class="text-center max-w-xs mx-auto mb-4">
+        <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Purity First</span>
+        <h2 class="font-serif text-2xl font-bold text-brand-dark">Made with Love, Eaten with Joy</h2>
+        <p class="text-xs text-brand-muted mt-1">Four pure pillars of our honest confectionery recipes.</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2.5">
+        <!-- Ingredient 1: Sattu -->
+        <div class="bg-white rounded-xl border border-brand-border p-3 flex flex-col justify-between shadow-sm">
+          <div class="w-8 h-8 rounded-lg bg-brand-goldsoft/70 text-brand-brown font-bold text-xs flex items-center justify-center mb-2">
+            🌱
+          </div>
+          <div>
+            <h4 class="font-serif font-bold text-sm text-brand-dark">Chana Sattu</h4>
+            <p class="text-[10px] text-brand-muted mt-1 leading-normal">
+              Slow-roasted Bengal gram flour packed with protein and dietary fiber for lasting energy.
+            </p>
+          </div>
+        </div>
+
+        <!-- Ingredient 2: Desi Ghee -->
+        <div class="bg-white rounded-xl border border-brand-border p-3 flex flex-col justify-between shadow-sm">
+          <div class="w-8 h-8 rounded-lg bg-amber-100 text-brand-amber font-bold text-xs flex items-center justify-center mb-2">
+            🧈
+          </div>
+          <div>
+            <h4 class="font-serif font-bold text-sm text-brand-dark">Pure A2 Desi Ghee</h4>
+            <p class="text-[10px] text-brand-muted mt-1 leading-normal">
+              Traditional bilona churned ghee offering aroma, gut-nourishing butyrate, and authentic richness.
+            </p>
+          </div>
+        </div>
+
+        <!-- Ingredient 3: Dates -->
+        <div class="bg-white rounded-xl border border-brand-border p-3 flex flex-col justify-between shadow-sm">
+          <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-900 font-bold text-xs flex items-center justify-center mb-2">
+            🌴
+          </div>
+          <div>
+            <h4 class="font-serif font-bold text-sm text-brand-dark">Arabian Dates</h4>
+            <p class="text-[10px] text-brand-muted mt-1 leading-normal">
+              Sun-ripened black dates acting as the primary binder and natural caramel-like sweetener.
+            </p>
+          </div>
+        </div>
+
+        <!-- Ingredient 4: Jaggery -->
+        <div class="bg-white rounded-xl border border-brand-border p-3 flex flex-col justify-between shadow-sm">
+          <div class="w-8 h-8 rounded-lg bg-orange-100 text-orange-900 font-bold text-xs flex items-center justify-center mb-2">
+            🍯
+          </div>
+          <div>
+            <h4 class="font-serif font-bold text-sm text-brand-dark">Desi Jaggery</h4>
+            <p class="text-[10px] text-brand-muted mt-1 leading-normal">
+              Unrefined sugarcane jaggery rich in iron, minerals, and deep earthy sweetness.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. WHY US -->
+    <section id="whyUsSection" class="px-4 py-6">
+      <div class="bg-brand-cream border border-brand-border rounded-2xl p-4">
+        <h2 class="font-serif text-xl font-bold text-brand-dark text-center mb-4">
+          Why Gulf Free Cravings?
+        </h2>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-3 bg-white rounded-xl border border-brand-border text-center">
+            <div class="w-8 h-8 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+            </div>
+            <h4 class="text-xs font-bold text-brand-dark">Quality Ingredients</h4>
+            <p class="text-[10px] text-brand-muted mt-0.5">Top-grade nuts & natural sweet</p>
+          </div>
+
+          <div class="p-3 bg-white rounded-xl border border-brand-border text-center">
+            <div class="w-8 h-8 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"/></svg>
+            </div>
+            <h4 class="text-xs font-bold text-brand-dark">Traditional Taste</h4>
+            <p class="text-[10px] text-brand-muted mt-0.5">Authentic nostalgic recipes</p>
+          </div>
+
+          <div class="p-3 bg-white rounded-xl border border-brand-border text-center">
+            <div class="w-8 h-8 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+            </div>
+            <h4 class="text-xs font-bold text-brand-dark">Thoughtfully Made</h4>
+            <p class="text-[10px] text-brand-muted mt-0.5">Zero artificial preservatives</p>
+          </div>
+
+          <div class="p-3 bg-white rounded-xl border border-brand-border text-center">
+            <div class="w-8 h-8 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h4 class="text-xs font-bold text-brand-dark">Fresh & Honest</h4>
+            <p class="text-[10px] text-brand-muted mt-0.5">Small batches every 48 hours</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. CUSTOMER REVIEWS -->
+    <section id="reviewsSection" class="px-4 py-4">
+      <div class="text-center mb-4">
+        <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Verified Buyers</span>
+        <h2 class="font-serif text-2xl font-bold text-brand-dark">Loved by Mithai Lovers</h2>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <!-- Review 1 -->
+        <div class="bg-white rounded-xl border border-brand-border p-3.5 shadow-sm">
+          <div class="flex items-center justify-between mb-1.5">
+            <div class="text-brand-amber text-xs font-bold">★★★★★</div>
+            <span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-semibold">Verified Buyer</span>
+          </div>
+          <p class="text-xs text-brand-dark italic leading-relaxed">
+            "Finally an authentic ladoo where you can taste real roasted nuts rather than synthetic sugar syrup. The Dry Fruit Ladoo is pure royalty!"
+          </p>
+          <div class="mt-2 text-[11px] font-bold text-brand-brown">
+            — Radhika S., Mumbai
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="bg-white rounded-xl border border-brand-border p-3.5 shadow-sm">
+          <div class="flex items-center justify-between mb-1.5">
+            <div class="text-brand-amber text-xs font-bold">★★★★★</div>
+            <span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-semibold">Verified Buyer</span>
+          </div>
+          <p class="text-xs text-brand-dark italic leading-relaxed">
+            "Gifted the Royal Hamper box for Diwali to our senior corporate partners. The packaging quality and the rich taste were simply unmatched."
+          </p>
+          <div class="mt-2 text-[11px] font-bold text-brand-brown">
+            — Vikram M., Bengaluru
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="bg-white rounded-xl border border-brand-border p-3.5 shadow-sm">
+          <div class="flex items-center justify-between mb-1.5">
+            <div class="text-brand-amber text-xs font-bold">★★★★★</div>
+            <span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-semibold">Verified Buyer</span>
+          </div>
+          <p class="text-xs text-brand-dark italic leading-relaxed">
+            "Sattu Jaggery bites are my everyday post-workout snack now. Hearty, sweet, and feels very light on digestion."
+          </p>
+          <div class="mt-2 text-[11px] font-bold text-brand-brown">
+            — Ananya P., Delhi NCR
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. FINAL CTA -->
+    <section class="px-4 py-6">
+      <div class="bg-gradient-to-br from-brand-brown to-brand-dark text-white rounded-2xl p-6 text-center shadow-lg border border-brand-border">
+        <span class="text-[10px] font-bold tracking-widest text-brand-gold uppercase">Guilt-Free Tradition</span>
+        <h2 class="font-serif text-2xl font-bold mt-1">Craving Something Better?</h2>
+        <p class="text-xs text-stone-300 mt-2 max-w-xs mx-auto leading-relaxed">
+          Traditional mithai. Better ingredients. Zero compromise on taste.
+        </p>
+        <button onclick="document.getElementById('sweetsSection').scrollIntoView({behavior: 'smooth'})" class="mt-5 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs shadow-md active:scale-95 transition">
+          <span>Shop All Sweets</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- 16. FOOTER -->
+  <footer class="bg-brand-dark text-stone-300 pt-8 pb-12 px-5 border-t border-brand-border">
+    <div class="flex flex-col gap-6">
+      <div>
+        <span class="font-serif text-xl font-bold text-white tracking-tight">Gulf Free<span class="text-brand-gold italic"> Cravings</span></span>
+        <p class="text-xs text-stone-400 mt-2 leading-relaxed">
+          Artisanal Indian confectionery made with clean organic ingredients, ancient grains, and pure desi ghee.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 text-xs">
+        <div>
+          <h5 class="font-bold text-white mb-2 text-[11px] uppercase tracking-wider text-brand-gold">Quick Sweets</h5>
+          <ul class="space-y-1.5 text-stone-400">
+            <li><a href="#sweetsSection" class="hover:text-white transition">Royal Dry Fruit Ladoo</a></li>
+            <li><a href="#sweetsSection" class="hover:text-white transition">Sattu Jaggery Bites</a></li>
+            <li><a href="#sweetsSection" class="hover:text-white transition">Anjeer Date Rolls</a></li>
+            <li><a href="#giftingSection" class="hover:text-white transition">Festive Gift Boxes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-bold text-white mb-2 text-[11px] uppercase tracking-wider text-brand-gold">Company & Care</h5>
+          <ul class="space-y-1.5 text-stone-400">
+            <li><a href="#ingredientsSection" class="hover:text-white transition">Our Ingredients</a></li>
+            <li><a href="#whyUsSection" class="hover:text-white transition">Why Us & Quality</a></li>
+            <li><a href="#" class="hover:text-white transition">Shipping Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Contact & Concierge</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-stone-800 text-[10px] text-stone-500 flex flex-col gap-1">
+        <p>Pure Vegetarian &bull; FSSAI Certified Kitchen &bull; Handcrafted in India</p>
+        <p>&copy; 2025 Gulf Free Cravings Pvt Ltd. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 8. QUICK PRODUCT DETAILS MODAL / SIDE DRAWER -->
+  <div id="quickViewModal" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-200">
+    <div onclick="closeQuickView()" class="absolute inset-0 drawer-backdrop"></div>
+    <div id="quickViewContent" class="absolute bottom-0 left-0 right-0 max-h-[85vh] bg-white rounded-t-3xl p-5 shadow-2xl overflow-y-auto transform translate-y-full transition-transform duration-300">
+      <div class="w-10 h-1 bg-stone-300 rounded-full mx-auto mb-4"></div>
+      
+      <div class="flex items-start justify-between">
+        <div class="pr-4">
+          <div id="modalRating" class="text-xs font-bold text-brand-amber mb-0.5">★ 4.9 (128)</div>
+          <h3 id="modalTitle" class="font-serif text-xl font-bold text-brand-dark">Product Title</h3>
+          <p id="modalPack" class="text-xs text-brand-muted">Box of 12 pcs &bull; 400g</p>
+        </div>
+        <button onclick="closeQuickView()" class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 flex-shrink-0 active:scale-90">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="mt-3 h-48 rounded-xl overflow-hidden bg-stone-100 border border-brand-border">
+        <img id="modalImage" src="" alt="Product" class="w-full h-full object-cover" />
+      </div>
+
+      <div class="mt-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-brand-muted">Description</h4>
+        <p id="modalDesc" class="text-xs text-brand-dark mt-1 leading-relaxed">
+          Product description goes here.
+        </p>
+      </div>
+
+      <div class="mt-3 p-3 bg-brand-cream rounded-xl border border-brand-border">
+        <h4 class="text-[11px] font-bold text-brand-brown uppercase tracking-wider">Clean Ingredients</h4>
+        <p id="modalIngredients" class="text-xs text-brand-dark mt-0.5 leading-snug">
+          Ingredients list here.
+        </p>
+      </div>
+
+      <div class="mt-4 pt-3 border-t border-stone-200 flex items-center justify-between">
+        <div>
+          <span class="text-[10px] text-stone-400 block">Total Price</span>
+          <span id="modalPrice" class="text-lg font-bold text-brand-dark">₹480</span>
+        </div>
+        <button id="modalAddBtn" onclick="addFromModal()" class="px-6 py-3 rounded-xl bg-brand-dark text-brand-gold font-bold text-xs flex items-center gap-2 shadow-md active:scale-95 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          <span>Add to Cart</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. FLOATING BOTTOM CART BAR (ZOMATO LOW-CLICK UX) -->
+  <div id="stickyBottomCart" class="fixed bottom-3 left-3 right-3 z-40 transform translate-y-24 transition-transform duration-300">
+    <div class="bg-brand-dark text-white rounded-2xl p-3 shadow-xl border border-brand-gold/30 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-10 h-10 rounded-xl bg-brand-gold text-brand-dark flex items-center justify-center font-bold relative flex-shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
+          <span id="floatingCartBadge" class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
+        </div>
+        <div>
+          <div class="text-xs font-bold flex items-center gap-1.5">
+            <span id="floatingCartItems">2 Items in Cart</span>
+            <span class="text-stone-400">&bull;</span>
+            <span id="floatingCartTotal" class="text-brand-gold font-bold">₹870</span>
+          </div>
+          <p class="text-[10px] text-stone-300">Free festive delivery unlocked</p>
+        </div>
+      </div>
+
+      <button onclick="openCartDrawer()" class="h-9 px-4 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center gap-1.5 shadow active:scale-95 transition">
+        <span>View Cart</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 10. CART DRAWER (RIGHT / BOTTOM SHEET UX) -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+    <div onclick="closeCartDrawer()" class="absolute inset-0 drawer-backdrop"></div>
+    <div id="cartDrawerContent" class="absolute bottom-0 left-0 right-0 max-h-[90vh] bg-white rounded-t-3xl shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300">
+      
+      <!-- Drawer Header -->
+      <div class="p-4 border-b border-brand-border flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <h3 class="font-serif text-lg font-bold text-brand-dark">Your Sweets Cart</h3>
+          <span id="drawerCartCountBadge" class="text-xs bg-brand-goldsoft text-brand-brown px-2 py-0.5 rounded-full font-bold">2 Items</span>
+        </div>
+        <button onclick="closeCartDrawer()" class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Free Delivery Banner in Cart -->
+      <div class="bg-amber-50 px-4 py-2 text-[11px] font-semibold text-amber-900 border-b border-amber-100 flex items-center gap-2">
+        <span class="text-brand-amber">🎉</span>
+        <span>Eligible for <strong>Free Express Delivery</strong> with insulated fresh packaging!</span>
+      </div>
+
+      <!-- Drawer Items List -->
+      <div id="cartItemList" class="p-4 overflow-y-auto space-y-3 max-h-[48vh]">
+        <!-- Dynamic items will be populated here -->
+      </div>
+
+      <!-- Drawer Footer & Checkout CTA -->
+      <div class="p-4 bg-stone-50 border-t border-brand-border">
+        <div class="space-y-1.5 text-xs mb-3">
+          <div class="flex justify-between text-brand-muted">
+            <span>Item Total</span>
+            <span id="drawerSubtotal">₹870</span>
+          </div>
+          <div class="flex justify-between text-brand-muted">
+            <span>Fresh Delivery & Packaging</span>
+            <span class="text-emerald-700 font-medium">FREE</span>
+          </div>
+          <div class="flex justify-between text-sm font-bold text-brand-dark pt-1 border-t border-stone-200">
+            <span>Grand Total</span>
+            <span id="drawerGrandTotal" class="text-base text-brand-brown">₹870</span>
+          </div>
+        </div>
+
+        <button onclick="simulateCheckout()" class="w-full py-3.5 rounded-xl bg-brand-dark text-brand-gold font-bold text-xs flex items-center justify-center gap-2 shadow-lg active:scale-98 transition">
+          <span>Proceed to Checkout</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </button>
+        <p class="text-[10px] text-center text-stone-400 mt-2">Guaranteed fresh batch dispatch within 24 hours</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT TOAST CONFIRMATION -->
+  <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 bg-brand-dark text-brand-goldsoft text-xs font-semibold px-4 py-2.5 rounded-full shadow-2xl border border-brand-gold/40 pointer-events-none opacity-0 transition-all duration-300">
+    Cart updated successfully
+  </div>
+
+  <!-- INTERACTIVE APP LOGIC -->
+  <script>
+    // Cart Data State (Prepopulated with 2 items to match default state)
+    let cart = {
+      'p1': { id: 'p1', name: 'Royal Dry Fruit Ladoo', price: 480, qty: 1, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg' },
+      'p2': { id: 'p2', name: 'Sattu Jaggery Bites', price: 390, qty: 1, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q' }
+    };
+
+    let activeModalItem = null;
+
+    // Initialize UI on load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCartUI();
+      renderProductCardButtons();
+    });
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('navDrawer');
+      const content = document.getElementById('navDrawerContent');
+      if (drawer.classList.contains('pointer-events-none')) {
+        drawer.classList.remove('pointer-events-none', 'opacity-0');
+        content.classList.remove('-translate-x-full');
+      } else {
+        drawer.classList.add('pointer-events-none', 'opacity-0');
+        content.classList.add('-translate-x-full');
+      }
+    }
+
+    // Category Filter UX
+    function filterCategory(cat) {
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.getAttribute('data-category') === cat) {
+          btn.className = 'cat-pill px-4 py-2 rounded-full text-xs font-bold transition whitespace-nowrap bg-brand-dark text-brand-goldsoft shadow-sm';
+        } else {
+          btn.className = 'cat-pill px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border';
+        }
+      });
+
+      const items = document.querySelectorAll('.product-item');
+      items.forEach(item => {
+        const itemCats = item.getAttribute('data-category');
+        if (cat === 'All' || itemCats.includes(cat)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // Wishlist Heart Micro-interaction
+    function toggleWishlist(btn) {
+      const svg = btn.querySelector('svg');
+      if (svg.getAttribute('fill') === 'currentColor') {
+        svg.setAttribute('fill', 'none');
+        btn.classList.remove('text-red-600');
+        btn.classList.add('text-brand-dark');
+        showToast('Removed from favourites');
+      } else {
+        svg.setAttribute('fill', 'currentColor');
+        btn.classList.add('text-red-600');
+        btn.classList.remove('text-brand-dark');
+        showToast('Saved to your favourites ❤️');
+      }
+    }
+
+    // Add to Cart from Homepage Card
+    function addToCart(id, name, price, img) {
+      if (!cart[id]) {
+        cart[id] = { id, name, price, qty: 1, img };
+      } else {
+        cart[id].qty += 1;
+      }
+      renderCartUI();
+      renderProductCardButtons();
+      showToast(`Added ${name} to cart`);
+    }
+
+    // Change Item Quantity directly
+    function updateQty(id, delta) {
+      if (!cart[id]) return;
+      cart[id].qty += delta;
+      if (cart[id].qty <= 0) {
+        delete cart[id];
+      }
+      renderCartUI();
+      renderProductCardButtons();
+    }
+
+    // Render Product Cards with Add or [- 1 +] Quantity controls
+    function renderProductCardButtons() {
+      const allProductIds = ['p1', 'p2', 'p3', 'p4'];
+      
+      allProductIds.forEach(id => {
+        const container = document.getElementById(`btn-container-${id}`);
+        if (!container) return;
+
+        if (cart[id] && cart[id].qty > 0) {
+          // Replace [+ Add] with active [- QTY +] control
+          container.innerHTML = `
+            <div class="flex items-center h-7 rounded-lg bg-brand-dark text-white border border-brand-dark overflow-hidden shadow-sm">
+              <button onclick="event.stopPropagation(); updateQty('${id}', -1)" class="w-6 h-full flex items-center justify-center font-bold text-xs hover:bg-stone-700 active:scale-90 transition">
+                −
+              </button>
+              <span class="px-2 text-xs font-bold text-brand-gold">${cart[id].qty}</span>
+              <button onclick="event.stopPropagation(); updateQty('${id}', 1)" class="w-6 h-full flex items-center justify-center font-bold text-xs hover:bg-stone-700 active:scale-90 transition">
+                +
+              </button>
+            </div>
+          `;
+        } else {
+          // Default [+ Add] state
+          const defaultData = {
+            'p1': { name: 'Royal Dry Fruit Ladoo', price: 480, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg' },
+            'p2': { name: 'Sattu Jaggery Bites', price: 390, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q' },
+            'p3': { name: 'Royal Gifting Hamper', price: 890, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBytAyROuBCkJ3bdx2y_kDVVRPYbVkevg1ZzfnIAmuznyewmK99DLDxSoovE6oDKNRxbaaROy49Tc3wQEa6Q_7-8cokqP86IyHzyB-OsWyL3bZKqmfz5UqXEBB7gLC-3ZYnRF6yBkpjmJ6yFPf9xf55hYsswGTiJQTpK3T-lyqX68wjZjK9uOAUu5PG00P8bNtUbb_KNLYPkEnnipYUCDl6VlE7-fiADiVqKWdh9a8w09boynxW5zUgzg' },
+            'p4': { name: 'Anjeer & Date Roll', price: 450, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w' }
+          }[id];
+
+          container.innerHTML = `
+            <button onclick="event.stopPropagation(); addToCart('${id}', '${defaultData.name}', ${defaultData.price}, '${defaultData.img}')" class="h-7 px-3 rounded-lg bg-brand-goldsoft text-brand-brown font-bold text-xs hover:bg-brand-gold hover:text-brand-dark active:scale-95 transition flex items-center gap-1 border border-brand-border">
+              <span>+</span> Add
+            </button>
+          `;
+        }
+      });
+    }
+
+    // Render Global Cart Status (Navbar, Floating Bottom Bar, Drawer)
+    function renderCartUI() {
+      const keys = Object.keys(cart);
+      const totalCount = keys.reduce((acc, k) => acc + cart[k].qty, 0);
+      const totalPrice = keys.reduce((acc, k) => acc + (cart[k].qty * cart[k].price), 0);
+
+      // 1. Navbar badge
+      const navCount = document.getElementById('navCartCount');
+      if (navCount) navCount.innerText = totalCount;
+
+      // 2. Floating Bottom Bar
+      const stickyBar = document.getElementById('stickyBottomCart');
+      if (stickyBar) {
+        if (totalCount > 0) {
+          stickyBar.classList.remove('translate-y-24');
+          document.getElementById('floatingCartBadge').innerText = totalCount;
+          document.getElementById('floatingCartItems').innerText = `${totalCount} Item${totalCount > 1 ? 's' : ''}`;
+          document.getElementById('floatingCartTotal').innerText = `₹${totalPrice}`;
+        } else {
+          stickyBar.classList.add('translate-y-24');
+        }
+      }
+
+      // 3. Cart Drawer Contents
+      const drawerList = document.getElementById('cartItemList');
+      const drawerCountBadge = document.getElementById('drawerCartCountBadge');
+      const drawerSubtotal = document.getElementById('drawerSubtotal');
+      const drawerGrandTotal = document.getElementById('drawerGrandTotal');
+
+      if (drawerCountBadge) drawerCountBadge.innerText = `${totalCount} Item${totalCount > 1 ? 's' : ''}`;
+      if (drawerSubtotal) drawerSubtotal.innerText = `₹${totalPrice}`;
+      if (drawerGrandTotal) drawerGrandTotal.innerText = `₹${totalPrice}`;
+
+      if (drawerList) {
+        if (totalCount === 0) {
+          drawerList.innerHTML = `
+            <div class="py-12 text-center text-stone-400">
+              <svg class="w-12 h-12 mx-auto text-stone-300 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
+              <p class="text-sm font-semibold text-brand-dark">Your cart is feeling light!</p>
+              <p class="text-xs text-stone-500 mt-1">Pick some fresh ladoos and wholesome bites.</p>
+              <button onclick="closeCartDrawer(); document.getElementById('sweetsSection').scrollIntoView({behavior:'smooth'});" class="mt-4 px-4 py-2 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs">
+                Explore Fresh Sweets
+              </button>
+            </div>
+          `;
+        } else {
+          drawerList.innerHTML = keys.map(id => {
+            const item = cart[id];
+            return `
+              <div class="flex items-center justify-between p-2.5 rounded-xl border border-brand-border bg-stone-50">
+                <div class="flex items-center gap-2.5">
+                  <img src="${item.img}" alt="${item.name}" class="w-12 h-12 rounded-lg object-cover border border-stone-200 flex-shrink-0" />
+                  <div>
+                    <h4 class="font-serif font-bold text-xs text-brand-dark line-clamp-1">${item.name}</h4>
+                    <span class="text-[11px] font-bold text-brand-brown">₹${item.price} each</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center h-7 rounded-lg bg-white border border-brand-border shadow-xs">
+                    <button onclick="updateQty('${id}', -1)" class="w-6 h-full flex items-center justify-center font-bold text-xs text-brand-dark active:scale-90">
+                      −
+                    </button>
+                    <span class="px-2 text-xs font-bold text-brand-dark">${item.qty}</span>
+                    <button onclick="updateQty('${id}', 1)" class="w-6 h-full flex items-center justify-center font-bold text-xs text-brand-dark active:scale-90">
+                      +
+                    </button>
+                  </div>
+                  <span class="text-xs font-bold text-brand-dark w-12 text-right">₹${item.price * item.qty}</span>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+    }
+
+    // Quick View Modal
+    function openQuickView(title, rating, price, pack, img, desc, ingredients, id) {
+      activeModalItem = { id, title, price: parseInt(price.replace('₹', '')), img };
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalRating').innerText = `★ ${rating}`;
+      document.getElementById('modalPrice').innerText = price;
+      document.getElementById('modalPack').innerHTML = pack;
+      document.getElementById('modalImage').src = img;
+      document.getElementById('modalDesc').innerText = desc;
+      document.getElementById('modalIngredients').innerText = ingredients;
+
+      const modal = document.getElementById('quickViewModal');
+      const content = document.getElementById('quickViewContent');
+      modal.classList.remove('pointer-events-none', 'opacity-0');
+      content.classList.remove('translate-y-full');
+    }
+
+    function closeQuickView() {
+      const modal = document.getElementById('quickViewModal');
+      const content = document.getElementById('quickViewContent');
+      modal.classList.add('pointer-events-none', 'opacity-0');
+      content.classList.add('translate-y-full');
+    }
+
+    function addFromModal() {
+      if (activeModalItem) {
+        addToCart(activeModalItem.id, activeModalItem.title, activeModalItem.price, activeModalItem.img);
+        closeQuickView();
+      }
+    }
+
+    // Cart Drawer Controls
+    function openCartDrawer() {
+      const drawer = document.getElementById('cartDrawer');
+      const content = document.getElementById('cartDrawerContent');
+      renderCartUI();
+      drawer.classList.remove('pointer-events-none', 'opacity-0');
+      content.classList.remove('translate-y-full');
+    }
+
+    function closeCartDrawer() {
+      const drawer = document.getElementById('cartDrawer');
+      const content = document.getElementById('cartDrawerContent');
+      drawer.classList.add('pointer-events-none', 'opacity-0');
+      content.classList.add('translate-y-full');
+    }
+
+    // Toast notifications
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2200);
+    }
+
+    // Checkout trigger simulation
+    function simulateCheckout() {
+      closeCartDrawer();
+      showToast('Redirecting to Secure Payment Checkout...');
+    }
+  </script>
+</body>
+</html>
