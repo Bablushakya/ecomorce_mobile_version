@@ -1,10 +1,14 @@
-/* Gulf Free Cravings - Custom Styles */
-/* Modern, mobile-first artisanal mithai e-commerce design */
+/* ============================================================
+   Guilt Free Cravings — Mobile-First E-Commerce Styles
+   Modern, mobile-native artisanal mithai e-commerce design
+   ============================================================ */
 
-/* Font Imports */
+/* Font Import */
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-/* CSS Variables for Brand Colors */
+/* ============================================================
+   CSS VARIABLES — Brand Design System
+   ============================================================ */
 :root {
   --brand-cream: #FAF6F0;
   --brand-creambright: #FFFDF9;
@@ -17,21 +21,52 @@
   --brand-card: #FFFFFF;
   --brand-muted: #76675B;
   --brand-olive: #4D5837;
+
+  /* Touch target minimum */
+  --touch-min: 44px;
+
+  /* Z-Index stack */
+  --z-header: 40;
+  --z-bottom-nav: 40;
+  --z-sticky-cart: 35;
+  --z-sheet: 50;
+  --z-search: 60;
+  --z-toast: 70;
 }
 
-/* Base Styles */
+/* ============================================================
+   BASE RESET & BODY
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Prevent bounce scroll overscroll effect on mobile */
+  overscroll-behavior-y: none;
+}
+
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #FAF6F0;
-  color: #261610;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--brand-cream);
+  color: var(--brand-dark);
+  /* Prevent text inflation on iOS */
+  -webkit-text-size-adjust: 100%;
+  /* Remove tap highlight */
   -webkit-tap-highlight-color: transparent;
+  /* Better font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .font-serif {
   font-family: 'DM Serif Display', Georgia, serif;
 }
 
-/* Scrollbar Hiding */
+/* ============================================================
+   SCROLLBAR HIDING (for horizontal scrollers)
+   ============================================================ */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -41,14 +76,18 @@ body {
   scrollbar-width: none;
 }
 
-/* Drawer Backdrop Effect */
+/* ============================================================
+   DRAWER / OVERLAY BACKDROP
+   ============================================================ */
 .drawer-backdrop {
-  background: rgba(38, 22, 16, 0.6);
+  background: rgba(38, 22, 16, 0.65);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
 
-/* Utility Classes */
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
 .line-clamp-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -56,83 +95,83 @@ body {
   overflow: hidden;
 }
 
-/* Smooth Transitions */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ============================================================
+   TRANSITIONS & ANIMATIONS
+   ============================================================ */
+
+/* Smooth all transitions */
+.transition-transform {
+  transition: transform 0.15s ease;
+}
+
+.transition-opacity {
+  transition: opacity 0.2s ease;
+}
+
 .transition-all {
   transition: all 0.2s ease;
 }
 
-/* Active States */
+/* Micro-interaction: scale on active (touch) */
 .active\:scale-95:active {
   transform: scale(0.95);
 }
-
 .active\:scale-98:active {
   transform: scale(0.98);
 }
-
 .active\:scale-90:active {
   transform: scale(0.90);
 }
 
-/* Hover Effects */
-.group:hover .group-hover\:scale-105 {
-  transform: scale(1.05);
-}
-
-/* Animation */
+/* Pulse for attention */
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Custom Scrolling Behavior */
-html {
-  scroll-behavior: smooth;
+/* Slide up for bottom sheets */
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }
 
-/* Responsive Images */
-img {
-  max-width: 100%;
-  height: auto;
+/* Bounce for cart badge update */
+@keyframes cartBounce {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  80% { transform: scale(0.9); }
+  100% { transform: scale(1); }
 }
 
-/* Selection Styling */
-::selection {
-  background-color: var(--brand-goldsoft);
-  color: var(--brand-brown);
+.cart-bounce {
+  animation: cartBounce 0.4s ease forwards;
 }
 
-/* Focus Styles for Accessibility */
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid var(--brand-amber);
-  outline-offset: 2px;
+/* Fade-in for search results */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Prevent Text Selection on UI Elements */
-.select-none {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+#searchResults > * {
+  animation: fadeIn 0.15s ease forwards;
 }
 
-/* Loading States */
+/* Shimmer loading */
 @keyframes shimmer {
-  0% {
-    background-position: -468px 0;
-  }
-  100% {
-    background-position: 468px 0;
-  }
+  0% { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
 }
 
 .loading-shimmer {
@@ -147,37 +186,277 @@ a:focus-visible {
   background-size: 800px 104px;
 }
 
-/* Print Styles */
+/* ============================================================
+   IMAGES
+   ============================================================ */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================================
+   SELECTION STYLING
+   ============================================================ */
+::selection {
+  background-color: var(--brand-goldsoft);
+  color: var(--brand-brown);
+}
+
+/* ============================================================
+   FOCUS STYLES — Accessibility
+   ============================================================ */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--brand-amber);
+  outline-offset: 2px;
+}
+
+/* Remove default outline for touch */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================================
+   TEXT SELECTION DISABLE (UI elements)
+   ============================================================ */
+.select-none {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ============================================================
+   PRODUCT CARD — Mobile Grid
+   ============================================================ */
+.product-item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.product-item:active {
+  transform: scale(0.985);
+}
+
+/* Product image container — forces square aspect */
+.product-item .aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+/* ============================================================
+   BOTTOM NAVIGATION BAR
+   ============================================================ */
+#bottomNav {
+  /* iOS safe area support */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+#bottomNav .safe-area-bottom {
+  padding-bottom: max(8px, env(safe-area-inset-bottom, 8px));
+}
+
+.bnav-btn {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  min-height: var(--touch-min);
+  touch-action: manipulation;
+}
+
+/* ============================================================
+   STICKY CART BAR — Position above bottom nav
+   ============================================================ */
+#stickyBottomCart {
+  /* 64px = approx bottom nav height + margin */
+  bottom: 68px;
+}
+
+/* ============================================================
+   SEARCH OVERLAY
+   ============================================================ */
+#searchOverlay .pointer-events-auto {
+  pointer-events: all;
+}
+
+#searchOverlay input {
+  /* iOS safari fix — prevent zoom on focus */
+  font-size: 16px;
+}
+
+/* ============================================================
+   VARIANT SHEET / CART SHEET BOTTOM SHEETS
+   ============================================================ */
+#variantSheetContent,
+#cartDrawerContent,
+#checkoutContent {
+  /* Prevent overscroll bounce inside sheets */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Sheet drag handle */
+.sheet-handle {
+  width: 40px;
+  height: 4px;
+  background: #E0E0E0;
+  border-radius: 2px;
+  margin: 12px auto 4px;
+}
+
+/* ============================================================
+   FORM INPUTS — Mobile Friendly
+   ============================================================ */
+input[type="text"],
+input[type="tel"],
+input[type="email"] {
+  font-size: 16px; /* Prevents iOS zoom */
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 12px;
+}
+
+/* ============================================================
+   TOUCH TARGETS — Minimum 44×44px
+   ============================================================ */
+@media (max-width: 767px) {
+  button:not(.variant-opt-btn):not(.cat-pill) {
+    min-height: 36px; /* Slightly relaxed for inline controls */
+  }
+  
+  /* Primary action buttons must be full 44px */
+  .w-full.h-12,
+  .h-12 {
+    min-height: 48px;
+  }
+  
+  #bottomNav button {
+    min-height: 48px;
+  }
+}
+
+/* ============================================================
+   MOBILE LAYOUT — Core breakpoint overrides
+   ============================================================ */
+@media (max-width: 640px) {
+  /* Main content padding bottom to account for bottom nav + cart bar */
+  main {
+    padding-bottom: 160px;
+  }
+  
+  /* Product grid — exactly 2 columns on all mobile sizes */
+  #productGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  /* Tighter card padding on small screens */
+  .product-item .p-2\.5 {
+    padding: 8px;
+  }
+  
+  /* Smaller font on very small screens */
+  @media (max-width: 360px) {
+    #productGrid {
+      gap: 8px;
+    }
+    .product-item h3 {
+      font-size: 11px;
+    }
+  }
+}
+
+/* ============================================================
+   TABLET & DESKTOP — Constrain layout
+   ============================================================ */
+@media (min-width: 768px) {
+  body {
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 60px rgba(0,0,0,0.1);
+    min-height: 100vh;
+  }
+  
+  #bottomNav {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  #stickyBottomCart {
+    max-width: 454px; /* 480 - 2×13 padding */
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+  
+  #toast {
+    max-width: 360px;
+  }
+  
+  /* Fix overlays to full viewport on tablet+ */
+  #variantSheet,
+  #cartDrawer,
+  #searchOverlay,
+  #navDrawer,
+  #checkoutModal,
+  #orderSuccess {
+    position: fixed;
+    inset: 0;
+  }
+  
+  /* Constrain sheet content on wide screens */
+  #variantSheetContent,
+  #cartDrawerContent,
+  #checkoutContent {
+    max-width: 480px;
+    margin: 0 auto;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) translateY(0);
+    width: 100%;
+  }
+  
+  #variantSheetContent.translate-y-full,
+  #cartDrawerContent.translate-y-full,
+  #checkoutContent.translate-y-full {
+    transform: translateX(-50%) translateY(100%);
+  }
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
 @media print {
-  .no-print {
+  #bottomNav,
+  #stickyBottomCart,
+  #variantSheet,
+  #cartDrawer,
+  #checkoutModal,
+  #searchOverlay,
+  #toast {
     display: none !important;
   }
 }
 
-/* Dark Mode Support (Optional Future Enhancement) */
+/* ============================================================
+   DARK MODE — Disabled intentionally (keeping light brand theme)
+   ============================================================ */
 @media (prefers-color-scheme: dark) {
-  /* Commented out - keeping light theme only for now */
-  /* body {
-    background-color: #1a1410;
-    color: #f5f5f5;
-  } */
+  /* Intentionally keeping light theme for brand consistency */
 }
 
-/* Mobile Optimizations */
-@media (max-width: 640px) {
-  /* Ensure touch targets are at least 44x44px */
-  button, a {
-    min-height: 44px;
-    min-width: 44px;
+/* ============================================================
+   REDUCED MOTION — Accessibility
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-}
-
-/* Tablet Optimizations */
-@media (min-width: 768px) {
-  /* Future enhancement: tablet-specific layouts */
-}
-
-/* Desktop Optimizations */
-@media (min-width: 1024px) {
-  /* Future enhancement: desktop-specific layouts */
 }
