@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta name="description" content="Guilt Free Cravings - Delicious homemade treats crafted with thoughtfully selected ingredients. No refined sugar, no preservatives, 100% love.">
   <meta name="keywords" content="Indian sweets, laddoo, healthy sweets, sugar-free, desi ghee, homemade, sattu, dates, jaggery">
   <meta name="author" content="Guilt Free Cravings">
+  <meta name="theme-color" content="#261610">
   
-  <title>Guilt Free Cravings — Delicious Homemade Treats</title>
-  
-  <!-- Favicon (Optional - Add later) -->
-  <!-- <link rel="icon" type="image/png" href="assets/images/favicon.png"> -->
+  <title>Guilt Free Cravings — Homemade Laddoos, No Refined Sugar</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,540 +51,586 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="bg-brand-cream text-brand-dark min-h-screen pb-24 select-none">
+<!-- 
+  DESKTOP NOTE: This page is intentionally designed as a single-page mobile-first app.
+  The existing structure, content, brand identity and desktop visual hierarchy are preserved.
+  Mobile-specific optimizations are applied via media queries and layout choices below max-width: 640px.
+  On desktop (≥768px), the layout falls back to a centered max-width container.
+-->
 
-  <!-- 1. TOP ANNOUNCEMENT & STICKY HEADER -->
-  <header class="sticky top-0 z-40 bg-brand-cream/95 backdrop-blur-md border-b border-brand-border transition-all duration-200" id="mainHeader">
-    <!-- Mini top promo bar -->
-    <div class="bg-brand-dark text-brand-goldsoft text-[11px] font-medium tracking-wider text-center py-1.5 px-3 flex items-center justify-center gap-2">
-      <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></span>
-      <span>NO REFINED SUGAR &bull; NO PRESERVATIVES &bull; 100% LOVE</span>
+<body class="bg-brand-cream text-brand-dark min-h-screen select-none">
+
+  <!-- ============================
+       MOBILE HEADER (Compact)
+       ============================ -->
+  <header class="sticky top-0 z-40 bg-brand-cream/97 backdrop-blur-md border-b border-brand-border" id="mainHeader">
+    <!-- Announcement Ticker -->
+    <div class="bg-brand-dark text-brand-goldsoft text-[10px] font-semibold tracking-widest text-center py-1.5 px-3 flex items-center justify-center gap-2 overflow-hidden">
+      <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse flex-shrink-0"></span>
+      <span class="ticker-text whitespace-nowrap">NO REFINED SUGAR &bull; NO PRESERVATIVES &bull; 100% LOVE &bull; FRESHLY MADE DAILY</span>
     </div>
 
-    <!-- Main Navigation Bar -->
-    <div class="px-4 py-3 flex items-center justify-between">
-      <!-- Left: Mobile Menu Toggle & Logo -->
-      <div class="flex items-center gap-3">
-        <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full bg-white border border-brand-border flex items-center justify-center text-brand-dark shadow-sm active:scale-95 transition" aria-label="Menu">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-        </button>
-        <a href="#" class="flex flex-col">
-          <span class="font-serif text-xl font-bold tracking-tight text-brand-dark leading-none">Guilt<span class="text-brand-amber font-normal italic">Free</span> Cravings</span>
-          <span class="text-[9px] uppercase tracking-widest text-brand-muted mt-0.5 font-semibold">Homemade Goodness &bull; Made with Love</span>
-        </a>
-      </div>
+    <!-- Main Nav Bar -->
+    <div class="px-4 py-2.5 flex items-center justify-between gap-2">
+      <!-- Logo -->
+      <a href="#" class="flex flex-col flex-shrink-0" aria-label="Guilt Free Cravings Home">
+        <span class="font-serif text-[18px] font-bold tracking-tight text-brand-dark leading-none">Guilt<span class="text-brand-amber font-normal italic">Free</span> Cravings</span>
+        <span class="text-[8px] uppercase tracking-widest text-brand-muted mt-0.5 font-semibold">Homemade Goodness &bull; Made with Love</span>
+      </a>
 
-      <!-- Right: Search & Cart Button -->
-      <div class="flex items-center gap-2">
-        <button onclick="document.getElementById('productsSection').scrollIntoView({behavior: 'smooth'})" class="w-9 h-9 rounded-full bg-white border border-brand-border flex items-center justify-center text-brand-dark shadow-sm active:scale-95 transition" aria-label="Search">
-          <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+      <!-- Right Actions -->
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <!-- Search -->
+        <button id="searchBtn" onclick="openSearch()" class="w-9 h-9 rounded-full bg-white border border-brand-border flex items-center justify-center text-brand-muted shadow-sm active:scale-95 transition-transform" aria-label="Search products">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
         </button>
-        <!-- Sticky Cart Icon with dynamic counter badge -->
-        <button onclick="openCartDrawer()" class="relative h-9 px-3 rounded-full bg-brand-dark text-white flex items-center gap-1.5 shadow-sm active:scale-95 transition">
+        <!-- Cart -->
+        <button onclick="openCartDrawer()" class="relative h-9 px-3 rounded-full bg-brand-dark text-white flex items-center gap-1.5 shadow-sm active:scale-95 transition-transform" aria-label="View cart">
           <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
-          <span class="text-xs font-bold font-sans text-brand-goldsoft" id="navCartCount">0</span>
+          <span class="text-xs font-bold text-brand-goldsoft" id="navCartCount">0</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- MOBILE NAVIGATION DRAWER (SLIDE OVER) -->
-  <div id="navDrawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
-    <div onclick="toggleMobileMenu()" class="absolute inset-0 drawer-backdrop"></div>
-    <div id="navDrawerContent" class="absolute top-0 left-0 bottom-0 w-[280px] bg-brand-cream p-6 shadow-2xl flex flex-col justify-between transform -translate-x-full transition-transform duration-300">
-      <div>
-        <div class="flex items-center justify-between pb-4 border-b border-brand-border">
-          <div>
-            <h3 class="font-serif text-lg font-bold text-brand-dark">GuiltFree Cravings</h3>
-            <p class="text-[11px] text-brand-muted">Homemade with Love</p>
-          </div>
-          <button onclick="toggleMobileMenu()" class="w-8 h-8 rounded-full bg-white border border-brand-border flex items-center justify-center text-brand-muted">
+  <!-- ============================
+       SEARCH OVERLAY
+       ============================ -->
+  <div id="searchOverlay" class="fixed inset-0 z-[60] pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Search">
+    <div onclick="closeSearch()" class="absolute inset-0 bg-brand-dark/70 backdrop-blur-sm"></div>
+    <div class="absolute top-0 left-0 right-0 bg-brand-cream shadow-2xl rounded-b-3xl overflow-hidden">
+      <!-- Search Input -->
+      <div class="px-4 pt-4 pb-3 flex items-center gap-3">
+        <div class="flex-1 flex items-center gap-2 bg-white border border-brand-border rounded-xl px-3 py-2.5 shadow-sm">
+          <svg class="w-4 h-4 text-brand-muted flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+          <input id="searchInput" type="text" placeholder="Search products, ingredients..." class="flex-1 text-sm bg-transparent outline-none text-brand-dark placeholder-brand-muted" oninput="handleSearch(this.value)" autocomplete="off">
+          <button id="searchClearBtn" onclick="clearSearch()" class="text-brand-muted hidden">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
-        <nav class="mt-6 flex flex-col gap-3 font-medium text-sm text-brand-dark">
-          <a href="#" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg bg-white border border-brand-border text-brand-amber font-semibold flex items-center justify-between">
-            <span>Home</span>
-            <span class="text-xs text-brand-amber">&bull;</span>
-          </a>
-          <a href="#productsSection" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-white text-brand-dark">Our Products</a>
-          <a href="#promiseSection" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-white text-brand-dark">Our Promise</a>
-          <a href="#storySection" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-white text-brand-dark">Our Story</a>
-          <a href="#visionSection" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-white text-brand-dark">Our Vision</a>
-          <a href="#whyUsSection" onclick="toggleMobileMenu()" class="px-3 py-2 rounded-lg hover:bg-white text-brand-dark">Why Choose Us</a>
-        </nav>
+        <button onclick="closeSearch()" class="text-brand-muted text-sm font-semibold px-1 py-2 whitespace-nowrap">Cancel</button>
       </div>
-      <div class="pt-6 border-t border-brand-border text-xs text-brand-muted">
-        <p class="font-semibold text-brand-dark">Get in Touch</p>
-        <p class="mt-1">Email: hello@guiltfreecravings.com</p>
-        <p class="mt-1">Phone: +91 XXXXX XXXXX</p>
-        <p class="mt-3 text-[10px] text-stone-400">&copy; 2026 Guilt Free Cravings</p>
+
+      <!-- Recent / Suggestions -->
+      <div id="searchSuggestions" class="px-4 pb-5">
+        <p class="text-[11px] uppercase font-bold tracking-wider text-brand-muted mb-2">Popular Searches</p>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="doSearch('laddoo')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Laddoo</button>
+          <button onclick="doSearch('sattu')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Sattu</button>
+          <button onclick="doSearch('dates')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Dates</button>
+          <button onclick="doSearch('besan')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Besan</button>
+          <button onclick="doSearch('sugar free')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Sugar Free</button>
+          <button onclick="doSearch('glass jar')" class="px-3 py-1.5 rounded-full bg-white border border-brand-border text-xs font-medium text-brand-dark">Glass Jar</button>
+        </div>
+        <!-- Search results will appear here -->
+        <div id="searchResults" class="mt-3 space-y-2 hidden"></div>
       </div>
     </div>
   </div>
 
-  <main>
-    <!-- 2. HERO SECTION -->
-    <section class="relative px-4 pt-4 pb-6 overflow-hidden">
-      <div class="relative rounded-2xl overflow-hidden bg-brand-dark text-white border border-brand-border shadow-md">
-        <!-- Hero Background visual -->
-        <div class="relative w-full h-[250px] overflow-hidden">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w" alt="Homemade Indian Laddoos" class="w-full h-full object-cover object-center transform scale-105" />
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/60 to-transparent"></div>
+  <!-- ============================
+       MAIN CONTENT
+       ============================ -->
+  <main class="pb-32" id="mainContent">
+
+    <!-- === SECTION 1: COMPACT HERO (Quick Value Prop) === -->
+    <section class="relative px-4 pt-3 pb-4" id="homeSection">
+      <div class="relative rounded-2xl overflow-hidden bg-brand-dark text-white border border-brand-border/50 shadow-lg">
+        <!-- Hero Image - Compact -->
+        <div class="relative w-full h-[190px] overflow-hidden">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w" 
+               alt="Guilt Free Cravings - Homemade Indian Laddoos" 
+               class="w-full h-full object-cover object-center" 
+               loading="eager"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent"></div>
         </div>
 
-        <!-- Hero Content Overlay -->
-        <div class="p-5 relative -mt-16 z-10">
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] text-brand-goldsoft mb-2.5">
-            <svg class="w-3.5 h-3.5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <!-- Hero Content Overlay - Compact -->
+        <div class="p-4 relative -mt-16 z-10">
+          <div class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-[10px] text-brand-goldsoft mb-2">
+            <svg class="w-3 h-3 text-brand-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             <span>Thoughtfully Selected Ingredients</span>
           </div>
 
-          <h1 class="font-serif text-3xl font-bold tracking-tight text-white leading-tight">
+          <h1 class="font-serif text-2xl font-bold tracking-tight text-white leading-tight">
             Wholesome Goodness,<br>
             <span class="text-brand-gold italic">Irresistible Taste</span>
           </h1>
 
-          <p class="text-stone-300 text-xs mt-2 leading-relaxed max-w-xs">
-            Delicious homemade treats crafted with thoughtfully selected ingredients, comforting flavours, and a whole lot of love, made to bring a little more joy to every craving.
-          </p>
+          <!-- Trust badges inline -->
+          <div class="mt-3 flex items-center gap-2 flex-wrap">
+            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] text-stone-200">🚫 No Sugar</span>
+            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] text-stone-200">🍯 Jaggery</span>
+            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] text-stone-200">🫙 Desi Ghee</span>
+          </div>
 
-          <!-- Direct Hero Action Buttons -->
-          <div class="mt-4 flex items-center gap-3">
-            <button onclick="document.getElementById('productsSection').scrollIntoView({behavior: 'smooth'})" class="flex-1 py-3 px-4 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-2 shadow-lg active:scale-98 transition">
-              <span>Explore Collection</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"/></svg>
+          <!-- Hero CTA - Scroll to products -->
+          <div class="mt-3 flex gap-2">
+            <button onclick="scrollToProducts()" class="flex-1 py-2.5 px-4 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg active:scale-95 transition-transform">
+              <span>Shop Now</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"/></svg>
             </button>
-            <a href="#storySection" class="py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-xs flex items-center justify-center transition">
-              Discover Story
-            </a>
+            <button onclick="openSearch()" class="py-2.5 px-3 rounded-xl bg-white/10 border border-white/20 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+              Search
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 3. A HEALTHY REASON TO SAY YES -->
-    <section class="px-4 py-6">
-      <div class="bg-white rounded-2xl border border-brand-border p-4 shadow-sm">
-        <h2 class="font-serif text-xl font-bold text-brand-dark leading-snug">
-          A Healthy Reason to Say Yes to Sweet
-        </h2>
-        <p class="text-xs text-brand-muted mt-2 leading-relaxed">
-          Somewhere between <em class="italic">"I shouldn't"</em> and <em class="italic">"just one bite"</em> we found a better answer: <strong>don't.</strong>
-        </p>
-        <p class="text-xs text-brand-muted mt-2 leading-relaxed">
-          Our laddoos are rolled by hand, warm with desi ghee, studded with real nuts, and sweetened only by jaggery and dates - never a grain of refined sugar. Every bite is thoughtfully crafted to bring together wholesome ingredients, traditional flavours, and the comforting taste of something truly homemade.
-        </p>
-
-        <div class="mt-4 space-y-2">
-          <div class="flex items-start gap-2 text-xs text-brand-dark">
-            <span class="text-brand-amber">✓</span>
-            <span>No preservatives hiding in the fine print.</span>
-          </div>
-          <div class="flex items-start gap-2 text-xs text-brand-dark">
-            <span class="text-brand-amber">✓</span>
-            <span>No unnecessary ingredients.</span>
-          </div>
-          <div class="flex items-start gap-2 text-xs text-brand-dark">
-            <span class="text-brand-amber">✓</span>
-            <span>Made with thoughtfully selected ingredients.</span>
-          </div>
-          <div class="flex items-start gap-2 text-xs text-brand-dark">
-            <span class="text-brand-amber">✓</span>
-            <span>Crafted fresh with traditional care.</span>
-          </div>
+    <!-- === SECTION 2: TRUST BADGES (Compact horizontal) === -->
+    <section class="px-4 pb-4">
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full border border-brand-border shadow-sm flex-shrink-0">
+          <span class="text-sm">🚫</span>
+          <span class="text-[11px] font-semibold text-brand-dark whitespace-nowrap">No Refined Sugar</span>
         </div>
-
-        <div class="mt-4 p-3 bg-brand-goldsoft/30 rounded-xl">
-          <p class="text-xs font-bold text-brand-brown">It's the real thing.</p>
-          <p class="text-xs text-brand-muted mt-1">This isn't a diet snack pretending to be a treat. It's honest, nourishing food made for everyday moments.</p>
+        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full border border-brand-border shadow-sm flex-shrink-0">
+          <span class="text-sm">🌿</span>
+          <span class="text-[11px] font-semibold text-brand-dark whitespace-nowrap">No Preservatives</span>
+        </div>
+        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full border border-brand-border shadow-sm flex-shrink-0">
+          <span class="text-sm">🫙</span>
+          <span class="text-[11px] font-semibold text-brand-dark whitespace-nowrap">100% Desi Ghee</span>
+        </div>
+        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full border border-brand-border shadow-sm flex-shrink-0">
+          <span class="text-sm">❤️</span>
+          <span class="text-[11px] font-semibold text-brand-dark whitespace-nowrap">Made with Love</span>
         </div>
       </div>
     </section>
 
-    <!-- 4. FOR EVERYONE -->
-    <section class="px-4 py-4">
-      <div class="grid grid-cols-1 gap-3">
-        <div class="bg-white rounded-xl border border-brand-border p-3 shadow-sm">
-          <h4 class="font-serif font-bold text-sm text-brand-dark">For growing kids</h4>
-          <p class="text-xs text-brand-muted mt-1">A wholesome burst of energy after school.</p>
+    <!-- === SECTION 3: PRODUCTS — PRODUCT-FIRST LAYOUT === -->
+    <section id="productsSection" class="px-4 pb-2">
+      <!-- Section Header -->
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Our Products</span>
+          <h2 class="font-serif text-xl font-bold text-brand-dark leading-tight">Four Recipes. Zero Regret.</h2>
         </div>
-        <div class="bg-white rounded-xl border border-brand-border p-3 shadow-sm">
-          <h4 class="font-serif font-bold text-sm text-brand-dark">For busy women</h4>
-          <p class="text-xs text-brand-muted mt-1">Something nourishing when the day gets long.</p>
-        </div>
-        <div class="bg-white rounded-xl border border-brand-border p-3 shadow-sm">
-          <h4 class="font-serif font-bold text-sm text-brand-dark">For busy men</h4>
-          <p class="text-xs text-brand-muted mt-1">A better bite between meetings and moments.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. OUR PROMISE SECTION -->
-    <section id="promiseSection" class="px-4 py-6">
-      <div class="bg-brand-dark text-white rounded-2xl p-5 border border-brand-border shadow-md">
-        <div class="text-center mb-4">
-          <span class="text-[10px] uppercase font-bold tracking-wider text-brand-gold">Our Simple Promise</span>
-          <h2 class="font-serif text-2xl font-bold mt-1">Nourishment You Can Taste,<br><span class="text-brand-gold italic">Tradition You Can Trust</span></h2>
-        </div>
-
-        <div class="grid grid-cols-3 gap-3 mt-4 text-center">
-          <div class="bg-white/10 border border-white/20 p-3 rounded-xl">
-            <div class="text-2xl mb-1">🚫</div>
-            <span class="text-xs font-bold block">No Preservatives</span>
-          </div>
-          <div class="bg-white/10 border border-white/20 p-3 rounded-xl">
-            <div class="text-2xl mb-1">🍯</div>
-            <span class="text-xs font-bold block">No Refined Sugar</span>
-          </div>
-          <div class="bg-white/10 border border-white/20 p-3 rounded-xl">
-            <div class="text-2xl mb-1">❤️</div>
-            <span class="text-xs font-bold block">100% Love</span>
-          </div>
-        </div>
-
-        <p class="text-xs text-stone-300 mt-4 text-center">
-          We believe you shouldn't have to read the fine print to know what's going into something you eat. No shortcuts.
-        </p>
-      </div>
-    </section>
-
-    <!-- 6. SIMPLE CHOICES BETTER INGREDIENTS -->
-    <section class="px-4 py-4">
-      <div class="text-center mb-4">
-        <h2 class="font-serif text-2xl font-bold text-brand-dark">Simple Choices Better Ingredients</h2>
+        <button onclick="scrollToProducts()" class="text-[11px] font-bold text-brand-amber flex items-center gap-1">
+          All
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+        </button>
       </div>
 
-      <div class="space-y-3">
-        <div class="bg-white rounded-xl border border-brand-border p-4 shadow-sm">
-          <div class="flex items-start gap-3">
-            <span class="w-8 h-8 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-sm flex items-center justify-center flex-shrink-0">01</span>
-            <div>
-              <h4 class="font-serif font-bold text-sm text-brand-dark">No Refined Sugar</h4>
-              <p class="text-xs text-brand-muted mt-1">Only jaggery and dates do the sweetening here - pure, natural, and guilt-free.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl border border-brand-border p-4 shadow-sm">
-          <div class="flex items-start gap-3">
-            <span class="w-8 h-8 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-sm flex items-center justify-center flex-shrink-0">02</span>
-            <div>
-              <h4 class="font-serif font-bold text-sm text-brand-dark">No Preservatives</h4>
-              <p class="text-xs text-brand-muted mt-1">Small batches, made to be eaten fresh, not stored forever. Real food, real simple.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl border border-brand-border p-4 shadow-sm">
-          <div class="flex items-start gap-3">
-            <span class="w-8 h-8 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-sm flex items-center justify-center flex-shrink-0">03</span>
-            <div>
-              <h4 class="font-serif font-bold text-sm text-brand-dark">Thoughtfully Sourced</h4>
-              <p class="text-xs text-brand-muted mt-1">Real ghee, real nuts, nothing borrowed from a lab. Just honest, wholesome ingredients.</p>
-            </div>
-          </div>
-        </div>
+      <!-- Category Filter Pills -->
+      <div class="flex gap-2 overflow-x-auto no-scrollbar pb-3">
+        <button data-category="All" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold transition whitespace-nowrap bg-brand-dark text-brand-goldsoft shadow-sm" onclick="filterCategory('All')">All</button>
+        <button data-category="Dry Fruit" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Dry Fruit')">Dry Fruit</button>
+        <button data-category="Besan" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Besan')">Besan</button>
+        <button data-category="Dates" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Dates')">Dates</button>
+        <button data-category="Energy" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Energy')">Energy</button>
+        <button data-category="Glass Jar" class="cat-pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition whitespace-nowrap bg-white text-brand-dark border border-brand-border" onclick="filterCategory('Glass Jar')">Glass Jar</button>
       </div>
 
-      <div class="mt-4 bg-white rounded-xl border border-brand-border p-3 shadow-sm grid grid-cols-2 gap-2 text-xs text-center">
-        <div class="flex flex-col items-center gap-1">
-          <span class="text-emerald-700">✓</span>
-          <span class="font-semibold text-brand-dark">100% Natural</span>
-        </div>
-        <div class="flex flex-col items-center gap-1">
-          <span class="text-emerald-700">✓</span>
-          <span class="font-semibold text-brand-dark">Made with Love</span>
-        </div>
-        <div class="flex flex-col items-center gap-1">
-          <span class="text-emerald-700">✓</span>
-          <span class="font-semibold text-brand-dark">Freshly Baked Daily</span>
-        </div>
-        <div class="flex flex-col items-center gap-1">
-          <span class="text-emerald-700">✓</span>
-          <span class="font-semibold text-brand-dark">Trusted Brand</span>
-        </div>
-      </div>
-    </section>
+      <!-- Product Grid - 2 columns on mobile -->
+      <div class="grid grid-cols-2 gap-3" id="productGrid">
 
-    <!-- 7. PRODUCTS SECTION -->
-    <section id="productsSection" class="px-4 py-6">
-      <div class="text-center mb-4">
-        <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">About The Products</span>
-        <h2 class="font-serif text-2xl font-bold text-brand-dark">Four Recipes Zero Regret</h2>
-        <p class="text-xs text-brand-muted mt-1">The snack you reach for at 4pm - honest ingredients, naturally sweetened, perfectly balanced.</p>
-        <p class="text-xs text-brand-muted italic mt-1">Pick 250g to fall in love. Pick 500g because you already have.</p>
-      </div>
-
-      <div class="space-y-4" id="productGrid">
         <!-- Product 1: Dry Fruit Sattu Laddoo -->
-        <div class="product-item bg-white rounded-xl border border-brand-border p-3 shadow-sm" data-id="p1">
-          <div class="flex items-start gap-3">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q" alt="Dry Fruit Sattu Laddoo" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" />
-            <div class="flex-1">
-              <h3 class="font-serif font-bold text-sm text-brand-dark">Dry Fruit Sattu Laddoo</h3>
-              <p class="text-xs text-brand-muted mt-1 leading-relaxed">Roasted sattu - a grain Indian kitchens have trusted for generations as a natural source of strength and stamina - packed with real dry fruits and slow-cooked desi ghee, sweetened with iron-rich jaggery.</p>
-              <div class="mt-2 flex items-center gap-2">
-                <span class="text-xs font-bold text-brand-dark">250g ₹250</span>
-                <span class="text-stone-300">|</span>
-                <span class="text-xs font-bold text-brand-dark">500g ₹500</span>
-              </div>
-              <div class="mt-2" id="btn-container-p1">
-                <button onclick="addToCart('p1', 'Dry Fruit Sattu Laddoo 250g', 250, 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q')" class="px-4 py-2 rounded-lg bg-brand-gold text-brand-dark font-bold text-xs hover:bg-brand-amber active:scale-95 transition">
-                  Add 250g
-                </button>
-              </div>
+        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+             data-id="p1" 
+             data-category="Dry Fruit,Energy,Sattu"
+             data-name="Dry Fruit Sattu Laddoo"
+             data-price="250"
+             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q">
+          <!-- Product Image -->
+          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q" 
+                 alt="Dry Fruit Sattu Laddoo" 
+                 class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                 loading="lazy"/>
+            <!-- Wishlist button -->
+            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+            </button>
+            <!-- Best seller badge -->
+            <div class="absolute top-2 left-2">
+              <span class="px-1.5 py-0.5 rounded-md bg-brand-amber text-white text-[9px] font-bold uppercase tracking-wide">Popular</span>
+            </div>
+          </div>
+
+          <!-- Product Info -->
+          <div class="p-2.5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Dry Fruit Sattu Laddoo</h3>
+            <div class="flex items-center gap-1 mt-1">
+              <span class="text-brand-gold text-[10px]">★★★★★</span>
+            </div>
+            <!-- Price Row -->
+            <div class="mt-1.5 flex items-baseline gap-1">
+              <span class="text-sm font-bold text-brand-dark">₹250</span>
+              <span class="text-[10px] text-brand-muted">/ 250g</span>
+            </div>
+            <!-- Quick Add Button -->
+            <div class="mt-2" id="btn-container-p1">
+              <button onclick="event.stopPropagation(); openVariantSheet('p1')" 
+                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
+                <span class="text-base leading-none">+</span> Add
+              </button>
             </div>
           </div>
         </div>
 
         <!-- Product 2: Besan Badam Laddoo -->
-        <div class="product-item bg-white rounded-xl border border-brand-border p-3 shadow-sm" data-id="p2">
-          <div class="flex items-start gap-3">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg" alt="Besan Badam Laddoo" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" />
-            <div class="flex-1">
-              <h3 class="font-serif font-bold text-sm text-brand-dark">Besan Badam Laddoo</h3>
-              <p class="text-xs text-brand-muted mt-1 leading-relaxed">Besan, slow-roasted until it turns nutty and golden. Almonds, for crunch. Desi ghee, for that unmistakable aroma the moment you open the box. Sweetened only with jaggery.</p>
-              <div class="mt-2 flex items-center gap-2">
-                <span class="text-xs font-bold text-brand-dark">250g ₹215</span>
-                <span class="text-stone-300">|</span>
-                <span class="text-xs font-bold text-brand-dark">500g ₹430</span>
-              </div>
-              <div class="mt-2" id="btn-container-p2">
-                <button onclick="addToCart('p2', 'Besan Badam Laddoo 250g', 215, 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg')" class="px-4 py-2 rounded-lg bg-brand-gold text-brand-dark font-bold text-xs hover:bg-brand-amber active:scale-95 transition">
-                  Add 250g
-                </button>
-              </div>
+        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+             data-id="p2" 
+             data-category="Besan,Badam"
+             data-name="Besan Badam Laddoo"
+             data-price="215"
+             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg">
+          <!-- Product Image -->
+          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg"
+                 alt="Besan Badam Laddoo"
+                 class="w-full h-full object-cover transition-transform duration-300"
+                 loading="lazy"/>
+            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+            </button>
+          </div>
+
+          <!-- Product Info -->
+          <div class="p-2.5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Besan Badam Laddoo</h3>
+            <div class="flex items-center gap-1 mt-1">
+              <span class="text-brand-gold text-[10px]">★★★★★</span>
+            </div>
+            <div class="mt-1.5 flex items-baseline gap-1">
+              <span class="text-sm font-bold text-brand-dark">₹215</span>
+              <span class="text-[10px] text-brand-muted">/ 250g</span>
+            </div>
+            <div class="mt-2" id="btn-container-p2">
+              <button onclick="event.stopPropagation(); openVariantSheet('p2')" 
+                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
+                <span class="text-base leading-none">+</span> Add
+              </button>
             </div>
           </div>
         </div>
 
         <!-- Product 3: Dates Delight Laddoo -->
-        <div class="product-item bg-white rounded-xl border border-brand-border p-3 shadow-sm" data-id="p3">
-          <div class="flex items-start gap-3">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w" alt="Dates Delight Laddoo" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" />
-            <div class="flex-1">
-              <h3 class="font-serif font-bold text-sm text-brand-dark">Dates Delight Laddoo</h3>
-              <p class="text-xs text-brand-muted mt-1 leading-relaxed">Dates, crushed nuts, roasted seeds, and desi ghee - bound together with nothing but their own natural sweetness. Rich, chewy, a little smoky from the roasting. The kind of energy that doesn't crash by 5pm.</p>
-              <div class="mt-2 flex items-center gap-2">
-                <span class="text-xs font-bold text-brand-dark">250g ₹315</span>
-                <span class="text-stone-300">|</span>
-                <span class="text-xs font-bold text-brand-dark">500g ₹630</span>
-              </div>
-              <div class="mt-2" id="btn-container-p3">
-                <button onclick="addToCart('p3', 'Dates Delight Laddoo 250g', 315, 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w')" class="px-4 py-2 rounded-lg bg-brand-gold text-brand-dark font-bold text-xs hover:bg-brand-amber active:scale-95 transition">
-                  Add 250g
-                </button>
-              </div>
+        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+             data-id="p3" 
+             data-category="Dates,Energy"
+             data-name="Dates Delight Laddoo"
+             data-price="315"
+             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w">
+          <!-- Product Image -->
+          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w"
+                 alt="Dates Delight Laddoo"
+                 class="w-full h-full object-cover transition-transform duration-300"
+                 loading="lazy"/>
+            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+            </button>
+            <div class="absolute top-2 left-2">
+              <span class="px-1.5 py-0.5 rounded-md bg-brand-olive text-white text-[9px] font-bold uppercase tracking-wide">Energy</span>
+            </div>
+          </div>
+
+          <!-- Product Info -->
+          <div class="p-2.5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Dates Delight Laddoo</h3>
+            <div class="flex items-center gap-1 mt-1">
+              <span class="text-brand-gold text-[10px]">★★★★★</span>
+            </div>
+            <div class="mt-1.5 flex items-baseline gap-1">
+              <span class="text-sm font-bold text-brand-dark">₹315</span>
+              <span class="text-[10px] text-brand-muted">/ 250g</span>
+            </div>
+            <div class="mt-2" id="btn-container-p3">
+              <button onclick="event.stopPropagation(); openVariantSheet('p3')" 
+                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
+                <span class="text-base leading-none">+</span> Add
+              </button>
             </div>
           </div>
         </div>
 
         <!-- Product 4: Sattu Laddoo -->
-        <div class="product-item bg-white rounded-xl border border-brand-border p-3 shadow-sm" data-id="p4">
-          <div class="flex items-start gap-3">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q" alt="Sattu Laddoo" class="w-24 h-24 rounded-lg object-cover flex-shrink-0" />
-            <div class="flex-1">
-              <h3 class="font-serif font-bold text-sm text-brand-dark">Sattu Laddoo</h3>
-              <p class="text-xs text-brand-muted mt-1 leading-relaxed">Long before protein powders and energy bars, Indian households had sattu - a humble grain built for exactly this: quiet, steady, natural energy. This laddoo brings it back, made honestly, with desi ghee and jaggery and absolutely nothing else hiding inside.</p>
-              <div class="mt-2 flex items-center gap-2">
-                <span class="text-xs font-bold text-brand-dark">250g ₹165</span>
-                <span class="text-stone-300">|</span>
-                <span class="text-xs font-bold text-brand-dark">500g ₹330</span>
-              </div>
-              <div class="mt-2" id="btn-container-p4">
-                <button onclick="addToCart('p4', 'Sattu Laddoo 250g', 165, 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q')" class="px-4 py-2 rounded-lg bg-brand-gold text-brand-dark font-bold text-xs hover:bg-brand-amber active:scale-95 transition">
-                  Add 250g
-                </button>
-              </div>
+        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+             data-id="p4" 
+             data-category="Energy,Sattu"
+             data-name="Sattu Laddoo"
+             data-price="165"
+             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q">
+          <!-- Product Image -->
+          <div class="relative w-full aspect-square overflow-hidden bg-brand-goldsoft/20">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q"
+                 alt="Sattu Laddoo"
+                 class="w-full h-full object-cover transition-transform duration-300"
+                 loading="lazy"/>
+            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+            </button>
+            <div class="absolute top-2 left-2">
+              <span class="px-1.5 py-0.5 rounded-md bg-brand-brown text-brand-goldsoft text-[9px] font-bold uppercase tracking-wide">Classic</span>
+            </div>
+          </div>
+
+          <!-- Product Info -->
+          <div class="p-2.5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Sattu Laddoo</h3>
+            <div class="flex items-center gap-1 mt-1">
+              <span class="text-brand-gold text-[10px]">★★★★★</span>
+            </div>
+            <div class="mt-1.5 flex items-baseline gap-1">
+              <span class="text-sm font-bold text-brand-dark">₹165</span>
+              <span class="text-[10px] text-brand-muted">/ 250g</span>
+            </div>
+            <div class="mt-2" id="btn-container-p4">
+              <button onclick="event.stopPropagation(); openVariantSheet('p4')" 
+                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
+                <span class="text-base leading-none">+</span> Add
+              </button>
             </div>
           </div>
         </div>
-      </div>
+
+        <!-- Glass Jar Products -->
+        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+             data-id="p5" 
+             data-category="Glass Jar,Dry Fruit"
+             data-name="Dry Fruit Sattu Laddoo (Glass Jar)"
+             data-price="350"
+             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q">
+          <div class="relative w-full aspect-square overflow-hidden bg-amber-50">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q"
+                 alt="Dry Fruit Sattu Laddoo Glass Jar"
+                 class="w-full h-full object-cover transition-transform duration-300"
+                 loading="lazy"/>
+            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+            </button>
+            <div class="absolute top-2 left-2">
+              <span class="px-1.5 py-0.5 rounded-md bg-amber-600 text-white text-[9px] font-bold uppercase tracking-wide">🫙 Glass Jar</span>
+            </div>
+          </div>
+          <div class="p-2.5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Dry Fruit Sattu (Glass Jar)</h3>
+            <div class="flex items-center gap-1 mt-1">
+              <span class="text-brand-gold text-[10px]">★★★★★</span>
+            </div>
+            <div class="mt-1.5 flex items-baseline gap-1">
+              <span class="text-sm font-bold text-brand-dark">₹350</span>
+              <span class="text-[10px] text-brand-muted">/ 350g</span>
+            </div>
+            <div class="mt-2" id="btn-container-p5">
+              <button onclick="event.stopPropagation(); openVariantSheet('p5')" 
+                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
+                <span class="text-base leading-none">+</span> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item bg-white rounded-2xl border border-brand-border shadow-sm overflow-hidden flex flex-col" 
+             data-id="p6" 
+             data-category="Glass Jar,Dates"
+             data-name="Dates Delight Laddoo (Glass Jar)"
+             data-price="500"
+             data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w">
+          <div class="relative w-full aspect-square overflow-hidden bg-amber-50">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w"
+                 alt="Dates Delight Glass Jar"
+                 class="w-full h-full object-cover transition-transform duration-300"
+                 loading="lazy"/>
+            <button onclick="event.stopPropagation(); toggleWishlist(this)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-dark shadow-sm active:scale-90 transition-transform" aria-label="Save to wishlist">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+            </button>
+            <div class="absolute top-2 left-2">
+              <span class="px-1.5 py-0.5 rounded-md bg-amber-600 text-white text-[9px] font-bold uppercase tracking-wide">🫙 Glass Jar</span>
+            </div>
+          </div>
+          <div class="p-2.5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-xs text-brand-dark leading-snug line-clamp-2">Dates Delight (Glass Jar)</h3>
+            <div class="flex items-center gap-1 mt-1">
+              <span class="text-brand-gold text-[10px]">★★★★★</span>
+            </div>
+            <div class="mt-1.5 flex items-baseline gap-1">
+              <span class="text-sm font-bold text-brand-dark">₹500</span>
+              <span class="text-[10px] text-brand-muted">/ 350g</span>
+            </div>
+            <div class="mt-2" id="btn-container-p6">
+              <button onclick="event.stopPropagation(); openVariantSheet('p6')" 
+                      class="w-full h-9 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm">
+                <span class="text-base leading-none">+</span> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /productGrid -->
     </section>
 
-    <!-- 8. GLASS JARS SECTION -->
-    <section class="px-4 py-6 bg-gradient-to-b from-brand-cream to-white">
-      <div class="text-center mb-4">
-        <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Traditional Glass Jars</span>
-        <h2 class="font-serif text-2xl font-bold text-brand-dark">Better Packaging, Same Honest Goodness</h2>
-        <p class="text-xs text-brand-muted mt-1">Reusable glass jars. Beautiful. Useful. Better for your treats.</p>
-      </div>
+    <!-- === SECTION 4: OUR PROMISE (Compact) === -->
+    <section id="promiseSection" class="px-4 py-4 mt-2">
+      <div class="bg-brand-dark text-white rounded-2xl p-4 border border-brand-border/30 shadow-md">
+        <div class="text-center mb-3">
+          <span class="text-[10px] uppercase font-bold tracking-wider text-brand-gold">Our Simple Promise</span>
+          <h2 class="font-serif text-lg font-bold mt-1">Nourishment You Can Taste,<br><span class="text-brand-gold italic">Tradition You Can Trust</span></h2>
+        </div>
 
-      <div class="space-y-3">
-        <!-- Glass Jar Product 1 -->
-        <div class="bg-white rounded-xl border border-brand-border p-3 shadow-sm">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="text-xs bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full font-semibold">Traditional Glass Jar</span>
+        <div class="grid grid-cols-3 gap-2 mt-3 text-center">
+          <div class="bg-white/10 border border-white/20 p-2.5 rounded-xl">
+            <div class="text-xl mb-1">🚫</div>
+            <span class="text-[10px] font-bold block">No Preservatives</span>
           </div>
-          <h3 class="font-serif font-bold text-sm text-brand-dark">Dry Fruit Sattu Laddoo</h3>
-          <p class="text-xs text-brand-muted mt-1">350g ₹350 | 500g ₹500</p>
-        </div>
-
-        <!-- Glass Jar Product 2 -->
-        <div class="bg-white rounded-xl border border-brand-border p-3 shadow-sm">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="text-xs bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full font-semibold">Traditional Glass Jar</span>
+          <div class="bg-white/10 border border-white/20 p-2.5 rounded-xl">
+            <div class="text-xl mb-1">🍯</div>
+            <span class="text-[10px] font-bold block">No Refined Sugar</span>
           </div>
-          <h3 class="font-serif font-bold text-sm text-brand-dark">Dates Delight Laddoo</h3>
-          <p class="text-xs text-brand-muted mt-1">350g ₹500 | 700g ₹700</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 9. OUR STORY SECTION -->
-    <section id="storySection" class="px-4 py-6">
-      <div class="text-center mb-4">
-        <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Our Story</span>
-        <h2 class="font-serif text-2xl font-bold text-brand-dark">Made with love, Eaten with joy</h2>
-        <p class="text-xs text-brand-muted mt-1">A simpler way of making sweets - rooted in tradition, made for today.</p>
-      </div>
-
-      <div class="space-y-4">
-        <!-- Where It Started -->
-        <div class="bg-white rounded-xl border border-brand-border p-4 shadow-sm">
-          <h3 class="font-serif font-bold text-base text-brand-dark">Where It Started</h3>
-          <p class="text-xs text-brand-muted italic mb-2">Rooted in tradition, made for today.</p>
-          <p class="text-xs text-brand-muted leading-relaxed">
-            Every great sweet in India was invented before refined sugar existed. Somewhere along the way, we forgot that and let "healthy" and "delicious" become enemies instead of the same word.
-          </p>
-          <p class="text-xs text-brand-muted leading-relaxed mt-2">
-            We didn't invent anything new. We just stopped cutting corners.
-          </p>
-        </div>
-
-        <!-- What Goes In -->
-        <div class="bg-white rounded-xl border border-brand-border p-4 shadow-sm">
-          <h3 class="font-serif font-bold text-base text-brand-dark mb-2">What Goes In</h3>
-          <p class="text-xs text-brand-muted italic mb-3">Ingredients chosen with intention. Simple ingredients, familiar flavours and nothing unnecessary.</p>
-          
-          <div class="space-y-2">
-            <div class="flex items-start gap-2">
-              <span class="w-6 h-6 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-xs flex items-center justify-center flex-shrink-0">01</span>
-              <div>
-                <h4 class="font-bold text-xs text-brand-dark">Sattu</h4>
-                <p class="text-xs text-brand-muted">For natural energy and the goodness of a trusted Indian staple.</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="w-6 h-6 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-xs flex items-center justify-center flex-shrink-0">02</span>
-              <div>
-                <h4 class="font-bold text-xs text-brand-dark">Dates</h4>
-                <p class="text-xs text-brand-muted">For clean, honest sweetness straight from nature.</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="w-6 h-6 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-xs flex items-center justify-center flex-shrink-0">03</span>
-              <div>
-                <h4 class="font-bold text-xs text-brand-dark">Desi Ghee</h4>
-                <p class="text-xs text-brand-muted">Because good fats were never meant to be the villain.</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="w-6 h-6 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-xs flex items-center justify-center flex-shrink-0">04</span>
-              <div>
-                <h4 class="font-bold text-xs text-brand-dark">Jaggery</h4>
-                <p class="text-xs text-brand-muted">Because sweetness doesn't need to be reinvented - it just needs to be chosen thoughtfully.</p>
-              </div>
-            </div>
+          <div class="bg-white/10 border border-white/20 p-2.5 rounded-xl">
+            <div class="text-xl mb-1">❤️</div>
+            <span class="text-[10px] font-bold block">100% Love</span>
           </div>
         </div>
 
-        <!-- Made At Home -->
-        <div class="bg-white rounded-xl border border-brand-border p-4 shadow-sm">
-          <h3 class="font-serif font-bold text-base text-brand-dark">Made At Home</h3>
-          <p class="text-xs text-brand-muted italic mb-2">Homemade by choice, not by accident.</p>
-          <p class="text-xs text-brand-muted leading-relaxed">
-            Every laddoo starts in a home kitchen. Rolled by hand. Tasted before it's ever packed. Nothing goes in that we wouldn't hand to our own kids, our own parents, our own hungry 6pm selves.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 10. OUR VISION SECTION -->
-    <section id="visionSection" class="px-4 py-6 bg-brand-dark text-white">
-      <div class="text-center mb-4">
-        <span class="text-[10px] uppercase font-bold tracking-wider text-brand-gold">Our Vision</span>
-        <h2 class="font-serif text-2xl font-bold mt-1">Making every craving feel a little better</h2>
-        <p class="text-xs text-stone-300 mt-2 max-w-xs mx-auto">
-          We envision a world where enjoying something sweet does not have to come with unnecessary compromise.
+        <p class="text-[11px] text-stone-300 mt-3 text-center leading-relaxed">
+          We believe you shouldn't have to read the fine print to know what's going into something you eat. No shortcuts.
         </p>
-      </div>
 
-      <div class="space-y-3 mt-4">
-        <div class="bg-white/10 border border-white/20 p-4 rounded-xl">
-          <h4 class="font-serif font-bold text-sm text-brand-gold">Taste</h4>
-          <p class="text-xs text-stone-300 mt-1">Delicious flavours that make every craving worth giving in to.</p>
-        </div>
-        <div class="bg-white/10 border border-white/20 p-4 rounded-xl">
-          <h4 class="font-serif font-bold text-sm text-brand-gold">Quality</h4>
-          <p class="text-xs text-stone-300 mt-1">Thoughtfully selected ingredients chosen with care and confidence.</p>
-        </div>
-        <div class="bg-white/10 border border-white/20 p-4 rounded-xl">
-          <h4 class="font-serif font-bold text-sm text-brand-gold">Thoughtfulness</h4>
-          <p class="text-xs text-stone-300 mt-1">Every treat made with attention, warmth, and a genuine love for good food.</p>
-        </div>
-      </div>
-
-      <div class="mt-4 p-4 bg-white/5 border border-white/10 rounded-xl text-center">
-        <p class="text-sm font-serif italic text-brand-goldsoft">"Better choices should never mean less enjoyment."</p>
+        <button onclick="scrollToProducts()" class="mt-3 w-full py-2.5 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-transform">
+          Shop Our Products
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </button>
       </div>
     </section>
 
-    <!-- 11. WHY CHOOSE US SECTION -->
-    <section id="whyUsSection" class="px-4 py-6">
-      <div class="text-center mb-4">
+    <!-- === SECTION 5: TARGET AUDIENCE (Horizontal scroll chips) === -->
+    <section class="px-4 py-4">
+      <h3 class="font-serif text-lg font-bold text-brand-dark mb-3">Made for Everyone</h3>
+      <div class="flex gap-2 overflow-x-auto no-scrollbar">
+        <div class="flex-shrink-0 w-36 bg-white rounded-2xl border border-brand-border p-3 shadow-sm">
+          <div class="text-xl mb-1">👶</div>
+          <h4 class="font-serif font-bold text-sm text-brand-dark">Growing Kids</h4>
+          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">A wholesome burst of energy after school.</p>
+        </div>
+        <div class="flex-shrink-0 w-36 bg-white rounded-2xl border border-brand-border p-3 shadow-sm">
+          <div class="text-xl mb-1">👩</div>
+          <h4 class="font-serif font-bold text-sm text-brand-dark">Busy Women</h4>
+          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Something nourishing when the day gets long.</p>
+        </div>
+        <div class="flex-shrink-0 w-36 bg-white rounded-2xl border border-brand-border p-3 shadow-sm">
+          <div class="text-xl mb-1">👨</div>
+          <h4 class="font-serif font-bold text-sm text-brand-dark">Busy Men</h4>
+          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">A better bite between meetings and moments.</p>
+        </div>
+        <div class="flex-shrink-0 w-36 bg-white rounded-2xl border border-brand-border p-3 shadow-sm">
+          <div class="text-xl mb-1">🧓</div>
+          <h4 class="font-serif font-bold text-sm text-brand-dark">Elders</h4>
+          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Traditional goodness, the way it used to taste.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECTION 6: WHY CHOOSE US === -->
+    <section id="whyUsSection" class="px-4 py-4">
+      <div class="text-center mb-3">
         <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Why Choose Us</span>
-        <h2 class="font-serif text-2xl font-bold text-brand-dark">Good Food, Thoughtfully Made</h2>
-        <p class="text-xs text-brand-muted mt-1">We put care into every detail so you can simply enjoy every delicious bite.</p>
+        <h2 class="font-serif text-xl font-bold text-brand-dark">Good Food, Thoughtfully Made</h2>
       </div>
 
-      <div class="grid grid-cols-2 gap-3">
+      <div class="grid grid-cols-2 gap-2.5">
         <div class="bg-white rounded-xl border border-brand-border p-3 text-center shadow-sm">
-          <div class="w-10 h-10 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <div class="w-9 h-9 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           </div>
           <h4 class="font-bold text-xs text-brand-dark">Quality Ingredients</h4>
-          <p class="text-xs text-brand-muted mt-1">Thoughtfully selected ingredients to create delicious treats you can enjoy with confidence.</p>
+          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Thoughtfully selected, always honest.</p>
         </div>
-
         <div class="bg-white rounded-xl border border-brand-border p-3 text-center shadow-sm">
-          <div class="w-10 h-10 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <div class="w-9 h-9 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/></svg>
           </div>
           <h4 class="font-bold text-xs text-brand-dark">Made with Care</h4>
-          <p class="text-xs text-brand-muted mt-1">Every treat is prepared with attention to detail, care, and a passion for great taste.</p>
+          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Every treat crafted with warmth & attention.</p>
         </div>
-
         <div class="bg-white rounded-xl border border-brand-border p-3 text-center shadow-sm">
-          <div class="w-10 h-10 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <div class="w-9 h-9 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+          </div>
+          <h4 class="font-bold text-xs text-brand-dark">Freshly Baked</h4>
+          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Made in small batches, never mass-produced.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-brand-border p-3 text-center shadow-sm">
+          <div class="w-9 h-9 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
           </div>
           <h4 class="font-bold text-xs text-brand-dark">Delicious Taste</h4>
-          <p class="text-xs text-brand-muted mt-1">Because choosing a better treat should never mean compromising on flavour.</p>
-        </div>
-
-        <div class="bg-white rounded-xl border border-brand-border p-3 text-center shadow-sm">
-          <div class="w-10 h-10 mx-auto rounded-full bg-brand-goldsoft text-brand-brown flex items-center justify-center mb-2">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
-          </div>
-          <h4 class="font-bold text-xs text-brand-dark">Homemade Goodness</h4>
-          <p class="text-xs text-brand-muted mt-1">The warmth and comfort of homemade goodness, made for everyday cravings and special moments.</p>
+          <p class="text-[10px] text-brand-muted mt-1 leading-relaxed">Better choices without flavour compromise.</p>
         </div>
       </div>
     </section>
 
-    <!-- 12. FINAL CTA -->
-    <section class="px-4 py-6">
-      <div class="bg-gradient-to-br from-brand-brown to-brand-dark text-white rounded-2xl p-6 text-center shadow-lg border border-brand-border">
-        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-brand-goldsoft text-brand-dark flex items-center justify-center font-serif font-bold text-2xl">
-          GC
+    <!-- === SECTION 7: OUR STORY (Collapsed/Compact) === -->
+    <section id="storySection" class="px-4 py-4">
+      <div class="bg-white rounded-2xl border border-brand-border p-4 shadow-sm">
+        <div class="mb-3">
+          <span class="text-[10px] uppercase font-bold tracking-wider text-brand-amber">Our Story</span>
+          <h2 class="font-serif text-xl font-bold text-brand-dark mt-1">Made with Love,<br><span class="text-brand-amber italic">Eaten with Joy</span></h2>
         </div>
-        <h2 class="font-serif text-xl font-bold">Ready to taste the difference?</h2>
-        <p class="text-xs text-stone-300 mt-2 max-w-xs mx-auto">
-          Order your favourite treats today and experience the warmth of homemade goodness.
+        <p class="text-xs text-brand-muted leading-relaxed">
+          Every great sweet in India was invented before refined sugar existed. Somewhere along the way, we forgot that and let "healthy" and "delicious" become enemies instead of the same word. We didn't invent anything new. We just stopped cutting corners.
         </p>
-        <button onclick="document.getElementById('productsSection').scrollIntoView({behavior: 'smooth'})" class="mt-4 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs shadow-md active:scale-95 transition">
+        
+        <!-- Ingredients list compact -->
+        <div class="mt-3 grid grid-cols-2 gap-2">
+          <div class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-[10px] flex items-center justify-center flex-shrink-0">01</span>
+            <span class="text-xs font-semibold text-brand-dark">Sattu</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-[10px] flex items-center justify-center flex-shrink-0">02</span>
+            <span class="text-xs font-semibold text-brand-dark">Dates</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-[10px] flex items-center justify-center flex-shrink-0">03</span>
+            <span class="text-xs font-semibold text-brand-dark">Desi Ghee</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-brand-goldsoft text-brand-brown font-bold text-[10px] flex items-center justify-center flex-shrink-0">04</span>
+            <span class="text-xs font-semibold text-brand-dark">Jaggery</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECTION 8: OUR VISION === -->
+    <section id="visionSection" class="px-4 py-4">
+      <div class="bg-brand-dark text-white rounded-2xl p-4 border border-brand-border/20 shadow-md">
+        <span class="text-[10px] uppercase font-bold tracking-wider text-brand-gold">Our Vision</span>
+        <h2 class="font-serif text-xl font-bold mt-1">Making every craving feel a little better</h2>
+        <p class="text-xs text-stone-300 mt-2 leading-relaxed">
+          We envision a world where enjoying something sweet does not have to come with unnecessary compromise.
+        </p>
+
+        <div class="mt-3 space-y-2">
+          <div class="bg-white/10 border border-white/20 p-2.5 rounded-xl flex items-start gap-2">
+            <span class="text-brand-gold font-bold text-xs mt-0.5 flex-shrink-0">Taste</span>
+            <p class="text-[11px] text-stone-300">Delicious flavours that make every craving worth giving in to.</p>
+          </div>
+          <div class="bg-white/10 border border-white/20 p-2.5 rounded-xl flex items-start gap-2">
+            <span class="text-brand-gold font-bold text-xs mt-0.5 flex-shrink-0">Quality</span>
+            <p class="text-[11px] text-stone-300">Thoughtfully selected ingredients chosen with care.</p>
+          </div>
+        </div>
+
+        <div class="mt-3 p-3 bg-white/5 border border-white/10 rounded-xl text-center">
+          <p class="text-sm font-serif italic text-brand-goldsoft">"Better choices should never mean less enjoyment."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- === FINAL CTA === -->
+    <section class="px-4 py-4">
+      <div class="bg-gradient-to-br from-brand-brown to-brand-dark text-white rounded-2xl p-5 text-center shadow-lg border border-brand-border/20">
+        <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-brand-goldsoft text-brand-dark flex items-center justify-center font-serif font-bold text-base">GC</div>
+        <h2 class="font-serif text-lg font-bold">Ready to taste the difference?</h2>
+        <p class="text-xs text-stone-300 mt-1.5 max-w-xs mx-auto">Order your favourite treats today and experience the warmth of homemade goodness.</p>
+        <button onclick="scrollToProducts()" class="mt-4 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs shadow-md active:scale-95 transition-transform">
           <span>Shop Now</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
         </button>
@@ -594,17 +638,17 @@
     </section>
   </main>
 
-  <!-- 13. FOOTER -->
-  <footer class="bg-brand-dark text-stone-300 pt-8 pb-12 px-5 border-t border-brand-border">
-    <div class="flex flex-col gap-6">
+  <!-- ============================
+       FOOTER
+       ============================ -->
+  <footer class="bg-brand-dark text-stone-300 pt-6 pb-4 px-5 border-t border-brand-border/30">
+    <div class="flex flex-col gap-5">
       <div>
         <div class="flex items-center gap-2 mb-2">
-          <span class="w-10 h-10 rounded-full bg-brand-goldsoft text-brand-dark flex items-center justify-center font-serif font-bold text-base">GC</span>
-          <span class="font-serif text-lg font-bold text-white">Guilt Free Cravings</span>
+          <span class="w-9 h-9 rounded-full bg-brand-goldsoft text-brand-dark flex items-center justify-center font-serif font-bold text-sm">GC</span>
+          <span class="font-serif text-base font-bold text-white">Guilt Free Cravings</span>
         </div>
-        <p class="text-xs text-stone-400 mt-2">
-          Delicious treats thoughtfully made for your everyday cravings and special moments.
-        </p>
+        <p class="text-xs text-stone-400 mt-1.5">Delicious treats thoughtfully made for your everyday cravings.</p>
         <div class="flex items-center gap-3 mt-3">
           <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition" aria-label="Instagram">
             <span class="text-xs font-bold">IG</span>
@@ -622,9 +666,10 @@
         <div>
           <h5 class="font-bold text-white mb-2 text-[11px] uppercase tracking-wider text-brand-gold">Quick Links</h5>
           <ul class="space-y-1.5 text-stone-400">
-            <li><a href="#" class="hover:text-white transition">Home</a></li>
-            <li><a href="#" class="hover:text-white transition">About Us</a></li>
+            <li><a href="#homeSection" class="hover:text-white transition">Home</a></li>
             <li><a href="#productsSection" class="hover:text-white transition">Products</a></li>
+            <li><a href="#promiseSection" class="hover:text-white transition">Our Promise</a></li>
+            <li><a href="#storySection" class="hover:text-white transition">Our Story</a></li>
             <li><a href="#visionSection" class="hover:text-white transition">Our Vision</a></li>
           </ul>
         </div>
@@ -634,28 +679,72 @@
             <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
             <li><a href="#" class="hover:text-white transition">FAQs</a></li>
             <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
-            <li><a href="#" class="hover:text-white transition">Terms & Conditions</a></li>
+            <li><a href="#" class="hover:text-white transition">Terms &amp; Conditions</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="border-t border-stone-800 pt-4">
-        <h5 class="font-bold text-white mb-2 text-xs text-brand-gold">Get in Touch</h5>
+      <div class="border-t border-stone-800 pt-3">
         <p class="text-xs text-stone-400">Email: hello@guiltfreecravings.com</p>
         <p class="text-xs text-stone-400 mt-1">Phone: +91 XXXXX XXXXX</p>
         <p class="text-xs text-stone-400 mt-1">Delhi, India</p>
       </div>
 
-      <div class="pt-4 border-t border-stone-800 text-[10px] text-stone-500 text-center">
+      <div class="pt-3 border-t border-stone-800 text-[10px] text-stone-500 text-center">
         <p>&copy; 2026 Guilt Free Cravings. All rights reserved.</p>
         <p class="mt-1">Made with care for every craving.</p>
       </div>
     </div>
   </footer>
 
-  <!-- FLOATING BOTTOM CART BAR -->
-  <div id="stickyBottomCart" class="fixed bottom-3 left-3 right-3 z-40 transform translate-y-24 transition-transform duration-300">
-    <div class="bg-brand-dark text-white rounded-2xl p-3 shadow-xl border border-brand-gold/30 flex items-center justify-between">
+  <!-- ============================
+       BOTTOM NAVIGATION BAR
+       ============================ -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/97 backdrop-blur-md border-t border-brand-border shadow-2xl" id="bottomNav" aria-label="Main navigation">
+    <div class="flex items-center justify-around px-2 py-2 safe-area-bottom">
+      <!-- Home -->
+      <button onclick="bottomNavSelect('home')" id="bnav-home" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-all active:scale-90 text-brand-amber" aria-label="Home">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z"/><path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z"/></svg>
+        <span class="text-[10px] font-bold">Home</span>
+      </button>
+      
+      <!-- Products -->
+      <button onclick="bottomNavSelect('products'); scrollToProducts();" id="bnav-products" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-all active:scale-90 text-brand-muted" aria-label="Products">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+        <span class="text-[10px] font-semibold">Products</span>
+      </button>
+
+      <!-- Search (Center prominent) -->
+      <button onclick="openSearch()" id="bnav-search" class="bnav-btn flex flex-col items-center flex-1 relative" aria-label="Search">
+        <div class="w-12 h-12 rounded-2xl bg-brand-dark flex items-center justify-center shadow-lg -mt-4 border-2 border-brand-cream active:scale-95 transition-transform">
+          <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+        </div>
+        <span class="text-[10px] font-semibold text-brand-muted mt-0.5">Search</span>
+      </button>
+
+      <!-- Cart -->
+      <button onclick="bottomNavSelect('cart'); openCartDrawer();" id="bnav-cart" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-all active:scale-90 text-brand-muted relative" aria-label="Cart">
+        <div class="relative">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
+          <span id="bnavCartBadge" class="hidden absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+        </div>
+        <span class="text-[10px] font-semibold">Cart</span>
+      </button>
+
+      <!-- Account / Menu -->
+      <button onclick="toggleMobileMenu()" id="bnav-account" class="bnav-btn flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-all active:scale-90 text-brand-muted" aria-label="More options">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        <span class="text-[10px] font-semibold">More</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================
+       FLOATING STICKY CART BAR
+       (shows when cart has items, above bottom nav)
+       ============================ -->
+  <div id="stickyBottomCart" class="fixed bottom-16 left-3 right-3 z-35 transform translate-y-40 transition-transform duration-300 ease-out pointer-events-none">
+    <div class="bg-brand-dark text-white rounded-2xl p-3 shadow-2xl border border-brand-gold/30 flex items-center justify-between pointer-events-auto">
       <div class="flex items-center gap-2.5">
         <div class="w-10 h-10 rounded-xl bg-brand-gold text-brand-dark flex items-center justify-center font-bold relative flex-shrink-0">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
@@ -667,63 +756,306 @@
             <span class="text-stone-400">&bull;</span>
             <span id="floatingCartTotal" class="text-brand-gold font-bold">₹0</span>
           </div>
-          <p class="text-[10px] text-stone-300">Homemade goodness awaits</p>
+          <p class="text-[10px] text-stone-300">Tap to view &amp; checkout</p>
         </div>
       </div>
 
-      <button onclick="openCartDrawer()" class="h-9 px-4 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center gap-1.5 shadow active:scale-95 transition">
+      <button onclick="openCartDrawer()" class="h-9 px-4 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs flex items-center gap-1.5 shadow active:scale-95 transition-transform">
         <span>View Cart</span>
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
       </button>
     </div>
   </div>
 
-  <!-- CART DRAWER -->
-  <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
-    <div onclick="closeCartDrawer()" class="absolute inset-0 drawer-backdrop"></div>
-    <div id="cartDrawerContent" class="absolute bottom-0 left-0 right-0 max-h-[90vh] bg-white rounded-t-3xl shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300">
+  <!-- ============================
+       VARIANT SELECTION BOTTOM SHEET
+       ============================ -->
+  <div id="variantSheet" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Select product options">
+    <div onclick="closeVariantSheet()" class="absolute inset-0 drawer-backdrop"></div>
+    <div id="variantSheetContent" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300 ease-out max-h-[88vh]">
       
-      <!-- Drawer Header -->
-      <div class="p-4 border-b border-brand-border flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <h3 class="font-serif text-lg font-bold text-brand-dark">Your Cart</h3>
-          <span id="drawerCartCountBadge" class="text-xs bg-brand-goldsoft text-brand-brown px-2 py-0.5 rounded-full font-bold">0 Items</span>
+      <!-- Sheet Handle -->
+      <div class="flex justify-center pt-3 pb-1">
+        <div class="w-10 h-1 rounded-full bg-stone-200"></div>
+      </div>
+
+      <!-- Close button -->
+      <div class="px-4 pb-3 flex items-center justify-between border-b border-brand-border">
+        <div class="flex items-center gap-3">
+          <img id="sheetProductImg" src="" alt="" class="w-14 h-14 rounded-xl object-cover border border-brand-border flex-shrink-0"/>
+          <div>
+            <h3 id="sheetProductName" class="font-serif font-bold text-sm text-brand-dark leading-snug"></h3>
+            <p id="sheetProductDesc" class="text-[11px] text-brand-muted mt-0.5"></p>
+          </div>
         </div>
-        <button onclick="closeCartDrawer()" class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 active:scale-95">
+        <button onclick="closeVariantSheet()" class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 flex-shrink-0 active:scale-90 transition-transform">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
 
-      <!-- Drawer Items List -->
-      <div id="cartItemList" class="p-4 overflow-y-auto space-y-3 max-h-[48vh]">
-        <!-- Dynamic items will be populated here -->
+      <!-- Sheet Body (scrollable) -->
+      <div class="px-4 py-4 overflow-y-auto flex-1">
+        <!-- Size / Pack Selection -->
+        <div class="mb-4">
+          <p class="text-xs font-bold text-brand-dark mb-2">Select Pack Size</p>
+          <div class="flex gap-2 flex-wrap" id="variantOptions">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="mb-4">
+          <p class="text-xs font-bold text-brand-dark mb-2">Quantity</p>
+          <div class="flex items-center gap-4">
+            <div class="flex items-center h-10 rounded-xl bg-brand-cream border border-brand-border overflow-hidden shadow-sm">
+              <button onclick="changeSheetQty(-1)" class="w-10 h-full flex items-center justify-center font-bold text-base text-brand-dark hover:bg-brand-border active:scale-90 transition-transform">−</button>
+              <span id="sheetQtyDisplay" class="px-4 text-sm font-bold text-brand-dark min-w-[40px] text-center">1</span>
+              <button onclick="changeSheetQty(1)" class="w-10 h-full flex items-center justify-center font-bold text-base text-brand-dark hover:bg-brand-border active:scale-90 transition-transform">+</button>
+            </div>
+            <div>
+              <p class="text-xs text-brand-muted">Total</p>
+              <p id="sheetTotalPrice" class="text-base font-bold text-brand-dark">₹0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Availability note -->
+        <div class="flex items-center gap-1.5 mb-4">
+          <span class="w-2 h-2 rounded-full bg-green-500 flex-shrink-0"></span>
+          <span class="text-xs text-brand-muted">In Stock • Freshly made, dispatched within 24hrs</span>
+        </div>
       </div>
 
-      <!-- Drawer Footer & Checkout CTA -->
-      <div class="p-4 bg-stone-50 border-t border-brand-border">
+      <!-- Sheet Actions - Sticky -->
+      <div class="px-4 pb-6 pt-3 border-t border-brand-border bg-white rounded-t-xl space-y-2.5">
+        <button onclick="addFromSheet()" id="sheetAddBtn" class="w-full h-12 rounded-xl bg-brand-goldsoft border border-brand-border text-brand-brown font-bold text-sm flex items-center justify-center gap-2 active:scale-98 transition-transform shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
+          Add to Cart
+        </button>
+        <button onclick="buyNowFromSheet()" id="sheetBuyBtn" class="w-full h-12 rounded-xl bg-brand-dark text-brand-gold font-bold text-sm flex items-center justify-center gap-2 active:scale-98 transition-transform shadow-lg">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          Buy Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================
+       CART DRAWER (Bottom Sheet)
+       ============================ -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Shopping cart">
+    <div onclick="closeCartDrawer()" class="absolute inset-0 drawer-backdrop"></div>
+    <div id="cartDrawerContent" class="absolute bottom-0 left-0 right-0 max-h-[92vh] bg-white rounded-t-3xl shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300 ease-out">
+      
+      <!-- Sheet Handle -->
+      <div class="flex justify-center pt-3 pb-1">
+        <div class="w-10 h-1 rounded-full bg-stone-200"></div>
+      </div>
+
+      <!-- Drawer Header -->
+      <div class="px-4 pb-3 border-b border-brand-border flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <h3 class="font-serif text-xl font-bold text-brand-dark">Your Cart</h3>
+          <span id="drawerCartCountBadge" class="text-xs bg-brand-goldsoft text-brand-brown px-2 py-0.5 rounded-full font-bold">0 Items</span>
+        </div>
+        <button onclick="closeCartDrawer()" class="w-9 h-9 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 active:scale-95 transition-transform">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Cart Items List -->
+      <div id="cartItemList" class="px-4 py-3 overflow-y-auto space-y-3 flex-1 max-h-[52vh]">
+        <!-- Dynamic items -->
+      </div>
+
+      <!-- Cart Footer & Checkout -->
+      <div class="px-4 pt-3 pb-6 bg-stone-50 border-t border-brand-border">
         <div class="space-y-1.5 text-xs mb-3">
           <div class="flex justify-between text-brand-muted">
             <span>Item Total</span>
             <span id="drawerSubtotal">₹0</span>
           </div>
-          <div class="flex justify-between text-sm font-bold text-brand-dark pt-1 border-t border-stone-200">
+          <div class="flex justify-between text-brand-muted">
+            <span>Delivery</span>
+            <span class="text-green-600 font-semibold">Free</span>
+          </div>
+          <div class="flex justify-between text-sm font-bold text-brand-dark pt-1.5 border-t border-stone-200">
             <span>Grand Total</span>
-            <span id="drawerGrandTotal" class="text-base text-brand-brown">₹0</span>
+            <span id="drawerGrandTotal" class="text-base text-brand-dark">₹0</span>
           </div>
         </div>
 
-        <button onclick="simulateCheckout()" class="w-full py-3.5 rounded-xl bg-brand-dark text-brand-gold font-bold text-xs flex items-center justify-center gap-2 shadow-lg active:scale-98 transition">
+        <button onclick="simulateCheckout()" class="w-full h-12 rounded-xl bg-brand-dark text-brand-gold font-bold text-sm flex items-center justify-center gap-2 shadow-lg active:scale-98 transition-transform">
           <span>Proceed to Checkout</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
         </button>
-        <p class="text-[10px] text-center text-stone-400 mt-2">Freshly made with love, just for you</p>
+        <p class="text-[10px] text-center text-stone-400 mt-2">Freshly made with love, just for you ❤️</p>
       </div>
     </div>
   </div>
 
-  <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 bg-brand-dark text-brand-goldsoft text-xs font-semibold px-4 py-2.5 rounded-full shadow-2xl border border-brand-gold/40 pointer-events-none opacity-0 transition-all duration-300">
-    Cart updated successfully
+  <!-- ============================
+       MOBILE SIDE DRAWER (More/Account)
+       ============================ -->
+  <div id="navDrawer" class="fixed inset-0 z-[55] pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div onclick="toggleMobileMenu()" class="absolute inset-0 drawer-backdrop"></div>
+    <div id="navDrawerContent" class="absolute top-0 left-0 bottom-0 w-[280px] bg-brand-cream p-6 shadow-2xl flex flex-col justify-between transform -translate-x-full transition-transform duration-300 ease-out">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-brand-border">
+          <div>
+            <h3 class="font-serif text-lg font-bold text-brand-dark">GuiltFree Cravings</h3>
+            <p class="text-[11px] text-brand-muted">Homemade with Love</p>
+          </div>
+          <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full bg-white border border-brand-border flex items-center justify-center text-brand-muted active:scale-90 transition-transform">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <nav class="mt-6 flex flex-col gap-2 font-medium text-sm text-brand-dark">
+          <a href="#homeSection" onclick="toggleMobileMenu()" class="px-3 py-3 rounded-xl bg-white border border-brand-border text-brand-amber font-semibold flex items-center justify-between">
+            <span>Home</span>
+            <span class="text-xs text-brand-amber">&bull;</span>
+          </a>
+          <a href="#productsSection" onclick="toggleMobileMenu(); setTimeout(scrollToProducts, 300);" class="px-3 py-3 rounded-xl hover:bg-white text-brand-dark flex items-center justify-between transition">
+            <span>Our Products</span>
+            <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          </a>
+          <a href="#promiseSection" onclick="toggleMobileMenu()" class="px-3 py-3 rounded-xl hover:bg-white text-brand-dark flex items-center justify-between transition">
+            <span>Our Promise</span>
+            <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          </a>
+          <a href="#storySection" onclick="toggleMobileMenu()" class="px-3 py-3 rounded-xl hover:bg-white text-brand-dark flex items-center justify-between transition">
+            <span>Our Story</span>
+            <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          </a>
+          <a href="#visionSection" onclick="toggleMobileMenu()" class="px-3 py-3 rounded-xl hover:bg-white text-brand-dark flex items-center justify-between transition">
+            <span>Our Vision</span>
+            <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          </a>
+          <a href="#whyUsSection" onclick="toggleMobileMenu()" class="px-3 py-3 rounded-xl hover:bg-white text-brand-dark flex items-center justify-between transition">
+            <span>Why Choose Us</span>
+            <svg class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          </a>
+        </nav>
+      </div>
+      <div class="pt-6 border-t border-brand-border text-xs text-brand-muted">
+        <p class="font-semibold text-brand-dark">Get in Touch</p>
+        <p class="mt-1">Email: hello@guiltfreecravings.com</p>
+        <p class="mt-1">Phone: +91 XXXXX XXXXX</p>
+        <p class="mt-3 text-[10px] text-stone-400">&copy; 2026 Guilt Free Cravings</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================
+       CHECKOUT MODAL (Lightweight)
+       ============================ -->
+  <div id="checkoutModal" class="fixed inset-0 z-[60] pointer-events-none opacity-0 transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Checkout">
+    <div onclick="closeCheckout()" class="absolute inset-0 drawer-backdrop"></div>
+    <div id="checkoutContent" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl flex flex-col transform translate-y-full transition-transform duration-300 ease-out max-h-[95vh]">
+      <!-- Handle -->
+      <div class="flex justify-center pt-3 pb-1">
+        <div class="w-10 h-1 rounded-full bg-stone-200"></div>
+      </div>
+      
+      <!-- Header -->
+      <div class="px-4 pb-3 border-b border-brand-border flex items-center justify-between">
+        <h3 class="font-serif text-xl font-bold text-brand-dark">Checkout</h3>
+        <button onclick="closeCheckout()" class="w-9 h-9 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 active:scale-90 transition-transform">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Checkout Form -->
+      <div class="px-4 py-4 overflow-y-auto flex-1 space-y-4">
+        <!-- Contact -->
+        <div>
+          <p class="text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">1. Contact</p>
+          <div class="space-y-2.5">
+            <input type="text" placeholder="Full Name" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="name">
+            <input type="tel" placeholder="Phone Number" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="tel" inputmode="tel">
+            <input type="email" placeholder="Email (optional)" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="email" inputmode="email">
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div>
+          <p class="text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">2. Delivery Address</p>
+          <div class="space-y-2.5">
+            <input type="text" placeholder="Address Line 1" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="address-line1">
+            <input type="text" placeholder="City" class="w-full h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="address-level2">
+            <div class="grid grid-cols-2 gap-2">
+              <input type="text" placeholder="State" class="h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="address-level1">
+              <input type="text" placeholder="PIN Code" class="h-11 px-3 rounded-xl border border-brand-border text-sm bg-white outline-none focus:border-brand-amber transition" autocomplete="postal-code" inputmode="numeric">
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Summary compact -->
+        <div>
+          <p class="text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">3. Order Summary</p>
+          <div id="checkoutSummary" class="bg-brand-cream rounded-xl p-3 space-y-1.5 text-xs">
+            <!-- Populated by JS -->
+          </div>
+          <div class="mt-2 flex justify-between font-bold text-sm px-1">
+            <span>Total</span>
+            <span id="checkoutTotal">₹0</span>
+          </div>
+        </div>
+
+        <!-- Payment -->
+        <div>
+          <p class="text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">4. Payment</p>
+          <div class="space-y-2">
+            <label class="flex items-center gap-3 p-3 rounded-xl border border-brand-amber bg-brand-goldsoft/30 cursor-pointer">
+              <input type="radio" name="payment" value="cod" checked class="accent-brand-amber">
+              <div>
+                <p class="text-sm font-semibold text-brand-dark">Cash on Delivery</p>
+                <p class="text-[10px] text-brand-muted">Pay when your order arrives</p>
+              </div>
+            </label>
+            <label class="flex items-center gap-3 p-3 rounded-xl border border-brand-border bg-white cursor-pointer">
+              <input type="radio" name="payment" value="upi" class="accent-brand-amber">
+              <div>
+                <p class="text-sm font-semibold text-brand-dark">UPI / Online Payment</p>
+                <p class="text-[10px] text-brand-muted">PhonePe, GPay, Paytm, etc.</p>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Place Order CTA -->
+      <div class="px-4 pb-8 pt-3 border-t border-brand-border bg-white">
+        <button onclick="placeOrder()" class="w-full h-12 rounded-xl bg-brand-dark text-brand-gold font-bold text-sm flex items-center justify-center gap-2 shadow-lg active:scale-98 transition-transform">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Place Order
+        </button>
+        <p class="text-[10px] text-center text-stone-400 mt-2">Secure &bull; Freshly made with love &bull; Dispatched in 24hrs</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================
+       TOAST NOTIFICATION
+       ============================ -->
+  <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-[70] bg-brand-dark text-brand-goldsoft text-xs font-semibold px-4 py-2.5 rounded-full shadow-2xl border border-brand-gold/40 pointer-events-none opacity-0 transition-all duration-300 whitespace-nowrap">
+    Cart updated
+  </div>
+
+  <!-- ============================
+       ORDER SUCCESS OVERLAY
+       ============================ -->
+  <div id="orderSuccess" class="fixed inset-0 z-[70] pointer-events-none opacity-0 flex items-center justify-center transition-opacity duration-300">
+    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl mx-6 border border-brand-border">
+      <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-brand-dark">Order Placed! 🎉</h3>
+      <p class="text-xs text-brand-muted mt-2 leading-relaxed">Thank you for your order!<br>Your homemade laddoos will be dispatched within 24 hours.</p>
+      <button onclick="dismissOrderSuccess()" class="mt-5 px-6 py-3 rounded-xl bg-brand-gold text-brand-dark font-bold text-sm active:scale-95 transition-transform">
+        Continue Shopping
+      </button>
+    </div>
   </div>
 
   <!-- External JavaScript -->
