@@ -19,80 +19,86 @@ const PRODUCTS = {
   p1: {
     id: 'p1',
     name: 'Dry Fruit Sattu Laddoo',
-    desc: 'Roasted sattu packed with real dry fruits, desi ghee & iron-rich jaggery.',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q',
+    badge: 'Sweetened with Jaggery',
+    desc: 'A protein-dense wellness bite handcrafted with roasted sattu, premium nuts, and pure Desi Ghee. Sweetened naturally with iron-rich jaggery for pure, guilt-free indulgence.',
+    img: 'assets/images/dry_fruit_sattu_laddoo_product.jpg',
     variants: [
       { id: 'p1-250', label: '250g', price: 250 },
       { id: 'p1-500', label: '500g', price: 500 },
     ],
     rating: 4.9,
     category: ['Dry Fruit', 'Energy', 'Sattu'],
-    tags: ['sattu', 'laddoo', 'dry fruit', 'energy', 'healthy', 'sugar free'],
+    tags: ['sattu', 'laddoo', 'dry fruit', 'energy', 'healthy', 'sugar free', 'desi ghee'],
   },
   p2: {
     id: 'p2',
     name: 'Besan Badam Laddoo',
-    desc: 'Slow-roasted besan with almonds, desi ghee & jaggery. Unmistakable aroma.',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg',
+    badge: 'Pure Desi Ghee',
+    desc: 'A rich, slow-roasted heritage laddoo packed with premium almonds and pure Desi Ghee. Sweetened exclusively with natural jaggery to give you the ultimate traditional flavor.',
+    img: 'assets/images/besan_badam_laddoo_product.jpg',
     variants: [
       { id: 'p2-250', label: '250g', price: 215 },
       { id: 'p2-500', label: '500g', price: 430 },
     ],
     rating: 4.8,
     category: ['Besan', 'Badam'],
-    tags: ['besan', 'badam', 'almond', 'laddoo', 'ghee', 'healthy', 'sugar free'],
+    tags: ['besan', 'badam', 'almond', 'laddoo', 'ghee', 'healthy', 'sugar free', 'nostalgic'],
   },
   p3: {
     id: 'p3',
     name: 'Dates Delight Laddoo',
-    desc: 'Dates, crushed nuts, roasted seeds & desi ghee. Natural energy that lasts.',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w',
+    badge: 'Zero Added Sugar',
+    desc: 'A fiber-rich wellness bite handcrafted with premium dates, crunchy nuts, roasted seeds, and pure Desi Ghee. Sweetened exclusively by nature to deliver sustained energy.',
+    img: 'assets/images/dates_delight_laddoo_product.jpg',
     variants: [
       { id: 'p3-250', label: '250g', price: 315 },
       { id: 'p3-500', label: '500g', price: 630 },
     ],
     rating: 4.9,
     category: ['Dates', 'Energy'],
-    tags: ['dates', 'laddoo', 'energy', 'nuts', 'ghee', 'healthy', 'sugar free'],
+    tags: ['dates', 'laddoo', 'energy', 'nuts', 'ghee', 'healthy', 'sugar free', 'arabian dates'],
   },
   p4: {
     id: 'p4',
     name: 'Sattu Laddoo',
-    desc: 'Traditional sattu with desi ghee & jaggery. Natural energy, no shortcuts.',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q',
+    badge: 'High Protein',
+    desc: 'The original fitness fuel reinvented. Handcrafted using gut-friendly roasted Sattu, pure Desi Ghee, and natural jaggery. Satisfy your sweet cravings mindfully with zero preservatives.',
+    img: 'assets/images/sattu_laddoo_product.jpg',
     variants: [
       { id: 'p4-250', label: '250g', price: 165 },
       { id: 'p4-500', label: '500g', price: 330 },
     ],
     rating: 4.7,
     category: ['Energy', 'Sattu'],
-    tags: ['sattu', 'laddoo', 'ghee', 'jaggery', 'energy', 'healthy', 'classic'],
+    tags: ['sattu', 'laddoo', 'ghee', 'jaggery', 'energy', 'healthy', 'superfood', 'protein'],
   },
   p5: {
     id: 'p5',
     name: 'Dry Fruit Sattu Laddoo (Glass Jar)',
-    desc: 'Same great Dry Fruit Sattu Laddoo — now in a beautiful, reusable glass jar.',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q',
+    badge: 'Traditional Glass Jar',
+    desc: 'Handcrafted Dry Fruit Sattu Laddoo in a reusable, hygienic & eco-friendly traditional glass jar. Perfect for mindful daily snacking and gifting.',
+    img: 'assets/images/dry_fruit_sattu_laddoo_packaging_jar.jpg',
     variants: [
       { id: 'p5-350', label: '350g Jar', price: 350 },
       { id: 'p5-500', label: '500g Jar', price: 500 },
     ],
     rating: 4.9,
     category: ['Glass Jar', 'Dry Fruit'],
-    tags: ['glass jar', 'sattu', 'laddoo', 'dry fruit', 'gifting'],
+    tags: ['glass jar', 'sattu', 'laddoo', 'dry fruit', 'gifting', 'reusable'],
   },
   p6: {
     id: 'p6',
     name: 'Dates Delight Laddoo (Glass Jar)',
-    desc: 'Dates Delight in a premium reusable glass jar. Perfect for gifting.',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w',
+    badge: 'Traditional Glass Jar',
+    desc: 'Dates Delight in a premium reusable glass jar. Sweetened exclusively with natural dates and packed with crunchy nuts for an artisanal gifting edition.',
+    img: 'assets/images/dates_delight_laddoo_packaging_jar.jpg',
     variants: [
       { id: 'p6-350', label: '350g Jar', price: 500 },
       { id: 'p6-700', label: '700g Jar', price: 700 },
     ],
     rating: 4.8,
     category: ['Glass Jar', 'Dates'],
-    tags: ['glass jar', 'dates', 'laddoo', 'gifting'],
+    tags: ['glass jar', 'dates', 'laddoo', 'gifting', 'reusable'],
   },
 };
 
@@ -157,7 +163,7 @@ const DEFAULT_PROFILE = {
       status: 'In Transit',
       statusColor: 'amber',
       items: [
-        { name: 'Dry Fruit Sattu Laddoo (500g)', qty: 2, price: 500, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBwEK9WgU2M8R9caHlsZT-mnEmugJMTNDNSN7YP3rxQpMmd2dFAACQdFL9HllVk8cRHqYpo102dkWFajIHNkKq71dFTLNvxPFuPF-XM8j5tG2XzTVPc2WjS3eq0tuuKQJPRBpv9-0sfVVRrupXFcVnEjvaAtb2RWRJlYBOGVZ8H9zAlzcmj3azK8QkS4cLNWNn3YyDMNhTZooRtSLhALT1EXfWQd1QLI0w1ngTT_yswYRzCPfHxiAT_Q' }
+        { name: 'Dry Fruit Sattu Laddoo (500g)', qty: 2, price: 500, img: 'assets/images/dry_fruit_sattu_laddoo_product.jpg' }
       ],
       total: 1000,
       payment: 'UPI Payment'
@@ -168,8 +174,8 @@ const DEFAULT_PROFILE = {
       status: 'Delivered',
       statusColor: 'green',
       items: [
-        { name: 'Dates Delight Laddoo (500g)', qty: 1, price: 630, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRws8_rbcddZpSb45zpN7m9EyoKOe-sX-8T-W6RiKyc-89_2_cGZWipxTgnEQ7CrLBuVT4BXT86ZKv2nCg9j1fXzDvhjp0KorPnwf_a1iQpK2XLv140OPaenj5znkho8CcRZ_1cNaZpU4pDmsp8uMXlGoyScgQ3OhVy5FNLLUxcZZnesyErMCJY2dYLlnI7PsxPCkJdLqh1ExswgOO16lBGxfK4xOZjeez99NCf7poWSD6hX3shl8P_w' },
-        { name: 'Besan Badam Laddoo (250g)', qty: 1, price: 215, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhV4sxwYhe2gAYghT2ytsnuaCdcqClD1QgwKELJSNK5ldAUk82PmaK1pw1_9szRTFHdZNCCqLuKPJuQYAZRGXlgTxAn28HSJq81EcSOFdNyUHfPKAjqn0hLL3zIz7-vmM3zD0Inhy0HK3Kjej1eHLJZG6_stEbEWe17z0lX4pVZK3Z3PlDCpjJ_iT6qRLov7n3h8J93zindN89-WUXVLmoxS092jMaNlaRhfiA2GbQjyB3bfHONl5uxg' }
+        { name: 'Dates Delight Laddoo (500g)', qty: 1, price: 630, img: 'assets/images/dates_delight_laddoo_product.jpg' },
+        { name: 'Besan Badam Laddoo (250g)', qty: 1, price: 215, img: 'assets/images/besan_badam_laddoo_product.jpg' }
       ],
       total: 845,
       payment: 'Cash on Delivery'
